@@ -9,18 +9,17 @@ export class DataService {
 
   itemsRef: AngularFireList<any>;
 
-  constructor(private af: AngularFireDatabase) {
-
-  }
+  constructor(private af: AngularFireDatabase) { }
 
   getTasks() {
-    this.itemsRef = this.af.list('tasks');
-    return this.itemsRef.valueChanges();
+    return this.af.list('tasks').snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
   }
 
-  // getCharacter(character) {
-  //   return this.af.object('/Characters/' + character, { preserveSnapshot: true });
-  // }
+  getTask(taskID) {
+    return this.af.object('tasks/' + taskID).valueChanges();
+  }
 
   getDatabase() {
     return this.af;

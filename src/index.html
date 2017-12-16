@@ -1,102 +1,19 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <title>TORNADOR</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- load MUI -->
-  <link href="//cdn.muicss.com/mui-0.9.34/css/mui.min.css" rel="stylesheet" type="text/css" />
-  <script src="//cdn.muicss.com/mui-0.9.34/js/mui.min.js"></script>
-  <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-
-
-  <script>
-    jQuery(function ($) {
-      var $bodyEl = $('body'),
-        $sidedrawerEl = $('#sidedrawer');
-
-
-      function showSidedrawer() {
-        // show overlay
-        var options = {
-          onclose: function () {
-            $sidedrawerEl
-              .removeClass('active')
-              .appendTo(document.body);
-          }
-        };
-
-        var $overlayEl = $(mui.overlay('on', options));
-
-        // show element
-        $sidedrawerEl.appendTo($overlayEl);
-        setTimeout(function () {
-          $sidedrawerEl.addClass('active');
-        }, 20);
-      }
-
-
-      function hideSidedrawer() {
-        $bodyEl.toggleClass('hide-sidedrawer');
-      }
-
-
-      $('.js-show-sidedrawer').on('click', showSidedrawer);
-      $('.js-hide-sidedrawer').on('click', hideSidedrawer);
-    });
-
-    var $titleEls = $('strong', $sidedrawerEl);
-
-    $titleEls
-      .next()
-      .hide();
-
-    $titleEls.on('click', function () {
-      $(this).next().slideToggle(200);
-    });
-
-  </script>
-
-
-
+    <meta charset="utf-8">
+    <title>TORNADOR</title>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- load MUI -->
+    <link href="//cdn.muicss.com/mui-0.9.34/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.9.34/js/mui.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    
 </head>
-
 <body>
-
-  <div class="mui-appbar">
-    <!-- delete this later -->
-  </div>
-
-
-  <!-- content -->
-  <div class="mui-container">
-    <div id="sidedrawer" class="mui--no-user-select">
-      <!-- Side drawer content goes here -->
-    </div>
-    <header id="header">
-      <div class="mui-appbar mui--appbar-line-height">
-        <div class="mui-container-fluid">
-          <a class="sidedrawer-toggle mui--visible-xs-inline-block mui--visible-sm-inline-block js-show-sidedrawer">☰</a>
-          <a class="sidedrawer-toggle mui--hidden-xs mui--hidden-sm js-hide-sidedrawer">☰</a>
-          <span class="mui--text-title mui--visible-xs-inline-block">Brand.io</span>
-        </div>
-      </div>
-    </header>
-    <div id="content-wrapper">
-      <!-- Main content goes here -->
-      <app-root></app-root>
-
-    </div>
-    <footer id="footer">
-      <div class="mui-container-fluid">
-        <br> Made with ♥ by
-        <a href="https://www.muicss.com">MUI</a>
-      </div>
-    </footer>
-  </div>
+  <app-root></app-root>
 </body>
-
 </html>

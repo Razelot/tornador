@@ -16,6 +16,10 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { DataService } from './data.service';
 
+
+import { TaskComponent } from './task/task.component';
+import { TaskListComponent } from './task-list/task-list.component';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
   authDomain: "tornador-bcc1d.firebaseapp.com",
@@ -25,15 +29,23 @@ export const firebaseConfig = {
   messagingSenderId: "666816185870"
 };
 
+const appRoutes: Routes = [
+  {path:'', component:TaskListComponent},
+  {path:'tasks/:taskID', component:TaskComponent}
+];
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TaskComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule
