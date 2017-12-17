@@ -1,0 +1,14 @@
+div.task-properties {
+    margin: 10px 0px 10px 0px;
+    color: #757575;
+}
+
+.task-icon{
+    margin: 0px 10px 0px 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.task-properties-text{
+    display: inline-block;
+    vertical-align: middle;
+}

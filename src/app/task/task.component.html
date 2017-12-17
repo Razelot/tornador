@@ -1,3 +1,85 @@
 <div class="mui-panel">
   <h1>{{ (task | async)?.title }}</h1>
+
+  <ul class="mui-tabs__bar">
+    <li class="mui--is-active">
+      <a data-mui-toggle="tab" data-mui-controls="pane-default-1">Tab-1</a>
+    </li>
+    <li>
+      <a data-mui-toggle="tab" data-mui-controls="pane-default-2">Tab-2</a>
+    </li>
+    <li>
+      <a data-mui-toggle="tab" data-mui-controls="pane-default-3">Tab-3</a>
+    </li>
+  </ul>
+  <div class="mui-tabs__pane mui--is-active" id="pane-default-1">
+    <div class="task-properties">
+      <div class="task-properties-text">
+        <i class="material-icons task-icon">&#xE834;</i>
+        <div class="task-properties-text">
+          staus-completion
+        </div>
+      </div>
+    </div>
+    <div class="mui-divider"></div>
+    <div class="task-properties">
+      <div class="task-properties-text">
+        <i class="material-icons task-icon">&#xE8F9;</i>
+        <div class="task-properties-text">
+          business-unit
+        </div>
+      </div>
+    </div>
+    <div class="mui-divider"></div>
+    <div class="task-properties">
+      <div class="task-properties-text">
+        <i class="material-icons task-icon">&#xE893;</i>
+        <div class="task-properties-text">
+          tags
+        </div>
+      </div>
+    </div>
+    <div class="mui-divider"></div>
+    <div class="task-properties">
+      <div class="task-properties-text">
+        <i class="material-icons task-icon">&#xE8A6;</i>
+        <div class="task-properties-text">
+          assigned-to
+        </div>
+      </div>
+    </div>
+    <div class="mui-divider"></div>
+    <div class="task-properties">
+      <div class="task-properties-text">
+        <i class="material-icons task-icon">&#xE916;</i>
+        <div class="task-properties-text">
+          date-created
+        </div>
+      </div>
+    </div>
+    <div class="mui-divider"></div>
+    <div class="task-properties">
+      <div class="task-properties-text">
+        <i class="material-icons task-icon">&#xE002;</i>
+        <div class="task-properties-text">
+          priority
+        </div>
+      </div>
+    </div>
+    <div class="mui-divider"></div>
+    <div class="task-properties">
+      <div class="task-properties-text">
+        <i class="material-icons task-icon">&#xE8D2;</i>
+        <div class="task-properties-text">
+          description
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mui-tabs__pane" id="pane-default-2">
+    <h1>Conversation</h1>
+  </div>
+  <div class="mui-tabs__pane" id="pane-default-3">
+    <h1>Attachment</h1>
+  </div>
 </div>
