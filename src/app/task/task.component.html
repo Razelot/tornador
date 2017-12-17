@@ -32,16 +32,22 @@
 
 <div class="mui-tabs__pane mui--is-active" id="pane-default-1">
   <div class="task-properties">
-    <div class="task-properties-text">
-      <i class="material-icons task-icon">&#xE834;</i>
-      <div class="task-properties-text">
-        staus-completion
-      </div>
+    <div>
+      <i id="icon-status" class="material-icons task-icon">&#xE835;</i>
+      <div class="mui-select">
+          <select [(ngModel)]="task.status"
+                  (change)="setStatusIcon(task.status)" >
+            <option selected>Not Started</option>
+            <option>In Progress</option>
+            <option>Pending</option>
+            <option>Completed</option>
+          </select>
+        </div>  
     </div>
   </div>
   <div class="mui-divider"></div>
   <div class="task-properties">
-    <div class="task-properties-text">
+    <div>
       <i class="material-icons task-icon">&#xE8F9;</i>
       <div class="task-properties-text">
         business-unit
@@ -50,7 +56,7 @@
   </div>
   <div class="mui-divider"></div>
   <div class="task-properties">
-    <div class="task-properties-text">
+    <div>
       <i class="material-icons task-icon">&#xE893;</i>
       <div class="task-properties-text">
         tags
@@ -59,7 +65,7 @@
   </div>
   <div class="mui-divider"></div>
   <div class="task-properties">
-    <div class="task-properties-text">
+    <div>
       <i class="material-icons task-icon">&#xE8A6;</i>
       <div class="task-properties-text">
         assigned-to
@@ -68,7 +74,7 @@
   </div>
   <div class="mui-divider"></div>
   <div class="task-properties">
-    <div class="task-properties-text">
+    <div>
       <i class="material-icons task-icon">&#xE916;</i>
       <div class="task-properties-text">
         date-created
@@ -77,7 +83,7 @@
   </div>
   <div class="mui-divider"></div>
   <div class="task-properties">
-    <div class="task-properties-text">
+    <div>
       <i class="material-icons task-icon">&#xE002;</i>
       <div class="task-properties-text">
         priority
@@ -86,11 +92,11 @@
   </div>
   <div class="mui-divider"></div>
   <div class="task-properties">
-    <div class="task-properties-text">
+    <div>
       <i class="material-icons task-icon">&#xE8D2;</i>
       <div class="task-properties-text">
-        description
-      </div>
+          description
+        </div>
     </div>
   </div>
 </div>

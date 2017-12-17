@@ -36,4 +36,28 @@ export class TaskComponent implements OnInit {
     // });
   }
 
+
+  setStatusIcon(selectedItem) {
+
+    var icon_string = "&#xE835;";
+
+    switch (selectedItem) {
+      case "Not Started":
+        icon_string = "&#xE835;"
+        break;
+      case "In Progress":
+        icon_string = "&#xE871;"
+        break;
+      case "Pending":
+        icon_string = "&#xE034;"
+        break;
+      case "Completed":
+        icon_string = "&#xE834;"
+        break;
+    }
+
+    document.getElementById("icon-status").innerHTML = icon_string;
+
+  }
+
 }
