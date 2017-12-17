@@ -4,6 +4,7 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
+
 @Injectable()
 export class DataService {
 

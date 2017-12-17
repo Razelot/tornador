@@ -20,6 +20,7 @@ import { DataService } from './data.service';
 import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { AuthService } from './auth.service';
+import { SideMenuComponent } from './side-menu/side-menu.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     TaskComponent,
-    TaskListComponent
+    TaskListComponent,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,6 @@ const appRoutes: Routes = [
     AngularFireAuthModule
   ],
   providers: [DataService,AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,SideMenuComponent]
 })
 export class AppModule { }

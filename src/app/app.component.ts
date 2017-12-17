@@ -7,7 +7,6 @@ import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 
 import { DataService } from './data.service';
-import { AuthService } from './auth.service';
 
 
 import { ActivatedRoute } from "@angular/router";
@@ -18,15 +17,14 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  email: string;
-  password: string;
+
+  user: Observable<firebase.User>;
 
   title = 'TORNADOR';
-  user: Observable<firebase.User>;
 
   tasks: Observable<any[]>;
 
-  constructor(public authService: AuthService, private dataService: DataService) {
+  constructor(private dataService: DataService) {
     // this.user = this.afAuth.authState;
   }
 
@@ -34,17 +32,4 @@ export class AppComponent {
     this.tasks = this.dataService.getTasks();
   }
 
-  signup() {
-    this.authService.signup(this.email, this.password);
-    this.email = this.password = '';
-  }
-
-  login() {
-    this.authService.login(this.email, this.password);
-    this.email = this.password = '';    
-  }
-
-  logout() {
-    this.authService.logout();
-  }
 }

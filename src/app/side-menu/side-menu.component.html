@@ -1,0 +1,67 @@
+<!-- Sidebar user profile -->
+
+<div class="mui-container">
+  <div *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</div>
+
+
+  <button class="login-btn mui-btn mui-btn--primary mui-btn--small" (click)="logout()" *ngIf="authService.user | async">
+    <div class="login-txt">Logout</div>
+  </button>
+
+  <div *ngIf="!(authService.user | async)">
+
+    <div class="mui-textfield mui-textfield--float-label">
+      <input type="text" [(ngModel)]="email">
+      <label>Email</label>
+    </div>
+
+    <div class="mui-textfield mui-textfield--float-label">
+      <input type="password" [(ngModel)]="password">
+      <label>Password</label>
+    </div>
+
+    <button class="login-btn mui-btn mui-btn--primary mui-btn--small" (click)="login()" [disabled]="!email || !password">
+      <div class="login-txt">Login</div>
+    </button>
+
+    <button class="login-btn mui-btn mui-btn--primary mui-btn--small" (click)="signup()" [disabled]="!email || !password">
+      <div class="login-txt">Signup</div>
+    </button>
+
+
+  </div>
+
+</div>
+
+<!-- Sidebar items -->
+<div class="mui-divider"></div>
+<div>
+  <div class="menu-text">
+    <i class="material-icons menu-icon">&#xE88A;</i>
+    <div class="menu-text"> Home </div>
+  </div>
+</div>
+
+<div class="mui-divider"></div>
+<div>
+  <div class="menu-text">
+    <i class="material-icons menu-icon">&#xE85E;</i>
+    <div class="menu-text"> My Tasks </div>
+  </div>
+</div>
+
+<div class="mui-divider"></div>
+<div>
+  <div class="menu-text">
+    <i class="material-icons menu-icon">&#xE89C;</i>
+    <div class="menu-text"> Create Tasks </div>
+  </div>
+</div>
+
+<div class="mui-divider"></div>
+<div>
+  <div class="menu-text">
+    <i class="material-icons menu-icon">&#xE85A;</i>
+    <div class="menu-text"> Announcements </div>
+  </div>
+</div>
