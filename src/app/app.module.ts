@@ -21,6 +21,7 @@ import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { AuthService } from './auth.service';
 import { SideMenuComponent } from './side-menu/side-menu.component';
+import { NewTaskComponent } from './new-task/new-task.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
@@ -32,8 +33,10 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
-  {path:'', component:TaskListComponent},
-  {path:'tasks/:taskID', component:TaskComponent}
+  {path: '', redirectTo: 'tasks', pathMatch: 'full' },
+  {path:'tasks', component:TaskListComponent},
+  {path:'tasks/:taskID', component:TaskComponent},
+  {path:'new', component:NewTaskComponent}
 ];
 
 
@@ -42,7 +45,8 @@ const appRoutes: Routes = [
     AppComponent,
     TaskComponent,
     TaskListComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    NewTaskComponent
   ],
   imports: [
     BrowserModule,
