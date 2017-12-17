@@ -8,14 +8,12 @@
     <li>
       <a data-mui-toggle="tab" data-mui-controls="pane-default-3">Tab-3</a>
     </li>
-  </ul>
+</ul>
   <div class="mui-tabs__pane mui--is-active" id="pane-default-1">Pane-1</div>
   <div class="mui-tabs__pane" id="pane-default-2">Pane-2</div>
   <div class="mui-tabs__pane" id="pane-default-3">Pane-3</div>
   
   <div class="mui-panel" *ngFor="let task of tasks | async">
-  
-  
     <div class="mui--text-title"><a href="/tasks/{{task.key}}">{{task.title}}</a></div>
     <!-- <div class="mui-divider"></div> -->
     <div class="mui--text-body2">{{task.description}}</div>

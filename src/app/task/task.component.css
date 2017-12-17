@@ -2,6 +2,46 @@ div.task-properties {
     margin: 10px 0px 10px 0px;
     color: #757575;
 }
+.task-title{
+    color:white;
+    margin-left: 15px;
+    margin-top: 25px;
+}
+
+.background-image-hero{
+    background-image: url('https://img00.deviantart.net/c09e/i/2009/023/d/0/item_1__broken_chair_by_myststock.jpg');
+    height: 300px;
+    margin: -15px -15px 0px -15px;
+    padding: 0px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;  
+}
+
+.background-transparent-gradient-dark{
+    background: linear-gradient(to bottom, #36363600, #363636AA, #363636FF);
+}
+
+.align-content-bottom{
+    position: relative;
+}
+
+.align-content-bottom > div{
+    position: absolute;
+    bottom: 0;
+}
+
+.mui-tabs__bar > li > a{
+    color: whitesmoke;
+}
+.mui-tabs__bar > li.mui--is-active {
+    border-bottom: 4px solid white;
+}
+.mui-tabs__bar > li.mui--is-active > a {
+    color: white;
+    font-weight: bold;
+}
+
 
 .task-icon{
     margin: 0px 10px 0px 10px;
