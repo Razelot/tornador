@@ -96,6 +96,14 @@
    body.hide-sidedrawer #footer {
      margin-left: 0;
    }
+
+
+ }
+
+ @media (max-width: 768px) {
+  .main-container {
+    padding: 0;
+  }
  }
  
  
