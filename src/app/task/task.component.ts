@@ -25,6 +25,7 @@ export class TaskComponent implements OnInit {
 
     console.log(this.task);
 
+
     // Check if character exists in database
     // this.task.subscribe(snapshot => {
     //   if (snapshot.val() != null) {
