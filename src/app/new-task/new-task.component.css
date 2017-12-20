@@ -1,0 +1,9 @@
+.datefield {
+    padding-top: 20px;
+    margin-bottom: 20px; 
+}
+
+.datefield > label {
+    font-size: 14px;
+    color: rgba(0,0,0,.26);
+}

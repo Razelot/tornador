@@ -10,6 +10,9 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from 'angularfire2';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 // New imports to update based on AngularFire2 version 4
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -33,10 +36,10 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
-  {path: '', redirectTo: 'tasks', pathMatch: 'full' },
-  {path:'tasks', component:TaskListComponent},
-  {path:'tasks/:taskID', component:TaskComponent},
-  {path:'new', component:NewTaskComponent}
+  { path: '', redirectTo: 'tasks', pathMatch: 'full' },
+  { path: 'tasks', component: TaskListComponent },
+  { path: 'tasks/:taskID', component: TaskComponent },
+  { path: 'new', component: NewTaskComponent }
 ];
 
 
@@ -55,9 +58,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    BrowserAnimationsModule
   ],
-  providers: [DataService,AuthService],
-  bootstrap: [AppComponent,SideMenuComponent]
+  providers: [DataService, AuthService],
+  bootstrap: [AppComponent, SideMenuComponent]
 })
 export class AppModule { }

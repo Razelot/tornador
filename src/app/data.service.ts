@@ -4,6 +4,9 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
+import { Task } from './task/task';
+
+
 
 @Injectable()
 export class DataService {
@@ -11,6 +14,10 @@ export class DataService {
   itemsRef: AngularFireList<any>;
 
   constructor(private af: AngularFireDatabase) { }
+
+  addTask(task: Task) {
+    console.log(task);
+  }
 
   getTasks() {
     return this.af.list('tasks').snapshotChanges().map(changes => {
