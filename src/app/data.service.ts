@@ -26,4 +26,8 @@ export class DataService {
     return this.af;
   }
 
+  getStatusOptions(){
+    return this.af.list('/option-selection/status').valueChanges();
+  }
+
 } 

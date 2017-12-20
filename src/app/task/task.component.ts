@@ -15,15 +15,26 @@ import { Observable } from 'rxjs/Observable';
 export class TaskComponent implements OnInit {
 
   taskID: string;
-  task: Observable<any>;
+  task$;
+  statusOptions$;
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router) { }
+  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router, ) { }
 
   ngOnInit() {
     this.taskID = this.ar.snapshot.params.taskID;
-    this.task = this.ds.getTask(this.taskID);
 
-    console.log(this.task);
+    // this.ds.getTask(this.taskID).subscribe(t => {
+    //   this.task$ = t;
+    //   console.log(this.task$);
+    // });
+
+    this.task$ = this.ds.getTask(this.taskID);
+
+    this.ds.getDatabase().list('/option-selection/status/').valueChanges()
+      .subscribe(statusOptions => {
+        this.statusOptions$ = statusOptions;
+        console.log(this.statusOptions$);
+      });
 
     // Check if character exists in database
     // this.task.subscribe(snapshot => {
@@ -59,5 +70,4 @@ export class TaskComponent implements OnInit {
     document.getElementById("icon-status").innerHTML = icon_string;
 
   }
-
 }

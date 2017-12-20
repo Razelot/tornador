@@ -1,112 +1,120 @@
-<div *ngIf="task | async as task">
-    <div class="background-image-hero
+<div *ngIf="task$ | async as task">
+  <div class="background-image-hero
               align-content-bottom">
-      <div class="background-transparent-gradient-dark
+    <div class="background-transparent-gradient-dark
       ">
-        <div>
-          <h2 class="task-title">
-            {{ task.title }}
-          </h2>
-  
-          <ul class="mui-tabs__bar 
+      <div>
+        <h2 class="task-title">
+          {{ task.title }}
+        </h2>
+
+        <ul class="mui-tabs__bar 
                        mui-tabs__bar--justified
                        foreground-white">
-            <li class="mui--is-active">
-              <a data-mui-toggle="tab" data-mui-controls="pane-default-1">
-                OVERVIEW
-              </a>
-            </li>
-            <li>
-              <a data-mui-toggle="tab" data-mui-controls="pane-default-2">
-                CONVERSATION
-              </a>
-            </li>
-            <li>
-              <a data-mui-toggle="tab" data-mui-controls="pane-default-3">
-                ATTACHMENTS
-              </a>
-            </li>
-          </ul>
-        </div>
+          <li class="mui--is-active">
+            <a data-mui-toggle="tab" data-mui-controls="pane-default-1">
+              OVERVIEW
+            </a>
+          </li>
+          <li>
+            <a data-mui-toggle="tab" data-mui-controls="pane-default-2">
+              CONVERSATION
+            </a>
+          </li>
+          <li>
+            <a data-mui-toggle="tab" data-mui-controls="pane-default-3">
+              ATTACHMENTS
+            </a>
+          </li>
+          <li>
+            <a data-mui-toggle="tab" data-mui-controls="pane-default-4">
+              HISTORY
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
-  
-    <div class="mui-tabs__pane mui--is-active" id="pane-default-1">
-      <div class="task-properties">
-        <div>
-          <i id="icon-status" class="material-icons task-icon">&#xE835;</i>
-          <div class="mui-select">
-            <select [(ngModel)]="task.status" 
-                    (change)="setStatusIcon(task.status)">
-              <option>TODO : Change Icon when Loaded / Initialized</option>
-              <option selected>Not Started</option>
-              <option>In Progress</option>
-              <option>Pending</option>
-              <option>Completed</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="mui-divider"></div>
-      <div class="task-properties">
-        <div>
-          <i class="material-icons task-icon">&#xE8F9;</i>
-          <div class="task-properties-text">
-            {{ task.category }}
-          </div>
-        </div>
-      </div>
-      <div class="mui-divider"></div>
-      <div class="task-properties">
-        <div>
-          <i class="material-icons task-icon">&#xE893;</i>
-          <div class="task-properties-text">
-            {{ task.tags }}
-          </div>
-        </div>
-      </div>
-      <div class="mui-divider"></div>
-      <div class="task-properties">
-        <div>
-          <i class="material-icons task-icon">&#xE8A6;</i>
-          <div class="task-properties-text">
-            {{ task.assigned-to }}
-          </div>
-        </div>
-      </div>
-      <div class="mui-divider"></div>
-      <div class="task-properties">
-        <div>
-          <i class="material-icons task-icon">&#xE916;</i>
-          <div class="task-properties-text">
-            {{ task.date-created }}
-          </div>
-        </div>
-      </div>
-      <div class="mui-divider"></div>
-      <div class="task-properties">
-        <div>
-          <i class="material-icons task-icon">&#xE002;</i>
-          <div class="task-properties-text">
-            {{ task.date-due }}
-          </div>
-        </div>
-      </div>
-      <div class="mui-divider"></div>
-      <div class="task-properties">
-        <div>
-          <i class="material-icons task-icon">&#xE8D2;</i>
-          <div class="task-properties-text">
-            {{ task.description }}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="mui-tabs__pane" id="pane-default-2">
-      <h1>Conversation</h1>
-    </div>
-    <div class="mui-tabs__pane" id="pane-default-3">
-      <h1>Attachment</h1>
-    </div>
-  
   </div>
+
+  <div class="mui-tabs__pane mui--is-active" id="pane-default-1">
+    <div class="task-properties">
+      <div>
+        <i id="icon-status" class="material-icons task-icon">
+          {{ setStatusIcon(task.status) }}</i>
+        <div class="mui-select">
+          <select [(ngModel)]="task.status" (change)="setStatusIcon(task.status)">
+          <!-- ng-options="status as status.display-name for status in statusOptions$">-->
+            <option 
+            *ngFor="let status of statusOptions$" >
+              {{ status.displayName }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="mui-divider"></div>
+    <div class="task-properties">
+      <div>
+        <i class="material-icons task-icon">&#xE8F9;</i>
+        <div class="task-properties-text">
+          {{ task.category }}
+        </div>
+      </div>
+    </div>
+    <div class="mui-divider"></div>
+    <div class="task-properties">
+      <div>
+        <i class="material-icons task-icon">&#xE893;</i>
+        <div class="task-properties-text">
+          {{ task.tags }}
+        </div>
+      </div>
+    </div>
+    <div class="mui-divider"></div>
+    <div class="task-properties">
+      <div>
+        <i class="material-icons task-icon">&#xE8A6;</i>
+        <div class="task-properties-text">
+          {{ task.assigned-to }}
+        </div>
+      </div>
+    </div>
+    <div class="mui-divider"></div>
+    <div class="task-properties">
+      <div>
+        <i class="material-icons task-icon">&#xE916;</i>
+        <div class="task-properties-text">
+          {{ task.date-created }}
+        </div>
+      </div>
+    </div>
+    <div class="mui-divider"></div>
+    <div class="task-properties">
+      <div>
+        <i class="material-icons task-icon">&#xE002;</i>
+        <div class="task-properties-text">
+          {{ task.date-due }}
+        </div>
+      </div>
+    </div>
+    <div class="mui-divider"></div>
+    <div class="task-properties">
+      <div>
+        <i class="material-icons task-icon">&#xE8D2;</i>
+        <div class="task-properties-text">
+          {{ task.description }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mui-tabs__pane" id="pane-default-2">
+    <h1>Conversation</h1>
+  </div>
+  <div class="mui-tabs__pane" id="pane-default-3">
+    <h1>Attachment</h1>
+  </div>
+  <div class="mui-tabs__pane" id="pane-default-4">
+    <h1>History</h1>
+  </div>
+
+</div>
