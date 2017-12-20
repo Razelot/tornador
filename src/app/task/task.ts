@@ -5,5 +5,5 @@ export interface Task {
     date_created: Date;
     date_due: Date;
     members_assigned: {};
-    tags: {"kontol something"};
+    tags: {};
   }

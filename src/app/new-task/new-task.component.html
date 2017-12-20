@@ -4,8 +4,23 @@
     <legend> New Task </legend>
     <div class="mui-textfield mui-textfield--float-label">
       <input type="text">
-      <label>Input 1</label>
+      <label>Title</label>
     </div>
+    <div class="mui-textfield">
+      <textarea placeholder="Description"></textarea>
+    </div>
+
+    <div class="mui-textfield datefield">
+      <label>Date Due</label>
+      <material-datepicker></material-datepicker>
+    </div>
+
+    <div>
+        <input type="date" id="myDate" value="2014-02-09">
+    </div>
+
+
+<!-- 
     <div class="mui-select">
       <select>
         <option>Option 1</option>
@@ -27,7 +42,7 @@
         </optgroup>
       </select>
       <label>Optgroups Example</label>
-    </div>
+    </div> -->
     <button type="submit" class="mui-btn mui-btn--raised">Submit</button>
   </form>
 
