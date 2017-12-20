@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from 'angularfire2';
 
-import { DatepickerModule } from 'angular2-material-datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -60,7 +59,6 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    DatepickerModule,
     BrowserAnimationsModule
   ],
   providers: [DataService, AuthService],
