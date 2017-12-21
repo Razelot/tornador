@@ -1,0 +1,15 @@
+{
+    "name": "T0rnaD0r",
+    "short_name": "TD",
+    "icons": [
+        {
+            "src": "images/touch/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/ico"
+        }
+    ],
+    "start_url": "/task-list",
+    "display": "standalone",
+    "background_color": "#3E4EB8",
+    "theme_color": "#2F3BA2"
+}
