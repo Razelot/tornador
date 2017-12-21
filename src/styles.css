@@ -1,6 +1,10 @@
 /**
  * Body CSS
  */
+
+@import '~normalize.css/normalize.css';
+@import '~@angular/material/prebuilt-themes/purple-green.css';
+
  html,
  body {
    height: 100%;

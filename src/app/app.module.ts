@@ -12,6 +12,8 @@ import { AngularFireModule } from 'angularfire2';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// Design / css module
+import { MatToolbarModule } from '@angular/material';
 
 // New imports to update based on AngularFire2 version 4
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -19,6 +21,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { DataService } from './data.service';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
@@ -59,7 +63,10 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
+
   ],
   providers: [DataService, AuthService],
   bootstrap: [AppComponent, SideMenuComponent]
