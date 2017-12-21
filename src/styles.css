@@ -181,3 +181,7 @@
   #sidedrawer strong + ul > li {
     padding: 6px 0px;
   }
+
+  button > i {
+    vertical-align: middle;
+  }
