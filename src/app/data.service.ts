@@ -6,17 +6,17 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { Task } from './task/task';
 
-
-
 @Injectable()
 export class DataService {
 
-  itemsRef: AngularFireList<any>;
-
   constructor(private af: AngularFireDatabase) { }
 
-  addTask(task: Task) {
-    console.log(task);
+  createTask(task: Task) {
+    this.af.list('tasks').push(task);
+  }
+
+  deleteTask(key: String) {
+    this.af.object('tasks/' + key).remove();
   }
 
   getTasks() {
@@ -33,7 +33,7 @@ export class DataService {
     return this.af;
   }
 
-  getStatusOptions(){
+  getStatusOptions() {
     return this.af.list('/option-selection/status').valueChanges();
   }
 

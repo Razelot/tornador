@@ -1,23 +1,21 @@
-<div class="mui-panel">
+<form class="mui-form">
+  <legend> New Task </legend>
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="text" name="title" [(ngModel)]="newTask.title">
+    <label>Title</label>
+  </div>
+  <div class="mui-textfield">
+    <textarea placeholder="Description" name="descripton" [(ngModel)]="newTask.description"></textarea>
+  </div>
 
-  <form class="mui-form">
-    <legend> New Task </legend>
-    <div class="mui-textfield mui-textfield--float-label">
-      <input type="text">
-      <label>Title</label>
-    </div>
-    <div class="mui-textfield">
-      <textarea placeholder="Description"></textarea>
-    </div>
+  <div class="mui-textfield datefield">
+    <label>Date Due</label>
+    <input type="date" name="date_due" min="{{today}}" [(ngModel)]="newTask.date_due">
 
-    <div class="mui-textfield datefield">
-      <label>Date Due</label>
-      <input type="date" id="myDate" value="2014-02-09">
-
-    </div>
+  </div>
 
 
-<!-- 
+  <!-- 
     <div class="mui-select">
       <select>
         <option>Option 1</option>
@@ -40,7 +38,5 @@
       </select>
       <label>Optgroups Example</label>
     </div> -->
-    <button type="submit" class="mui-btn mui-btn--raised">Submit</button>
-  </form>
-
-</div>
+  <button type="submit" class="mui-btn mui-btn--raised" (click)="createTask(newTask)">Submit</button>
+</form>

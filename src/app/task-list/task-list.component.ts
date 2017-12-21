@@ -7,6 +7,8 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 import { Observable } from 'rxjs/Observable';
 
+import { Task } from '../task/task';
+
 
 @Component({
   selector: 'app-task-list',
@@ -17,10 +19,14 @@ export class TaskListComponent implements OnInit {
 
   tasks: Observable<any[]>;
 
-  constructor(private ar: ActivatedRoute, private dataService: DataService, private router: Router) { }
+  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router) { }
 
   ngOnInit() {
-    this.tasks = this.dataService.getTasks();
+    this.tasks = this.ds.getTasks();
+  }
+
+  deleteTask(key: String) {
+    this.ds.deleteTask(key);
   }
 
 }
