@@ -1,39 +1,43 @@
 <div *ngIf="task$ | async as task">
-  <div class="background-image-hero
-              align-content-bottom">
+  <div class="background-image-hero">
     <div class="background-transparent-gradient-dark
-      ">
+                align-content-bottom">
       <div>
         <h2 class="task-title">
           {{ task.title }}
         </h2>
 
         <ul class="mui-tabs__bar 
-                       mui-tabs__bar--justified
-                       foreground-white">
+                   mui-tabs__bar--justified
+                   foreground-white">
           <li class="mui--is-active">
             <a data-mui-toggle="tab" data-mui-controls="pane-default-1">
-              OVERVIEW
+              <i class="material-icons">&#xE871;</i>
             </a>
           </li>
           <li>
             <a data-mui-toggle="tab" data-mui-controls="pane-default-2">
-              CONVERSATION
+              <i class="material-icons">&#xE0B7;</i>
             </a>
           </li>
           <li>
             <a data-mui-toggle="tab" data-mui-controls="pane-default-3">
-              ATTACHMENTS
+              <i class="material-icons">&#xE226;</i>
             </a>
           </li>
           <li>
             <a data-mui-toggle="tab" data-mui-controls="pane-default-4">
-              HISTORY
+              <i class="material-icons">&#xE8B3;</i>
             </a>
           </li>
         </ul>
       </div>
     </div>
+    
+    <button class="button-navigation-back" (click)="goBack()">
+        <i class="material-icons">&#xE5C4;</i>
+      </button>
+      
   </div>
 
   <div class="mui-tabs__pane mui--is-active" id="pane-default-1">
@@ -43,9 +47,8 @@
           {{ setStatusIcon(task.status) }}</i>
         <div class="mui-select">
           <select [(ngModel)]="task.status" (change)="setStatusIcon(task.status)">
-          <!-- ng-options="status as status.display-name for status in statusOptions$">-->
-            <option 
-            *ngFor="let status of statusOptions$" >
+            <!-- ng-options="status as status.display-name for status in statusOptions$">-->
+            <option *ngFor="let status of statusOptions$">
               {{ status.displayName }}
             </option>
           </select>

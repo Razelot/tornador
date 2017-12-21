@@ -4,18 +4,50 @@
     margin-top: 25px;
 }
 
+.button-navigation-back{
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    background: transparent;
+    color: white;
+    border-width: 0px 0px 0px 0px;
+    height: 48px;
+    width: 48px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.button-navigation-back:hover{
+    background-color: #36363655;
+}
+.button-navigation-back:focus{
+    border: transparent;
+    border-width: 0px 0px 0px 0px;
+}
+.button-navigation-back:active{
+    border: transparent;
+    border-width: 0px 0px 0px 0px;
+}
+
 .background-image-hero{
     background-image: url('https://img00.deviantart.net/c09e/i/2009/023/d/0/item_1__broken_chair_by_myststock.jpg');
     height: 300px;
-    margin: -15px -15px 0px -15px;
     padding: 0px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;  
+    position: relative;
 }
 
 .background-transparent-gradient-dark{
-    background: linear-gradient(to bottom, #36363600, #363636AA, #363636FF);
+    background: linear-gradient(to bottom, #36363655, #36363633 , #36363600 , #363636AA, #363636FF);
+    height: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .align-content-bottom{
@@ -35,7 +67,6 @@
 }
 .mui-tabs__bar > li.mui--is-active > a {
     color: white;
-    font-weight: bold;
 }
 
 .task-properties {

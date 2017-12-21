@@ -57,7 +57,7 @@ export class TaskComponent implements OnInit {
         icon_string = "&#xE835;"
         break;
       case "In Progress":
-        icon_string = "&#xE871;"
+        icon_string = "&#xE6C4;"
         break;
       case "Pending":
         icon_string = "&#xE034;"
@@ -70,4 +70,10 @@ export class TaskComponent implements OnInit {
     document.getElementById("icon-status").innerHTML = icon_string;
 
   }
+  
+goBack(){
+  console.log("goBack clicked");
+  window.history.back();
+}
+
 }
