@@ -26,8 +26,12 @@ export class DataService {
   }
 
   getTask(taskID) {
-    return this.af.object('tasks/' + taskID).valueChanges();
+    return this.af.object('tasks/' + taskID);
   }
+
+  // getTaskTitle(taskID){
+  //   return this.af.object('tasks/' + taskID);
+  // }
 
   getDatabase() {
     return this.af;

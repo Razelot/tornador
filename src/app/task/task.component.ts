@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 
 import { Observable } from 'rxjs/Observable';
+
+import { DataService } from '../data.service';
+import { NavigationService } from '../navigation.service';
 
 @Component({
   selector: 'app-task',
@@ -18,9 +20,12 @@ export class TaskComponent implements OnInit {
   task$;
   statusOptions$;
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router, ) { }
+  constructor(private ar: ActivatedRoute, private router: Router,
+    private ds: DataService, private ns: NavigationService) { }
 
   ngOnInit() {
+
+    var self = this;
     this.taskID = this.ar.snapshot.params.taskID;
 
     // this.ds.getTask(this.taskID).subscribe(t => {
@@ -28,7 +33,11 @@ export class TaskComponent implements OnInit {
     //   console.log(this.task$);
     // });
 
-    this.task$ = this.ds.getTask(this.taskID);
+    this.task$ = this.ds.getTask(this.taskID).valueChanges();
+
+    this.task$.subscribe(changes => {
+      self.ns.setTitle(changes.title);
+    });
 
     this.ds.getDatabase().list('/option-selection/status/').valueChanges()
       .subscribe(statusOptions => {
@@ -45,6 +54,7 @@ export class TaskComponent implements OnInit {
     //     this.router.navigate(['']); // Redeirect to index
     //   }
     // });
+
   }
 
 
@@ -70,10 +80,10 @@ export class TaskComponent implements OnInit {
     document.getElementById("icon-status").innerHTML = icon_string;
 
   }
-  
-goBack(){
-  console.log("goBack clicked");
-  window.history.back();
-}
+
+  goBack() {
+    console.log("goBack clicked");
+    window.history.back();
+  }
 
 }

@@ -148,10 +148,11 @@
    text-decoration: underline;
  }
 
+
  /**
  * Side drawer CSS
  */
-#sidedrawer-brand {
+  #sidedrawer-brand {
     padding-left: 20px;
   }
   
@@ -181,6 +182,10 @@
     padding: 6px 0px;
   }
 
+
+/**
+ * Button CSS
+ */
   button > i {
     vertical-align: middle;
   }

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 import { DataService } from '../data.service';
+import { NavigationService } from '../navigation.service';
 
 import { Task } from '../task/task';
 
@@ -14,9 +19,12 @@ export class NewTaskComponent implements OnInit {
   today: String;
   newTask: any = {};
 
-  constructor(private ds: DataService) { }
+  constructor(private ar: ActivatedRoute, private router: Router, 
+    private ds: DataService, private ns: NavigationService) { }
 
   ngOnInit() {
+    this.ns.setTitle("New Task");
+
     var date = new Date();
     var dd = ("0" + (date.getDate())).slice(-2);
     var mm = ("0" + (date.getMonth() + 1)).slice(-2);

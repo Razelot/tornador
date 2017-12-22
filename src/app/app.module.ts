@@ -29,6 +29,7 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { AuthService } from './auth.service';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { NewTaskComponent } from './new-task/new-task.component';
+import { NavigationService } from './navigation.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
@@ -68,7 +69,7 @@ const appRoutes: Routes = [
     environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
 
   ],
-  providers: [DataService, AuthService],
+  providers: [DataService, AuthService, NavigationService],
   bootstrap: [AppComponent, SideMenuComponent]
 })
 export class AppModule { }
