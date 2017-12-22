@@ -8,8 +8,9 @@ import * as firebase from 'firebase/app';
 
 import { DataService } from './data.service';
 
-
 import { ActivatedRoute } from "@angular/router";
+
+// import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -18,18 +19,12 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class AppComponent {
 
-  user: Observable<firebase.User>;
-
   title = 'TORNADOR';
 
-  tasks: Observable<any[]>;
-
-  constructor(private dataService: DataService) {
-    // this.user = this.afAuth.authState;
+  constructor(private ds: DataService) {
   }
 
   ngOnInit() {
-    this.tasks = this.dataService.getTasks();
   }
 
 }

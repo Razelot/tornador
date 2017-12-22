@@ -20,3 +20,7 @@ div.task-properties {
 .login-txt{
     font-size: 11px;
 }
+
+.active-link {
+    color:red;
+}
