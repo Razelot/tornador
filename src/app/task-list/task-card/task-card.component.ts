@@ -37,20 +37,20 @@ export class TaskCardComponent implements OnInit {
       this.tasks$ = this.ds.getTasks();
     }
 
-    this.tasks$ = this.tasks$.map((tasksSorted) => {
-      tasksSorted.sort((a: Task, b: Task) => {
+//     this.tasks$ = this.tasks$.map((tasksSorted) => {
+//       tasksSorted.sort((a: Task, b: Task) => {
 
-        // let aPriority = this.getPriorityOrder(a.priority);
-        // let bPriority = this.getPriorityOrder(b.priority);
+//         // let aPriority = this.getPriorityOrder(a.priority);
+//         // let bPriority = this.getPriorityOrder(b.priority);
 
-console.log(a.priority.id);
-console.log(b.priority.id);
+// console.log(a.priority.id);
+// console.log(b.priority.id);
 
-        return a.priority.id < b.priority.id ? -1 : 1;
+//         return a.priority.id < b.priority.id ? -1 : 1;
 
-      });
-      return tasksSorted;
-    });
+//       });
+//       return tasksSorted;
+//     });
 
     this.ds.getDatabase().list('/business_unit/').valueChanges()
       .subscribe(businessOptions => {
