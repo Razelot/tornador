@@ -8,7 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Observable } from 'rxjs/Observable';
 
-import { Task } from '../task/task';
+import { Task } from '../model/task';
 import { NewTaskComponent } from '../new-task/new-task.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 import { FormControl } from '@angular/forms';

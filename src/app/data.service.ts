@@ -4,8 +4,9 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import { Task } from './task/task';
+import { Task } from './model/task';
 import { Observable } from 'rxjs/Observable';
+import { Department } from './model/department';
 
 @Injectable()
 export class DataService {
@@ -16,9 +17,9 @@ export class DataService {
     this.af.list('tasks').push(task);
   }
 
-updateTask(taskID: String, task: Task){
-  this.af.object('/tasks/' + taskID).update(task);
-}
+  updateTask(taskID: String, task: Task) {
+    this.af.object('/tasks/' + taskID).update(task);
+  }
 
   deleteTask(key: String) {
     this.af.object('tasks/' + key).remove();
@@ -26,11 +27,11 @@ updateTask(taskID: String, task: Task){
 
   getTasks() {
     return this.af.list('tasks').snapshotChanges().map(changes => {
-      return changes.map(c => ({ key: c.payload.key, ... c.payload.val() }));
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
   }
 
-  getTask(taskID) : Observable<{}>{
+  getTask(taskID): Observable<{}> {
     return this.af.object('tasks/' + taskID).valueChanges();
   }
 
@@ -40,6 +41,11 @@ updateTask(taskID: String, task: Task){
 
   getDatabase() {
     return this.af;
+  }
+
+  getDepartmentName(id: String) {
+    // console.log(this.af.object('department/' + id + "/name"));
+    return this.af.object('department/' + id).valueChanges().map((department) => <Department> department);
   }
 
 } 

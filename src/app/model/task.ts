@@ -4,9 +4,9 @@ import { Department } from "../model/department";
 
 export interface Task {
     title: string;
-    priority: Priority;
-    business_unit: BusinessUnit;
-    department: Department;
+    priority: string;
+    business_unit: string;
+    department: string;
     description: string;
     status: string;
     date_created: Date;

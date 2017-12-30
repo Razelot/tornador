@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DataService } from '../data.service';
 
-import { Task } from '../task/task';
+import { Task } from '../model/task';
 import { TaskOverviewComponent } from '../task/task-overview/task-overview.component';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 

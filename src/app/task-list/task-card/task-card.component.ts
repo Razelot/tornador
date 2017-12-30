@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { DataService } from '../../data.service';
 import { Router } from '@angular/router';
-import { Task } from '../../task/task';
+import { Task } from '../../model/task';
 import { BusinessUnit } from '../../model/businessUnit';
 import { Department } from '../../model/department';
 import { Priority } from '../../model/priority';
@@ -30,6 +30,7 @@ export class TaskCardComponent implements OnInit {
   priorityArray$
 
   ngOnInit() {
+
     if (this.filterProperty$ != null && this.filterString$ != null) {
       this.tasks$ = this.getFilteredTasks(this.filterProperty$, this.filterString$);
     }
@@ -37,20 +38,25 @@ export class TaskCardComponent implements OnInit {
       this.tasks$ = this.ds.getTasks();
     }
 
-//     this.tasks$ = this.tasks$.map((tasksSorted) => {
-//       tasksSorted.sort((a: Task, b: Task) => {
+    // this.tasks$ = this.tasks$.map((tasksSorted) => {
+    //   console.log(tasksSorted);
+    //   return tasksSorted;
+    // });
 
-//         // let aPriority = this.getPriorityOrder(a.priority);
-//         // let bPriority = this.getPriorityOrder(b.priority);
+    this.tasks$ = this.tasks$.map((tasksSorted) => {
+      tasksSorted.sort((a: Task, b: Task) => {
 
-// console.log(a.priority.id);
-// console.log(b.priority.id);
+        // let aPriority = this.getPriorityOrder(a.priority);
+        // let bPriority = this.getPriorityOrder(b.priority);
 
-//         return a.priority.id < b.priority.id ? -1 : 1;
+        console.log(a.priority.id);
+        console.log(b.priority.id);
 
-//       });
-//       return tasksSorted;
-//     });
+        return a.priority.id < b.priority.id ? -1 : 1;
+
+      });
+      return tasksSorted;
+    });
 
     this.ds.getDatabase().list('/business_unit/').valueChanges()
       .subscribe(businessOptions => {

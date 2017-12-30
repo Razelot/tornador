@@ -6,7 +6,7 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 
 import { Observable } from 'rxjs/Observable';
 import { TaskOverviewComponent } from './task-overview/task-overview.component';
-import { Task } from './task';
+import { Task } from '../model/task';
 import { MatSnackBar } from '@angular/material';
 
 import { DataService } from '../data.service';
