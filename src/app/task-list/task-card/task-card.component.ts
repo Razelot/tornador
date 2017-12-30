@@ -26,7 +26,7 @@ export class TaskCardComponent implements OnInit {
 
   tasks$: Observable<Task[]>;
   bu00Array$;
-  deptArray$;
+  deptArray$: Array<Department>;
   priorityArray$
 
   ngOnInit() {
@@ -49,10 +49,7 @@ export class TaskCardComponent implements OnInit {
         // let aPriority = this.getPriorityOrder(a.priority);
         // let bPriority = this.getPriorityOrder(b.priority);
 
-        console.log(a.priority.id);
-        console.log(b.priority.id);
-
-        return a.priority.id < b.priority.id ? -1 : 1;
+        return a.priority < b.priority ? -1 : 1;
 
       });
       return tasksSorted;
@@ -97,11 +94,8 @@ export class TaskCardComponent implements OnInit {
     }
     else if (filterProperty == "priority") {
       return this.ds.getTasks()
-        .map(tasks => tasks.filter(task => (<Task>task).priority.name === filterString));
+        .map(tasks => tasks.filter(task => (<Task>task).priority === filterString));
     }
-
-
-
   }
 
   routerLink(taskID: string) {
@@ -127,6 +121,12 @@ export class TaskCardComponent implements OnInit {
     else {
       return "#363636";
     }
+  }
+
+  getDepartment(id : string): Department{
+
+    return this.ds.getDepartmentArray().find(dept => dept.id === id);
 
   }
+
 }

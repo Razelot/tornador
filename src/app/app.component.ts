@@ -9,6 +9,10 @@ import * as firebase from 'firebase/app';
 import { DataService } from './data.service';
 
 import { ActivatedRoute } from "@angular/router";
+import { Department } from './model/department';
+import { BusinessUnit } from './model/businessUnit';
+import { Priority } from './model/priority';
+import { Status } from './model/status';
 
 // import * as $ from 'jquery';
 
@@ -21,10 +25,41 @@ export class AppComponent {
 
   // title = 'TORNADOR';
 
+
   constructor(private ds: DataService) {
   }
 
   ngOnInit() {
+
+    this.ds.getDatabase().list('/business_unit/').snapshotChanges()
+      .subscribe(array => {
+        this.ds.setBusinessUnitArray(
+          array.map(m => ({ key: m.payload.key, ...m.payload.val() }))
+        )
+      });
+
+      this.ds.getDatabase().list('/department/').snapshotChanges()
+      .subscribe(array => {
+        this.ds.setDepartmentArray(
+          array.map(m => ({ key: m.payload.key, ...m.payload.val() }))
+        )
+      });
+
+    // this.ds.getDatabase().list('/department/').valueChanges()
+    //   .subscribe(array => {
+    //     this.ds.setPriorityArray(array.map(m => <Department>m));
+    //   });
+
+    // this.ds.getDatabase().list('/option-selection/priority/').valueChanges()
+    //   .subscribe(array => {
+    //     this.ds.setPriorityArray(array.map(m => <Priority>m));
+    //   });
+
+    // this.ds.getDatabase().list('/option-selection/status/').valueChanges()
+    //   .subscribe(array => {
+    //     this.ds.setStatusArray(array.map(m => <Status>m));
+    //   });
+
   }
 
 }

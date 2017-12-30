@@ -7,9 +7,19 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Task } from './model/task';
 import { Observable } from 'rxjs/Observable';
 import { Department } from './model/department';
+import { resolve } from 'q';
+import { Subscription } from 'rxjs/Subscription';
+import { BusinessUnit } from './model/businessUnit';
+import { Priority } from './model/priority';
+import { Status } from './model/status';
 
 @Injectable()
 export class DataService {
+
+  businessUnitArray$: Array<BusinessUnit> = [];
+  departmentArray$: Array<Department> = [];
+  priorityArray$: Array<Priority> = [];
+  statusArray$: Array<Status> = [];
 
   constructor(private af: AngularFireDatabase) { }
 
@@ -43,9 +53,37 @@ export class DataService {
     return this.af;
   }
 
-  getDepartmentName(id: String) {
-    // console.log(this.af.object('department/' + id + "/name"));
-    return this.af.object('department/' + id).valueChanges().map((department) => <Department> department);
+  getBusinessUnitArray() : Array<BusinessUnit>{
+    return this.businessUnitArray$;    
+  }
+  
+  getDepartmentArray() : Array<Department>{
+    return this.departmentArray$;    
+  }
+  
+  getPriorityArray() : Array<Priority>{
+    return this.priorityArray$;    
+  }
+
+  getStatusArray() : Array<Status>{
+    return this.statusArray$;    
+  }
+
+  setBusinessUnitArray(array : Array<BusinessUnit>) {
+    this.businessUnitArray$ = array;    
+  }
+  
+  setDepartmentArray(array : Array<Department>) {
+    this.departmentArray$ = array;    
+  }
+  
+  setPriorityArray(array : Array<Priority>) {
+    this.priorityArray$ = array;    
+  }
+
+  setStatusArray(array : Array<Status>) {
+    console.log(array);
+    this.statusArray$ = array;    
   }
 
 } 
