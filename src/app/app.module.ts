@@ -45,10 +45,15 @@ import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { AuthService } from './auth.service';
 import { SideMenuComponent } from './side-menu/side-menu.component';
+<<<<<<< HEAD
 import { NewTaskComponent } from './new-task/new-task.component';
 import { TaskOverviewComponent } from './task/task-overview/task-overview.component';
 import { TaskCardComponent } from './task-list/task-card/task-card.component';
 import { FilterDialogComponent } from './task-list/filter-dialog/filter-dialog.component';
+=======
+import { NewTaskComponent } from './new-task/new-task.component';
+import { NavigationService } from './navigation.service';
+>>>>>>> e6e36470a408f06186ea7e0e550d080a60e4e174
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
@@ -97,6 +102,7 @@ const appRoutes: Routes = [
     environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
 
   ],
+<<<<<<< HEAD
   providers: [DataService, AuthService,
     { 
       // hammer instantion with custom config
@@ -105,5 +111,9 @@ const appRoutes: Routes = [
     }
   ],
   bootstrap: [AppComponent]
+=======
+  providers: [DataService, AuthService, NavigationService],
+  bootstrap: [AppComponent, SideMenuComponent]
+>>>>>>> e6e36470a408f06186ea7e0e550d080a60e4e174
 })
 export class AppModule { }

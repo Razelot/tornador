@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h2 mat-dialog-title >ADD NEW TASK</h2>
 <mat-dialog-content>
   <!-- <form class="max-width">
@@ -10,6 +11,17 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+=======
+<form class="mui-form">
+  <!-- <legend> New Task </legend> -->
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="text" name="title" [(ngModel)]="newTask.title">
+    <label>Title</label>
+  </div>
+  <div class="mui-textfield">
+    <textarea placeholder="Description" name="descripton" [(ngModel)]="newTask.description"></textarea>
+  </div>
+>>>>>>> e6e36470a408f06186ea7e0e550d080a60e4e174
 
     <mat-form-field>
         <mat-select name="department" placeholder="Department" [(ngModel)]="newTask.department">

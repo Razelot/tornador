@@ -177,7 +177,6 @@ div.mat-tab-body-content > div{
      margin-left: 0;
    }
 
-
  }
 
  @media (max-width: 768px) {
@@ -225,10 +224,11 @@ div.mat-tab-body-content > div{
    text-decoration: underline;
  }
 
+
  /**
  * Side drawer CSS
  */
-#sidedrawer-brand {
+  #sidedrawer-brand {
     padding-left: 20px;
   }
   
@@ -258,6 +258,10 @@ div.mat-tab-body-content > div{
     padding: 6px 0px;
   }
 
+
+/**
+ * Button CSS
+ */
   button > i {
     vertical-align: middle;
   }

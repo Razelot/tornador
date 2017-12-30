@@ -7,9 +7,11 @@ import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 
 import { DataService } from './data.service';
-
+import { NavigationService } from './navigation.service';
 
 import { ActivatedRoute } from "@angular/router";
+
+// import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -18,18 +20,12 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class AppComponent {
 
-  user: Observable<firebase.User>;
+  // title = 'TORNADOR';
 
-  title = 'TORNADOR';
-
-  tasks: Observable<any[]>;
-
-  constructor(private dataService: DataService) {
-    // this.user = this.afAuth.authState;
+  constructor(private ds: DataService, private ns: NavigationService) {
   }
 
   ngOnInit() {
-    this.tasks = this.dataService.getTasks();
   }
 
 }
