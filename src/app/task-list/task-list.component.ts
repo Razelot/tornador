@@ -8,18 +8,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Observable } from 'rxjs/Observable';
 
-<<<<<<< HEAD
 import { Task } from '../task/task';
 import { NewTaskComponent } from '../new-task/new-task.component';
 import { TaskCardComponent } from './task-card/task-card.component';
 import { FormControl } from '@angular/forms';
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
-=======
-// import { Task } from '../task/task';
-
 import { DataService } from '../data.service';
-import { NavigationService } from '../navigation.service';
->>>>>>> e6e36470a408f06186ea7e0e550d080a60e4e174
 
 
 @Component({
@@ -62,7 +56,6 @@ export class TaskListComponent implements OnInit {
       data: {}
     });
 
-<<<<<<< HEAD
     dialogRef.afterClosed().subscribe(result => {
       // this.animal = result;
     });
@@ -71,15 +64,6 @@ export class TaskListComponent implements OnInit {
   
 
   ngOnInit() {
-=======
-  constructor(private ar: ActivatedRoute, private router: Router, 
-    private ds: DataService, private ns: NavigationService) { }
-
-  ngOnInit() {
-    this.tasks = this.ds.getTasks();
-
-    this.ns.setTitle("Task List");
->>>>>>> e6e36470a408f06186ea7e0e550d080a60e4e174
   }
 
   deleteTask(key: String) {

@@ -1,8 +1,12 @@
+import { BusinessUnit } from "../model/businessUnit";
+import { Priority } from "../model/priority";
+import { Department } from "../model/department";
+
 export interface Task {
     title: string;
-    priority: string;
-    business_unit: string;
-    department: string;
+    priority: Priority;
+    business_unit: BusinessUnit;
+    department: Department;
     description: string;
     status: string;
     date_created: Date;

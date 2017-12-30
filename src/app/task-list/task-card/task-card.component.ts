@@ -40,9 +40,9 @@ export class TaskCardComponent implements OnInit {
     this.tasks$ = this.tasks$.map((tasksSorted) => {
       tasksSorted.sort((a: Task, b: Task) => {
 
-        let aPriority = this.getPriorityOrder(a.priority);
-        let bPriority = this.getPriorityOrder(b.priority);
-        return aPriority < bPriority ? -1 : 1;
+        // let aPriority = this.getPriorityOrder(a.priority);
+        // let bPriority = this.getPriorityOrder(b.priority);
+        return a.priority.id < b.priority.id ? -1 : 1;
 
       });
       return tasksSorted;
@@ -87,7 +87,7 @@ export class TaskCardComponent implements OnInit {
     }
     else {
       return this.ds.getTasks()
-        .map(tasks => tasks.filter(task => (<Task>task).priority === filterString));
+        .map(tasks => tasks.filter(task => (<Task>task).priority.name === filterString));
     }
 
 
