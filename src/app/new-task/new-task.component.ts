@@ -1,12 +1,4 @@
-<<<<<<< HEAD
 import { Component, OnInit, Inject } from '@angular/core';
-=======
-import { Component, OnInit } from '@angular/core';
-
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
-
->>>>>>> e6e36470a408f06186ea7e0e550d080a60e4e174
 import { DataService } from '../data.service';
 import { NavigationService } from '../navigation.service';
 
@@ -28,7 +20,6 @@ export class NewTaskComponent implements OnInit {
   today: String;
   newTask: any = {};
 
-<<<<<<< HEAD
   constructor(private ds: DataService,
     public dialogRef: MatDialogRef<NewTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -37,14 +28,9 @@ export class NewTaskComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-=======
-  constructor(private ar: ActivatedRoute, private router: Router, 
-    private ds: DataService, private ns: NavigationService) { }
->>>>>>> e6e36470a408f06186ea7e0e550d080a60e4e174
 
   ngOnInit() {
-    this.ns.setTitle("New Task");
-
+    
     var date = new Date();
     var dd = ("0" + (date.getDate())).slice(-2);
     var mm = ("0" + (date.getMonth() + 1)).slice(-2);

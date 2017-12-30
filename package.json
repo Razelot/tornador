@@ -27,11 +27,7 @@
     "angularfire2": "^5.0.0-rc.4",
     "core-js": "^2.4.1",
     "firebase": "^4.8.0",
-<<<<<<< HEAD
     "hammerjs": "^2.0.8",
-=======
-    "jquery": "^3.2.1",
->>>>>>> e6e36470a408f06186ea7e0e550d080a60e4e174
     "normalize.css": "^7.0.0",
     "rxjs": "^5.5.2",
     "save": "^2.3.2",

@@ -30,13 +30,8 @@ updateTask(taskID: String, task: Task){
     });
   }
 
-<<<<<<< HEAD
   getTask(taskID) : Observable<{}>{
     return this.af.object('tasks/' + taskID).valueChanges();
-=======
-  getTask(taskID) {
-    return this.af.object('tasks/' + taskID);
->>>>>>> e6e36470a408f06186ea7e0e550d080a60e4e174
   }
 
   // getTaskTitle(taskID){

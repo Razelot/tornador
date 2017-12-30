@@ -23,13 +23,8 @@ export class TaskComponent implements OnInit {
   taskID: string;
   task$: Observable<{}>;
 
-<<<<<<< HEAD
   constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router,
               public snackBar : MatSnackBar ) { }
-=======
-  constructor(private ar: ActivatedRoute, private router: Router,
-    private ds: DataService, private ns: NavigationService) { }
->>>>>>> e6e36470a408f06186ea7e0e550d080a60e4e174
 
   ngOnInit() {
 
@@ -41,11 +36,7 @@ export class TaskComponent implements OnInit {
     //   console.log(this.task$);
     // });
 
-    this.task$ = this.ds.getTask(this.taskID).valueChanges();
-
-    this.task$.subscribe(changes => {
-      self.ns.setTitle(changes.title);
-    });
+    this.task$ = this.ds.getTask(this.taskID);
 
 
     // Check if character exists in database
@@ -80,14 +71,6 @@ export class TaskComponent implements OnInit {
     }
 
   }
-<<<<<<< HEAD
-=======
-
-  goBack() {
-    console.log("goBack clicked");
-    window.history.back();
-  }
->>>>>>> e6e36470a408f06186ea7e0e550d080a60e4e174
 
   onSaveButtonClick(task: Task) : void {
     this.ds.updateTask(this.taskID, task);

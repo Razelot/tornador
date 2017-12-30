@@ -34,11 +34,11 @@
             <input matInput name="title" placeholder="Task Name" [(ngModel)]="task.title">
         </mat-form-field>
       </form>
+
     </mat-expansion-panel>
   </mat-accordion>
 
   <form class="max-width">
-
 
     <mat-form-field *ngIf="isAddNewTask$">
       <mat-select name="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit">
