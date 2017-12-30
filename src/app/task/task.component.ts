@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
@@ -6,19 +6,23 @@ import { Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 
 import { Observable } from 'rxjs/Observable';
+import { TaskOverviewComponent } from './task-overview/task-overview.component';
+import { Task } from './task';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.css']
+  styleUrls: ['./task.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class TaskComponent implements OnInit {
 
   taskID: string;
-  task$;
-  statusOptions$;
+  task$: Observable<{}>;
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router, ) { }
+  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router,
+              public snackBar : MatSnackBar ) { }
 
   ngOnInit() {
     this.taskID = this.ar.snapshot.params.taskID;
@@ -30,11 +34,6 @@ export class TaskComponent implements OnInit {
 
     this.task$ = this.ds.getTask(this.taskID);
 
-    this.ds.getDatabase().list('/option-selection/status/').valueChanges()
-      .subscribe(statusOptions => {
-        this.statusOptions$ = statusOptions;
-        console.log(this.statusOptions$);
-      });
 
     // Check if character exists in database
     // this.task.subscribe(snapshot => {
@@ -47,33 +46,31 @@ export class TaskComponent implements OnInit {
     // });
   }
 
+  
+  activeTab: number = 0;
+  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
-  setStatusIcon(selectedItem) {
-
-    var icon_string = "&#xE835;";
-
-    switch (selectedItem) {
-      case "Not Started":
-        icon_string = "&#xE835;"
-        break;
-      case "In Progress":
-        icon_string = "&#xE6C4;"
-        break;
-      case "Pending":
-        icon_string = "&#xE034;"
-        break;
-      case "Completed":
-        icon_string = "&#xE834;"
-        break;
+  onSwipe(action: String) {
+    // next
+    if (action === this.SWIPE_ACTION.RIGHT) {
+      if (this.activeTab > 0) {
+        this.activeTab = this.activeTab - 1;
+      } 
     }
 
-    document.getElementById("icon-status").innerHTML = icon_string;
+    // previous
+    if (action === this.SWIPE_ACTION.LEFT) {
+      if (this.activeTab < 4) {
+        this.activeTab = this.activeTab + 1;
+      } 
+    }
 
   }
-  
-goBack(){
-  console.log("goBack clicked");
-  window.history.back();
-}
 
+  onSaveButtonClick(task: Task) : void {
+    this.ds.updateTask(this.taskID, task);
+    this.snackBar.open("Task Saved!", "Dismiss", {
+      duration: 3000,
+    });
+  }
 }

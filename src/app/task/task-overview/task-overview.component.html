@@ -1,0 +1,96 @@
+<div *ngIf="task$ as task">
+
+  <mat-accordion *ngIf="!isAddNewTask$">
+    <mat-expansion-panel style="margin-bottom: 24px; margin-left: -24px; margin-right: -24px; margin-top:-24px;">
+      <mat-expansion-panel-header style="padding: 24px; height: unset;">
+        <mat-panel-title style="flex-direction: column;">
+          <div>
+            {{ task.business_unit}} > {{task.department}}
+          </div>
+          <div>
+            <strong>{{task.title}}</strong>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <form class="max-width">
+        <mat-form-field>
+          <mat-select name="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit">
+            <mat-option *ngFor="let business of businessOptions$" [value]="business.id">
+              {{ business.id }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select name="department" placeholder="Department" [(ngModel)]="task.department">
+            <mat-option *ngFor="let department of departmentOptions$" [value]="department.name">
+              {{ department.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput name="title" placeholder="Task Name" [(ngModel)]="task.title">
+        </mat-form-field>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <form class="max-width">
+
+
+    <mat-form-field *ngIf="isAddNewTask$">
+      <mat-select name="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit">
+        <mat-option *ngFor="let business of businessOptions$" [value]="business.id">
+          {{ business.id }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isAddNewTask$">
+      <mat-select name="department" placeholder="Department" [(ngModel)]="task.department">
+        <mat-option *ngFor="let department of departmentOptions$" [value]="department.name">
+          {{ department.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isAddNewTask$">
+          <input matInput name="title" placeholder="Task Name" [(ngModel)]="task.title">
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" name="description" placeholder="Description"
+        [(ngModel)]="task.description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let fruit of fruits" selectable="true" removable="true" (remove)="removeTag(fruit)">
+          {{fruit.name}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Tags" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" matChipInputAddOnBlur="true"
+          (matChipInputTokenEnd)="addTag($event)" />
+      </mat-chip-list>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select name="priority" placeholder="Priority" [(ngModel)]="task.priority">
+        <mat-option *ngFor="let priority of priorityOptions$" [value]="priority.name">
+          {{ priority.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="!isAddNewTask$">
+      <mat-select placeholder="Status" [(ngModel)]="task.status" name="status">
+        <mat-option *ngFor="let status of statusOptions$" [(value)]="status.displayName">
+          {{ status.displayName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+</div>

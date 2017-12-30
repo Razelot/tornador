@@ -1,0 +1,39 @@
+<div *ngFor="let task of tasks$ | async">
+        <mat-card class="example-card" (click)="routerLink(task.key)">
+            <mat-card-header>
+              <!-- <div mat-card-avatar class="example-header-image"></div> -->
+              <mat-card-subtitle style="width: 100%;">
+                <span>
+                  <span [ngStyle]="{'background-color': getChipColor(task, 'bu00') }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold;">
+                    {{ task.business_unit}}
+                  </span>
+                  <span style="margin-right: 4px;"></span>
+                  <span [ngStyle]="{'background-color': getChipColor(task, 'department') }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase;">
+                    {{ task.department }}
+                  </span>
+                </span>
+                <span style="float: right;">
+                  <span [ngStyle]="{'background-color': getChipColor(task, 'priority') }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform: uppercase;">
+                    {{ task.priority }}
+                  </span>
+                  <!-- <span style="margin-right: 4px;"></span>
+                  <span [ngStyle]="{'background-color': getChipColor(task, 'dept') }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase;">
+                    {{ task.status }}
+                  </span> -->
+                </span>
+
+              </mat-card-subtitle>
+              <mat-card-title>{{task.title}}</mat-card-title>
+            </mat-card-header>
+            <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+            <mat-card-content>
+              <p>
+                {{ task.description }}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <!-- <button mat-button>LIKE</button>
+              <button mat-button>SHARE</button> -->
+            </mat-card-actions>
+          </mat-card>
+</div>

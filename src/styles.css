@@ -3,7 +3,7 @@
  */
 
 @import '~normalize.css/normalize.css';
-@import '~@angular/material/prebuilt-themes/purple-green.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
  html,
  body {
@@ -21,7 +21,83 @@
    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
  }
  
- 
+/**
+*
+*/
+.mat-dialog-container{
+  background-color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.mat-dialog-title{
+  color: #000000;
+}
+
+.mat-tab-label{
+  width: 25%;
+}
+
+
+/* v v Styles for tab v v*/
+.mat-tab-label {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  color:#363636AA;
+  font-weight: 700;
+}
+
+.mat-tab-label.mat-tab-label-active {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  color: #363636;
+  font-weight: 700;
+  opacity: 1;
+}
+
+.mat-tab-group.mat-primary .mat-tab-label:focus, .mat-tab-group.mat-primary .mat-tab-link:focus, .mat-tab-nav-bar.mat-primary .mat-tab-label:focus, .mat-tab-nav-bar.mat-primary .mat-tab-link:focus{
+  background-color: transparent;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+  background-color: #363636;
+  height: 3px;
+}
+
+.mat-tab-body{
+  flex: 1;
+  background-color: #eee;
+}
+
+.mat-tab-body-wrapper{
+  flex: 1;
+}
+
+.mat-tab-header{
+  background-color: #eee;
+}
+
+.mat-tab-group{
+  flex: 1;
+}
+
+div.mat-tab-body-content{
+  display: flex;
+}
+
+div.mat-tab-body-content > div{
+  flex: 1;
+}
+
+.roboto-font{
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+
+/* ^ ^ Styles for tab ^ ^ */
+
+
  /**
   * Layout CSS
   */

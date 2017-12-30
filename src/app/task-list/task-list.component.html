@@ -1,53 +1,69 @@
-<ul class="mui-tabs__bar">
-  <li class="mui--is-active">
-    <a data-mui-toggle="tab" data-mui-controls="pane-default-1">Tab-1</a>
-  </li>
-  <li>
-    <a data-mui-toggle="tab" data-mui-controls="pane-default-2">Tab-2</a>
-  </li>
-  <li>
-    <a data-mui-toggle="tab" data-mui-controls="pane-default-3">Tab-3</a>
-  </li>
-</ul>
-<div class="mui-tabs__pane mui--is-active" id="pane-default-1">Pane-1</div>
-<div class="mui-tabs__pane" id="pane-default-2">Pane-2</div>
-<div class="mui-tabs__pane" id="pane-default-3">Pane-3</div>
-
-<div class="mui-panel" *ngFor="let task of tasks | async">
-
-  <div class="mui-container-fluid">
-
-    <div class="mui-row">
-      <div class="mui-col-md-12">
-        <div class="mui--text-title">
-          <a routerLink="/tasks/{{task.key}}">{{task.title}}</a>
-        </div>
-        <div class="mui-divider"></div>
-      </div>
-    </div>
-
-    <div class="mui-row">
-      <div class="mui-col-md-12">
-        <div class="mui--text-body2">{{task.description}}</div>
-      </div>
-    </div>
-
-    <div class="mui-row">
-      <div class="mui-col-md-12">
-        <div class="mui--text-caption" *ngFor="let tag of task.tags">
-          {{tag}}
-        </div>
-      </div>
-    </div>
-
-    <div class="mui-row">
-      <div class="mui-col-md-2 mui-col-md-offset-10">
-        <button class="mui-btn mui-btn--flat mui-btn--danger del-btn" (click)="deleteTask(task.key)">
-          <i class="material-icons">&#xE872;</i>
+<div style="height: 100%; width: 100%; display: flex; flex-direction: column;">
+  <div>
+    <mat-toolbar style="padding: 0px 5px; position:sticky; top:0px;">
+      <span>
+        <button mat-icon-button>
+          <i class="material-icons">&#xE5D2;</i>
         </button>
-      </div>
-    </div>
+      </span>
+      <span style="flex: 1; margin: 0px 5px;">
+        Task > {{ getToolbarTitle() }}
+      </span>
+      <span>
+        <button id="filter" mat-icon-button (click)="openFilterDialog()"
+          [style.background-color]="isFilterActive$ ? '#363636' : 'transparent'"
+          [style.color]="isFilterActive$ ? '#FFFFFF' : '#363636'">
+          <i class="material-icons">&#xE152;</i>
+        </button>
+        <button mat-icon-button>
+          <i class="material-icons">more_vert</i>
+        </button>
+      </span>
+    </mat-toolbar>
 
   </div>
 
+  <div style="flex: 1; height: calc(100% - 56px);">
+    <mat-tab-group [(selectedIndex)]="activeTab$" style="height: 100%;">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="material-icons">&#xE835;</i>
+        </ng-template>
+        <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+          <app-task-card [filterProperty$]="'status'" [filterString$]="'Not Started'"></app-task-card>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="material-icons">&#xE871;</i>
+        </ng-template>
+        <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+          <app-task-card [filterProperty$]="'status'" [filterString$]="'In Progress'"></app-task-card>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="material-icons">&#xE834;</i>
+        </ng-template>
+        <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+          <app-task-card [filterProperty$]="'status'" [filterString$]="'Completed'"></app-task-card>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="material-icons">&#xE034;</i>
+        </ng-template>
+        <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+          <app-task-card [filterProperty$]="'status'" [filterString$]="'Pending'"></app-task-card>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
 </div>
+
+<button mat-fab (click)="openNewTaskDialog()"
+        style="background-color: #363636; position: fixed; top: auto; left: auto; right: 20px; bottom: 20px; z-index: 9;">
+  <i class="material-icons" style="color: #FFFFFF">
+    &#xE145;
+  </i>
+</button>

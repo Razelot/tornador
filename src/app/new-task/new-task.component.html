@@ -1,42 +1,69 @@
-<form class="mui-form">
-  <legend> New Task </legend>
-  <div class="mui-textfield mui-textfield--float-label">
-    <input type="text" name="title" [(ngModel)]="newTask.title">
-    <label>Title</label>
-  </div>
-  <div class="mui-textfield">
-    <textarea placeholder="Description" name="descripton" [(ngModel)]="newTask.description"></textarea>
-  </div>
+<h2 mat-dialog-title >ADD NEW TASK</h2>
+<mat-dialog-content>
+  <!-- <form class="max-width">
+    <mat-form-field>
+      <mat-select name="business_unit" placeholder="BU00" [(ngModel)]="newTask.business_unit">
+        <mat-option *ngFor="let bu00 of bu00Options$" [value]="bu00">
+          <div style="display: inline-block;">
+            {{ bu00 }}
+          </div>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <div class="mui-textfield datefield">
-    <label>Date Due</label>
-    <input type="date" name="date_due" min="{{today}}" [(ngModel)]="newTask.date_due">
+    <mat-form-field>
+        <mat-select name="department" placeholder="Department" [(ngModel)]="newTask.department">
+          <mat-option *ngFor="let department of departmentOptions$" [value]="department">
+            {{ department }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-  </div>
+    <mat-form-field>
+      <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="3"
+      name="title" placeholder="Task Name" [(ngModel)]="newTask.title"></textarea>
+    </mat-form-field>
+    
+    <mat-form-field>
+        <mat-select name="priority" placeholder="Priority" [(ngModel)]="newTask.priority">
+          <mat-option *ngFor="let priority of priorityOptions$" [value]="priority">
+            {{ priority }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+    <mat-form-field >
+        <mat-chip-list #chipList>
+            <mat-chip *ngFor="let fruit of fruits" selectable="true"
+                     removable="true" (remove)="removeTag(fruit)">
+              {{fruit.name}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Tags"
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   matChipInputAddOnBlur="true"
+                   (matChipInputTokenEnd)="addTag($event)" />
+          </mat-chip-list>
+    </mat-form-field>
 
+    <mat-form-field >
+        <textarea matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"
+        name="description" placeholder="Description" [(ngModel)]="newTask.description"></textarea>
+    </mat-form-field>
+  </form> -->
 
+<app-task-overview [task$]="newTask" [isAddNewTask$]="true"></app-task-overview>
+
+</mat-dialog-content>
+<mat-dialog-actions>
   <!-- 
-    <div class="mui-select">
-      <select>
-        <option>Option 1</option>
-        <option>Option 2</option>
-        <option>Option 3</option>
-        <option>Option 4</option>
-      </select>
-      <label>Select Example</label>
-    </div>
-    <div class="mui-select">
-      <select>
-        <optgroup label="Group 1">
-          <option>Option 1</option>
-          <option>Option 2</option>
-        </optgroup>
-        <optgroup label="Group 2">
-          <option>Option 3</option>
-          <option>Option 4</option>
-        </optgroup>
-      </select>
-      <label>Optgroups Example</label>
-    </div> -->
-  <button type="submit" class="mui-btn mui-btn--raised" (click)="createTask(newTask)">Submit</button>
-</form>
+    <button mat-button mat-dialog-close>No</button>
+   Can optionally provide a result for the closing dialog.
+  <button mat-button [mat-dialog-close]="true">Yes</button> 
+-->
+
+  <button mat-raised-button style="background-color: #363636; color: #FFFFFF; width: 48%; box-sizing:border-box;" type="submit" (click)="createTask(newTask)">Create</button>
+  <button mat-button style="background-color: #F0F0F0; width: 48%; box-sizing:border-box; float: right;" type="cancel" (click)="onNoClick()">Cancel</button>
+
+</mat-dialog-actions>

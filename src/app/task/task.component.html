@@ -1,123 +1,71 @@
-<div *ngIf="task$ | async as task">
-  <div class="background-image-hero">
-    <div class="background-transparent-gradient-dark
-                align-content-bottom">
-      <div>
-        <h2 class="task-title">
-          {{ task.title }}
-        </h2>
+<div *ngIf="task$ | async as task" style="display: flex; flex-direction:column; height: 100%; overflow: auto;">
 
-        <ul class="mui-tabs__bar 
-                   mui-tabs__bar--justified
-                   foreground-white">
-          <li class="mui--is-active">
-            <a data-mui-toggle="tab" data-mui-controls="pane-default-1">
-              <i class="material-icons">&#xE871;</i>
-            </a>
-          </li>
-          <li>
-            <a data-mui-toggle="tab" data-mui-controls="pane-default-2">
-              <i class="material-icons">&#xE0B7;</i>
-            </a>
-          </li>
-          <li>
-            <a data-mui-toggle="tab" data-mui-controls="pane-default-3">
-              <i class="material-icons">&#xE226;</i>
-            </a>
-          </li>
-          <li>
-            <a data-mui-toggle="tab" data-mui-controls="pane-default-4">
-              <i class="material-icons">&#xE8B3;</i>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    
-    <button class="button-navigation-back" (click)="goBack()">
-        <i class="material-icons">&#xE5C4;</i>
-      </button>
-      
+  <div style="position: sticky; top: 0px; z-index: 2;">
+    <mat-toolbar style="background-color: #363636; color: white;">
+      <mat-toolbar-row>
+        <span style="margin: 0px 5px;">
+          <button mat-icon-button routerLink="../../tasks">
+            <i class="material-icons">&#xE5C4;</i>
+          </button>
+        </span>
+        <span style="flex: 1; text-overflow: clip; overflow: scroll;">
+          <span *ngIf="activeTab > 0">{{ task.title }}</span>
+        </span>
+        <span style="margin: 0px 5px;">
+          <button mat-icon-button [matMenuTriggerFor]="menu" class="button-navigation" style="float: right;">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" yPosition="below">
+            <button mat-menu-item>
+              <i class="material-icons">&#xE872;</i>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+
+          <button *ngIf="activeTab == 0" mat-icon-button class="button-navigation" style="float: right;" (click)="onSaveButtonClick(task)">
+            <i class="material-icons">&#xE163;</i>
+          </button>
+        </span>
+      </mat-toolbar-row>
+    </mat-toolbar>
   </div>
 
-  <div class="mui-tabs__pane mui--is-active" id="pane-default-1">
-    <div class="task-properties">
-      <div>
-        <i id="icon-status" class="material-icons task-icon">
-          {{ setStatusIcon(task.status) }}</i>
-        <div class="mui-select">
-          <select [(ngModel)]="task.status" (change)="setStatusIcon(task.status)">
-            <!-- ng-options="status as status.display-name for status in statusOptions$">-->
-            <option *ngFor="let status of statusOptions$">
-              {{ status.displayName }}
-            </option>
-          </select>
+  <div style="display: block; flex: 1;">
+
+    <mat-tab-group id="task" [(selectedIndex)]="activeTab" style="height: 100%;">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="material-icons">&#xE871;</i>
+        </ng-template>
+        <div style="padding: 24px;" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+          <app-task-overview [task$]="task"></app-task-overview>
         </div>
-      </div>
-    </div>
-    <div class="mui-divider"></div>
-    <div class="task-properties">
-      <div>
-        <i class="material-icons task-icon">&#xE8F9;</i>
-        <div class="task-properties-text">
-          {{ task.category }}
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="material-icons">&#xE0B7;</i>
+        </ng-template>
+        <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+          Conversation
         </div>
-      </div>
-    </div>
-    <div class="mui-divider"></div>
-    <div class="task-properties">
-      <div>
-        <i class="material-icons task-icon">&#xE893;</i>
-        <div class="task-properties-text">
-          {{ task.tags }}
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="material-icons">&#xE226;</i>
+        </ng-template>
+        <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+          Attachment
         </div>
-      </div>
-    </div>
-    <div class="mui-divider"></div>
-    <div class="task-properties">
-      <div>
-        <i class="material-icons task-icon">&#xE8A6;</i>
-        <div class="task-properties-text">
-          {{ task.assigned-to }}
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="material-icons">&#xE8B3;</i>
+        </ng-template>
+        <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+          History
         </div>
-      </div>
-    </div>
-    <div class="mui-divider"></div>
-    <div class="task-properties">
-      <div>
-        <i class="material-icons task-icon">&#xE916;</i>
-        <div class="task-properties-text">
-          {{ task.date-created }}
-        </div>
-      </div>
-    </div>
-    <div class="mui-divider"></div>
-    <div class="task-properties">
-      <div>
-        <i class="material-icons task-icon">&#xE002;</i>
-        <div class="task-properties-text">
-          {{ task.date-due }}
-        </div>
-      </div>
-    </div>
-    <div class="mui-divider"></div>
-    <div class="task-properties">
-      <div>
-        <i class="material-icons task-icon">&#xE8D2;</i>
-        <div class="task-properties-text">
-          {{ task.description }}
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="mui-tabs__pane" id="pane-default-2">
-    <h1>Conversation</h1>
-  </div>
-  <div class="mui-tabs__pane" id="pane-default-3">
-    <h1>Attachment</h1>
-  </div>
-  <div class="mui-tabs__pane" id="pane-default-4">
-    <h1>History</h1>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 
 </div>

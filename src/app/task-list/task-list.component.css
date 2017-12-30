@@ -1,3 +1,24 @@
 .del-btn {
     float: right;
 }
+
+
+button#filter.filter-button :active{
+    background-color: #36363636;
+    color: white;
+}
+
+.filter-dialog{
+    width: 100%;
+    max-width: 100px;
+    position: fixed !important;
+    top: 56px;
+}
+
+.transparent-backdrop{
+    opacity: 0;
+}
+
+mat-dialog-container.mat-dialog-container{
+    margin: 0px;
+}

@@ -4,44 +4,40 @@
     margin-top: 25px;
 }
 
-.button-navigation-back{
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
+.navigation-panel{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 48px;
+}
+
+.button-navigation{
     background: transparent;
     color: white;
     border-width: 0px 0px 0px 0px;
     height: 48px;
     width: 48px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-.button-navigation-back:hover{
-    background-color: #36363655;
-}
-.button-navigation-back:focus{
-    border: transparent;
-    border-width: 0px 0px 0px 0px;
-}
-.button-navigation-back:active{
-    border: transparent;
-    border-width: 0px 0px 0px 0px;
+    min-width: 48px;
+    max-width: 48px;
+    padding: 0px;
 }
 
 .background-image-hero{
     background-image: url('https://img00.deviantart.net/c09e/i/2009/023/d/0/item_1__broken_chair_by_myststock.jpg');
-    height: 300px;
+    height: 200px;
+    width: inherit;
     padding: 0px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;  
     position: relative;
+    display: block;
 }
 
-.background-transparent-gradient-dark{
-    background: linear-gradient(to bottom, #36363655, #36363633 , #36363600 , #363636AA, #363636FF);
+div.background-transparent-gradient-dark{
+    background: linear-gradient(to bottom, #36363655, #36363633,  #363636AA, #363636FF);
     height: inherit;
     position: absolute;
     top: 0;
@@ -50,63 +46,31 @@
     bottom: 0;
 }
 
-.align-content-bottom{
-    position: relative;
-}
-
-.align-content-bottom > div{
-    position: absolute;
-    bottom: 0;
-}
-
-.mui-tabs__bar > li > a{
-    color: whitesmoke;
-}
-.mui-tabs__bar > li.mui--is-active {
-    border-bottom: 4px solid white;
-}
-.mui-tabs__bar > li.mui--is-active > a {
+p.task-subtitle {
     color: white;
+    margin: 10px 10px 0px 10px;
+    text-align: left;
+    height: 28px;
+    width: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    font: 700 16px/28px Roboto,"Helvetica Neue",sans-serif;
 }
 
-.task-properties {
-    margin: 10px 0px 10px 0px;
-    color: #757575;
-    display: inline-block;
-    vertical-align: middle;
+p.task-title {
+    color: white;
+    font-size: 22px;
+    margin: 0px 10px 10px 10px;
+    text-align: left;
+    word-wrap: break-word;
+    width: inherit;
+    font: 500 20px/32px Roboto,"Helvetica Neue",sans-serif;
 }
 
-.task-icon{
-    margin: 0px 10px 0px 10px;
-    display: inline-block;
-    vertical-align: middle;
+mat-toolbar-row.mat-toolbar-row{
+    padding: 0px;
+
 }
 
-.task-properties-text{
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.mui-select{
-    font-size: 14px;
-    display: inline-block;
-    vertical-align: middle;
-    position: relative;
-    padding-top: 0px;
-    margin-bottom: 0px;
-}
-
-.mui-select > select{
-    font-size: 14px;
-    display: block;
-    width: 100%;
-    outline: 0;
-    border: none;
-    background-color: transparent;
-    background-image: none;
-    box-shadow: none;
-    cursor: pointer;
-    -webkit-appearance: none;
-}
 
 
