@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DataService } from '../data.service';
-import { NavigationService } from '../navigation.service';
 
 import { Task } from '../task/task';
 import { TaskOverviewComponent } from '../task/task-overview/task-overview.component';

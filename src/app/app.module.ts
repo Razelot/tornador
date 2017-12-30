@@ -4,8 +4,6 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
-import {NavigationService} from './navigation.service';
-
 import { AppComponent } from './app.component';
 
 import { AngularFireModule } from 'angularfire2';

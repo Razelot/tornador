@@ -10,7 +10,6 @@ import { Task } from './task';
 import { MatSnackBar } from '@angular/material';
 
 import { DataService } from '../data.service';
-import { NavigationService } from '../navigation.service';
 
 @Component({
   selector: 'app-task',

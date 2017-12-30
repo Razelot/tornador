@@ -11,8 +11,10 @@ export class NavigationService {
     this.title = title;
   }
 
-  getTitle(){
-    return this.title;
-  }
+  // getTitle(){
+  //   return this.title;
+  // }
+
+  //DELETE THIS STUPID TS
 
 }
