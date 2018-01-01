@@ -1,14 +1,14 @@
-<div style="height: 100%; width: 100%; display: flex; flex-direction: column;">
+<div style="height: calc(100% - 56px); width: 100%; display: flex; flex-direction: column;">
 
 
   <div style="flex: 1; height: calc(100% - 56px);">
-    <mat-tab-group [(selectedIndex)]="activeTab$" style="height: 100%;">
+    <mat-tab-group (selectedTabChange)="ns.setTitle(getToolbarTitle())"  [(selectedIndex)]="activeTab$" style="height: 100%;">
       <mat-tab >
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE835;</i>
         </ng-template>
         <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
-          <app-task-card [filterProperty$]="'status'" [filterString$]="'Not Started'"></app-task-card>
+          <app-task-card [filterProperty$]="'status'" [filterString$]="'status_0'"></app-task-card>
         </div>
       </mat-tab>
       <mat-tab>
@@ -16,7 +16,7 @@
           <i class="material-icons">&#xE871;</i>
         </ng-template>
         <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
-          <app-task-card [filterProperty$]="'status'" [filterString$]="'In Progress'"></app-task-card>
+          <app-task-card [filterProperty$]="'status'" [filterString$]="'status_1'"></app-task-card>
         </div>
       </mat-tab>
       <mat-tab>
@@ -24,7 +24,7 @@
           <i class="material-icons">&#xE834;</i>
         </ng-template>
         <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
-          <app-task-card [filterProperty$]="'status'" [filterString$]="'Completed'"></app-task-card>
+          <app-task-card [filterProperty$]="'status'" [filterString$]="'status_2'"></app-task-card>
         </div>
       </mat-tab>
       <mat-tab>
@@ -32,7 +32,7 @@
           <i class="material-icons">&#xE034;</i>
         </ng-template>
         <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
-          <app-task-card [filterProperty$]="'status'" [filterString$]="'Pending'"></app-task-card>
+          <app-task-card [filterProperty$]="'status'" [filterString$]="'status_3'"></app-task-card>
         </div>
       </mat-tab>
     </mat-tab-group>

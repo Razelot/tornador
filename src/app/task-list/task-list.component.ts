@@ -38,7 +38,7 @@ export class TaskListComponent implements OnInit {
 
   toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router,
+  constructor(private ar: ActivatedRoute, private ds: DataService, private ns: NavigationService, private router: Router,
     public dialog: MatDialog) { }
 
   openNewTaskDialog(): void {
@@ -65,7 +65,6 @@ export class TaskListComponent implements OnInit {
   }
 
   
-
   ngOnInit() {
   }
 
@@ -106,16 +105,5 @@ export class TaskListComponent implements OnInit {
         return "Pending";
     }
   }
-
-  hello() {
-    // console.log("hhahahahaha")
-  }
-
-
-  selectedTabChange(){
-    console.log("hhahahahaha")
-
-  }
-
 
 }

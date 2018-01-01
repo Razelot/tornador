@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../data.service';
-import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-task-overview',
@@ -19,7 +18,7 @@ export class TaskOverviewComponent implements OnInit {
   statusOptions$;
   priorityOptions$
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router, private app : AppComponent ) { }
+  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router ) { }
 
   ngOnInit() {
     this.ds.getDatabase().list('/business_unit/').valueChanges()
