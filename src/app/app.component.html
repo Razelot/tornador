@@ -1,4 +1,39 @@
-<div>
+<mat-drawer-container class="example-container" autosize>
+
+    <mat-drawer #drawer class="example-sidenav" mode="over">
+        <p>Auto-resizing sidenav</p>
+        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+            Toggle extra text
+        </button>
+    </mat-drawer>
+
+    <div>
+        <mat-toolbar style="padding: 0px 5px; position:sticky; top:0px;">
+            <span>
+                <button mat-icon-button (click)="drawer.toggle()">
+                    <i class="material-icons">&#xE5D2;</i>
+                </button>
+            </span>
+            <span style="flex: 1; margin: 0px 5px;">
+                <!-- Task > {{ getToolbarTitle() }} -->
+                {{this.ns.getTitle()}}
+            </span>
+            <span>
+                <button id="filter" mat-icon-button (click)="openFilterDialog()" [style.background-color]="isFilterActive$ ? '#363636' : 'transparent'"
+                    [style.color]="isFilterActive$ ? '#FFFFFF' : '#363636'">
+                    <i class="material-icons">&#xE152;</i>
+                </button>
+                <button mat-icon-button>
+                    <i class="material-icons">more_vert</i>
+                </button>
+            </span>
+        </mat-toolbar>
+
+    </div>
+
     <!-- Main content goes here -->
     <router-outlet></router-outlet>
-</div>
+
+
+</mat-drawer-container>

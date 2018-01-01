@@ -14,6 +14,7 @@ import { TaskCardComponent } from './task-card/task-card.component';
 import { FormControl } from '@angular/forms';
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 import { DataService } from '../data.service';
+import { NavigationService } from '../navigation.service';
 
 
 @Component({
@@ -24,6 +25,8 @@ import { DataService } from '../data.service';
 })
 
 export class TaskListComponent implements OnInit {
+
+
 
   isFilterDivVisible$: boolean = false;
 
@@ -102,6 +105,16 @@ export class TaskListComponent implements OnInit {
       case 3:
         return "Pending";
     }
+  }
+
+  hello() {
+    // console.log("hhahahahaha")
+  }
+
+
+  selectedTabChange(){
+    console.log("hhahahahaha")
+
   }
 
 

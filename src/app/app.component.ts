@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 
 import { DataService } from './data.service';
+import { NavigationService } from './navigation.service';
 
 import { ActivatedRoute } from "@angular/router";
 import { Department } from './model/department';
@@ -26,10 +27,12 @@ export class AppComponent {
   // title = 'TORNADOR';
 
 
-  constructor(private ds: DataService) {
+  constructor(private ds: DataService, private ns: NavigationService) {
   }
 
   ngOnInit() {
+
+    this.ns.setTitle("HEELLLO");
 
     this.ds.getDatabase().list('/business_unit/').snapshotChanges()
       .subscribe(array => {

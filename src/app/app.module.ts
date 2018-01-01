@@ -15,7 +15,7 @@ import
 { 
   MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule,
   MatChipsModule, MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, 
-  MatSnackBarModule, MatCheckboxModule,
+  MatSnackBarModule, MatCheckboxModule, MatSidenavModule
 } from '@angular/material';
 
 import{ FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,6 +36,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { DataService } from './data.service';
+import { NavigationService } from './navigation.service';
+
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -89,14 +91,14 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
 
     MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatChipsModule,
-    MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, MatSnackBarModule, MatCheckboxModule, 
+    MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, MatSnackBarModule, MatCheckboxModule, MatSidenavModule,
     
     FormsModule, ReactiveFormsModule,
 
     environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
 
   ],
-  providers: [DataService, AuthService,
+  providers: [DataService, AuthService, NavigationService
     { 
       // hammer instantion with custom config
       provide: HAMMER_GESTURE_CONFIG, 
