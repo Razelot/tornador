@@ -45,21 +45,20 @@ export class AppComponent {
         )
       });
 
-    // this.ds.getDatabase().list('/department/').valueChanges()
-    //   .subscribe(array => {
-    //     this.ds.setPriorityArray(array.map(m => <Department>m));
-    //   });
+      this.ds.getDatabase().list('/option-selection/priority/').snapshotChanges()
+      .subscribe(array => {
+        this.ds.setPriorityArray(
+          array.map(m => ({ key: m.payload.key, ...m.payload.val() }))
+        )
+      });
 
-    // this.ds.getDatabase().list('/option-selection/priority/').valueChanges()
-    //   .subscribe(array => {
-    //     this.ds.setPriorityArray(array.map(m => <Priority>m));
-    //   });
-
-    // this.ds.getDatabase().list('/option-selection/status/').valueChanges()
-    //   .subscribe(array => {
-    //     this.ds.setStatusArray(array.map(m => <Status>m));
-    //   });
-
+      this.ds.getDatabase().list('/option-selection/status/').snapshotChanges()
+      .subscribe(array => {
+        this.ds.setStatusArray(
+          array.map(m => ({ key: m.payload.key, ...m.payload.val() }))
+        )
+      });
   }
+
 
 }

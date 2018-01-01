@@ -82,8 +82,24 @@ export class DataService {
   }
 
   setStatusArray(array : Array<Status>) {
-    console.log(array);
     this.statusArray$ = array;    
+  }
+
+  
+  getDepartment(id : string): Department{
+    return this.getDepartmentArray().find(obj => obj.id === id);
+  }
+  
+  getBusinessUnit(id : string): BusinessUnit{
+    return this.getBusinessUnitArray().find(obj => obj.id === id);
+  }
+
+  getPriority(id : string): Priority{
+    return this.getPriorityArray().find(obj => obj.id === id);
+  }
+
+  getStatus(id : string) : Status{
+    return this.getStatusArray().find(obj => obj.id === id);
   }
 
 } 

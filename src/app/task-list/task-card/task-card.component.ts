@@ -6,6 +6,7 @@ import { Task } from '../../model/task';
 import { BusinessUnit } from '../../model/businessUnit';
 import { Department } from '../../model/department';
 import { Priority } from '../../model/priority';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-task-card',
@@ -15,7 +16,7 @@ import { Priority } from '../../model/priority';
 })
 export class TaskCardComponent implements OnInit {
 
-  constructor(private ds: DataService, private router: Router) { }
+  constructor(private ds: DataService, private router: Router, private app : AppComponent) { }
 
   @Input() filterProperty$: string;
   @Input() filterString$: string;
@@ -121,12 +122,6 @@ export class TaskCardComponent implements OnInit {
     else {
       return "#363636";
     }
-  }
-
-  getDepartment(id : string): Department{
-
-    return this.ds.getDepartmentArray().find(dept => dept.id === id);
-
   }
 
 }

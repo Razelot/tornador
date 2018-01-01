@@ -50,7 +50,7 @@ export class NewTaskComponent implements OnInit {
     this.newTask = {};
     this.newTask.date_assigned = this.today;
     this.newTask.date_due = this.today;
-    this.newTask.status = "Not Started";
+    this.newTask.status = "status_0";
   }
 
   separatorKeysCodes = [ENTER, COMMA];

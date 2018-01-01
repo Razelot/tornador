@@ -4,17 +4,17 @@
               <!-- <div mat-card-avatar class="example-header-image"></div> -->
               <mat-card-subtitle style="width: 100%;">
                 <span>
-                  <span [ngStyle]="{'background-color': getChipColor(task, 'bu00') }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold;">
-                    {{ task.business_unit}}
+                  <span [ngStyle]="{'background-color': ds.getBusinessUnit(task.business_unit).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold;">
+                    {{ ds.getBusinessUnit(task.business_unit).id }}
                   </span>
                   <span style="margin-right: 4px;"></span>
-                  <span [ngStyle]="{'background-color': getChipColor(task, 'department') }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase;">
-                    {{ getDepartment(task.department).name }}
+                  <span [ngStyle]="{'background-color': ds.getDepartment(task.department).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase;">
+                    {{ ds.getDepartment(task.department).name }}
                   </span>
                 </span>
                 <span style="float: right;">
-                  <span [ngStyle]="{'background-color': getChipColor(task, 'priority') }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform: uppercase;">
-                    {{ task.priority }}
+                  <span [ngStyle]="{'background-color': ds.getPriority(task.priority).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform: uppercase;">
+                    {{ ds.getPriority(task.priority).name }}
                   </span>
                   <!-- <span style="margin-right: 4px;"></span>
                   <span [ngStyle]="{'background-color': getChipColor(task, 'dept') }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase;">

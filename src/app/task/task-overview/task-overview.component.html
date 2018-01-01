@@ -5,7 +5,7 @@
       <mat-expansion-panel-header style="padding: 24px; height: unset;">
         <mat-panel-title style="flex-direction: column;">
           <div>
-            {{ task.business_unit}} > {{task.department}}
+            {{ ds.getBusinessUnit(task.business_unit).id }} > {{  ds.getDepartment(task.department).name }}
           </div>
           <div>
             <strong>{{task.title}}</strong>
@@ -16,7 +16,7 @@
       <form class="max-width">
         <mat-form-field>
           <mat-select name="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit">
-            <mat-option *ngFor="let business of businessOptions$" [value]="business.name">
+            <mat-option *ngFor="let business of businessOptions$" [value]="business.id">
               {{ business.id }}
             </mat-option>
           </mat-select>
@@ -78,7 +78,7 @@
 
     <mat-form-field>
       <mat-select name="priority" placeholder="Priority" [(ngModel)]="task.priority">
-        <mat-option *ngFor="let priority of priorityOptions$" [value]="priority.name">
+        <mat-option *ngFor="let priority of priorityOptions$" [value]="priority.id">
           {{ priority.name }}
         </mat-option>
       </mat-select>
@@ -86,8 +86,8 @@
 
     <mat-form-field *ngIf="!isAddNewTask$">
       <mat-select placeholder="Status" [(ngModel)]="task.status" name="status">
-        <mat-option *ngFor="let status of statusOptions$" [(value)]="status.displayName">
-          {{ status.displayName }}
+        <mat-option *ngFor="let status of statusOptions$" [(value)]="status.id">
+          {{ status.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
