@@ -2,7 +2,7 @@
 
 
   <div style="flex: 1; height: calc(100% - 56px);">
-    <mat-tab-group (selectedTabChange)="ns.setTitle(getToolbarTitle())"  [(selectedIndex)]="activeTab$" style="height: 100%;">
+    <mat-tab-group (selectedTabChange)="setTitle(getToolbarTitle())"  [(selectedIndex)]="activeTab$" style="height: 100%;">
       <mat-tab >
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE835;</i>

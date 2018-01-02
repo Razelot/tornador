@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <mat-drawer-container class="example-container" autosize>
 
     <mat-drawer #drawer class="example-sidenav" mode="over">
@@ -7,20 +8,39 @@
             Toggle extra text
         </button>
         
+=======
+<mat-drawer-container autosize>
+
+    <mat-drawer #drawer mode="over">
+        <app-side-menu></app-side-menu>
+>>>>>>> 2088f257cc28feea357733f2cd45c00c92a89340
     </mat-drawer>
 
     <div>
         <mat-toolbar style="padding: 0px 5px; position:sticky; top:0px;">
             <span>
+
+                <button class="{{ getBack() ? 'hamburger hamburger--arrow is-active' : 'hamburger hamburger--arrow' }}" type="button" (click)="hamburger()">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+
+                <!-- 
                 <button mat-icon-button (click)="drawer.toggle()">
                     <i class="material-icons">&#xE5D2;</i>
-                </button>
+                </button> -->
+
+
+                <!-- <button mat-icon-button (click)="toggle()">
+                    <i class="material-icons">&#xE5D2;</i>
+                </button> -->
             </span>
             <span style="flex: 1; margin: 0px 5px;">
                 <!-- Task > {{ getToolbarTitle() }} -->
-                {{this.ns.getTitle()}}
+                {{getTitle()}}
             </span>
-            <span>
+            <!-- <span>
                 <button id="filter" mat-icon-button (click)="openFilterDialog()" [style.background-color]="isFilterActive$ ? '#363636' : 'transparent'"
                     [style.color]="isFilterActive$ ? '#FFFFFF' : '#363636'">
                     <i class="material-icons">&#xE152;</i>
@@ -28,7 +48,7 @@
                 <button mat-icon-button>
                     <i class="material-icons">more_vert</i>
                 </button>
-            </span>
+            </span> -->
         </mat-toolbar>
 
     </div>

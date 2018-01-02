@@ -105,6 +105,6 @@ const appRoutes: Routes = [
       useClass: MyHammerConfig 
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,SideMenuComponent]
 })
 export class AppModule { }
