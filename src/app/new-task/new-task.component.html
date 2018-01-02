@@ -1,7 +1,7 @@
 <h2 mat-dialog-title >ADD NEW TASK</h2>
 <mat-dialog-content>
 
-<app-task-overview [task$]="newTask" [isAddNewTask$]="true"></app-task-overview>
+<app-task-overview #taskOverview [task$]="newTask" [isAddNewTask$]="true"></app-task-overview>
 
 </mat-dialog-content>
 <mat-dialog-actions>

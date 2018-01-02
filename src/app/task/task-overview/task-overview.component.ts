@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../data.service';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-task-overview',
@@ -18,9 +19,28 @@ export class TaskOverviewComponent implements OnInit {
   statusOptions$;
   priorityOptions$
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router ) { }
+  formControl$ = new FormControl('', [Validators.required]);
+  formGroup$ : FormGroup;
+
+  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router, formBuilder : FormBuilder) {
+    this.formGroup$ = formBuilder.group({
+      floatLabel: 'never',
+      business_unit: new FormControl(),
+      department: new FormControl(),
+      status: new FormControl(),
+      priority: new FormControl(),
+      title: new FormControl(),
+      description: new FormControl(),
+
+    });
+
+
+   }
 
   ngOnInit() {
+
+console.log(this.formGroup$);
+
     this.ds.getDatabase().list('/business_unit/').valueChanges()
       .subscribe(businessOptions => {
         this.businessOptions$ = businessOptions;

@@ -98,7 +98,7 @@ const appRoutes: Routes = [
     environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
 
   ],
-  providers: [DataService, AuthService, NavigationService
+  providers: [DataService, AuthService, NavigationService,
     { 
       // hammer instantion with custom config
       provide: HAMMER_GESTURE_CONFIG, 

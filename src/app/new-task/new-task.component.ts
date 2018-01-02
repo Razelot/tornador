@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { DataService } from '../data.service';
 
 import { Task } from '../model/task';
@@ -40,10 +40,18 @@ export class NewTaskComponent implements OnInit {
 
   }
 
+@ViewChild('taskOverview') taskOverview : TaskOverviewComponent;
+
   createTask(task: Task) {
-    this.ds.createTask(task);
-    this.resetTask();
-    this.onNoClick();
+
+    if(this.taskOverview.formGroup$.hasError('required')){ // has error
+
+    } else{
+      this.ds.createTask(task);
+      this.resetTask();
+      this.onNoClick();
+    }
+
   }
 
   resetTask() {
@@ -51,6 +59,7 @@ export class NewTaskComponent implements OnInit {
     this.newTask.date_assigned = this.today;
     this.newTask.date_due = this.today;
     this.newTask.status = "status_0";
+    this.newTask.description = "";
   }
 
   separatorKeysCodes = [ENTER, COMMA];

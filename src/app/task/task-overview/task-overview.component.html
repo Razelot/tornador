@@ -5,7 +5,7 @@
       <mat-expansion-panel-header style="padding: 24px; height: unset;">
         <mat-panel-title style="flex-direction: column;">
           <div>
-            {{ ds.getBusinessUnit(task.business_unit).id }} > {{  ds.getDepartment(task.department).name }}
+            {{ ds.getBusinessUnit(task.business_unit).id }} > {{ ds.getDepartment(task.department).name }}
           </div>
           <div>
             <strong>{{task.title}}</strong>
@@ -13,59 +13,79 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <form class="max-width">
-        <mat-form-field>
-          <mat-select name="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit">
+      <form class="max-width" [formGroup]="formGroup$">
+        <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
+          <mat-select formControlName="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit">
             <mat-option *ngFor="let business of businessOptions$" [value]="business.id">
               {{ business.id }}
             </mat-option>
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
-          <mat-select name="department" placeholder="Department" [(ngModel)]="task.department">
+        <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
+          <mat-select formControlName="department" placeholder="Department" [(ngModel)]="task.department">
             <mat-option *ngFor="let department of departmentOptions$" [value]="department.id">
               {{ department.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
-            <input matInput name="title" placeholder="Task Name" [(ngModel)]="task.title">
+        <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
+          <mat-select formControlName="priority" placeholder="Priority" [(ngModel)]="task.priority">
+            <mat-option *ngFor="let priority of priorityOptions$" [value]="priority.id">
+              {{ priority.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
+          <input formControlName="title" matInput placeholder="Task Name" [(ngModel)]="task.title">
         </mat-form-field>
       </form>
 
     </mat-expansion-panel>
   </mat-accordion>
 
-  <form class="max-width">
+  <form class="max-width" [formGroup]="formGroup$" >
 
-    <mat-form-field *ngIf="isAddNewTask$">
-      <mat-select name="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit">
+    <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
+      <mat-select formControlName="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit" required>
         <mat-option *ngFor="let business of businessOptions$" [value]="business.id">
           {{ business.id }}
         </mat-option>
       </mat-select>
+      <!-- <mat-error *ngIf="formControl$.hasError('required')">Please choose a Business Unit</mat-error> -->
     </mat-form-field>
 
-    <mat-form-field *ngIf="isAddNewTask$">
-      <mat-select name="department" placeholder="Department" [(ngModel)]="task.department">
+    <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
+      <mat-select formControlName="department" placeholder="Department" [(ngModel)]="task.department" required>
         <mat-option *ngFor="let department of departmentOptions$" [value]="department.id">
           {{ department.name }}
         </mat-option>
       </mat-select>
+      <!-- <mat-error *ngIf="formGroup$.value.department.hasError('required')">Please choose a Department</mat-error> -->
     </mat-form-field>
 
-    <mat-form-field *ngIf="isAddNewTask$">
-          <input matInput name="title" placeholder="Task Name" [(ngModel)]="task.title">
+    <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
+      <mat-select formControlName="priority" placeholder="Priority" [(ngModel)]="task.priority" required>
+        <mat-option *ngFor="let priority of priorityOptions$" [value]="priority.id">
+          {{ priority.name }}
+        </mat-option>
+      </mat-select>
+      <!-- <mat-error *ngIf="formControl$.hasError('required')">Please choose a Priority</mat-error> -->
     </mat-form-field>
 
-    <mat-form-field>
-      <textarea matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" name="description" placeholder="Description"
-        [(ngModel)]="task.description"></textarea>
+    <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
+      <input matInput formControlName="title" placeholder="Task Name" [(ngModel)]="task.title" required>
+      <!-- <mat-error *ngIf="formControl$.hasError('required')">Please give a Task Name</mat-error> -->
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
+      <textarea matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"  placeholder="Description"
+      formControlName="description" [(ngModel)]="task.description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
       <mat-chip-list #chipList>
         <mat-chip *ngFor="let fruit of fruits" selectable="true" removable="true" (remove)="removeTag(fruit)">
           {{fruit.name}}
@@ -76,16 +96,8 @@
       </mat-chip-list>
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-select name="priority" placeholder="Priority" [(ngModel)]="task.priority">
-        <mat-option *ngFor="let priority of priorityOptions$" [value]="priority.id">
-          {{ priority.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field *ngIf="!isAddNewTask$">
-      <mat-select placeholder="Status" [(ngModel)]="task.status" name="status">
+    <mat-form-field *ngIf="!isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
+      <mat-select formControlName="status" placeholder="Status" [(ngModel)]="task.status" >
         <mat-option *ngFor="let status of statusOptions$" [(value)]="status.id">
           {{ status.name }}
         </mat-option>
