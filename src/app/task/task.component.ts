@@ -10,6 +10,8 @@ import { Task } from '../model/task';
 import { MatSnackBar } from '@angular/material';
 
 import { DataService } from '../data.service';
+import { NavigationService } from '../navigation.service';
+
 
 @Component({
   selector: 'app-task',
@@ -22,10 +24,12 @@ export class TaskComponent implements OnInit {
   taskID: string;
   task$: Observable<{}>;
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router,
-              public snackBar : MatSnackBar ) { }
+  constructor(private ar: ActivatedRoute, private ds: DataService, private ns: NavigationService, private router: Router,
+    public snackBar: MatSnackBar) { }
 
   ngOnInit() {
+
+    this.ns.setTask(true);
 
     var self = this;
     this.taskID = this.ar.snapshot.params.taskID;
@@ -50,7 +54,7 @@ export class TaskComponent implements OnInit {
 
   }
 
-  
+
   activeTab: number = 0;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
@@ -59,19 +63,19 @@ export class TaskComponent implements OnInit {
     if (action === this.SWIPE_ACTION.RIGHT) {
       if (this.activeTab > 0) {
         this.activeTab = this.activeTab - 1;
-      } 
+      }
     }
 
     // previous
     if (action === this.SWIPE_ACTION.LEFT) {
       if (this.activeTab < 4) {
         this.activeTab = this.activeTab + 1;
-      } 
+      }
     }
 
   }
 
-  onSaveButtonClick(task: Task) : void {
+  onSaveButtonClick(task: Task): void {
     this.ds.updateTask(this.taskID, task);
     this.snackBar.open("Task Saved!", "Dismiss", {
       duration: 3000,

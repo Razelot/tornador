@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
@@ -9,11 +9,12 @@ import * as firebase from 'firebase/app';
 import { DataService } from './data.service';
 import { NavigationService } from './navigation.service';
 
-import { ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Department } from './model/department';
 import { BusinessUnit } from './model/businessUnit';
 import { Priority } from './model/priority';
 import { Status } from './model/status';
+import { MatDrawer } from '@angular/material';
 
 // import * as $ from 'jquery';
 
@@ -26,13 +27,15 @@ export class AppComponent {
 
   // title = 'TORNADOR';
 
+  classburger: String = "hamburger hamburger--arrow is-active";
 
-  constructor(private ds: DataService, private ns: NavigationService) {
+
+  constructor(private ds: DataService, private ns: NavigationService, private r: Router) {
   }
 
   ngOnInit() {
 
-    this.ns.setTitle("HEELLLO");
+    this.ns.setTitle("TORNADOR");
 
     this.ds.getDatabase().list('/business_unit/').snapshotChanges()
       .subscribe(array => {
@@ -41,26 +44,49 @@ export class AppComponent {
         )
       });
 
-      this.ds.getDatabase().list('/department/').snapshotChanges()
+    this.ds.getDatabase().list('/department/').snapshotChanges()
       .subscribe(array => {
         this.ds.setDepartmentArray(
           array.map(m => ({ key: m.payload.key, ...m.payload.val() }))
         )
       });
 
-      this.ds.getDatabase().list('/option-selection/priority/').snapshotChanges()
+    this.ds.getDatabase().list('/option-selection/priority/').snapshotChanges()
       .subscribe(array => {
         this.ds.setPriorityArray(
           array.map(m => ({ key: m.payload.key, ...m.payload.val() }))
         )
       });
 
-      this.ds.getDatabase().list('/option-selection/status/').snapshotChanges()
+    this.ds.getDatabase().list('/option-selection/status/').snapshotChanges()
       .subscribe(array => {
         this.ds.setStatusArray(
           array.map(m => ({ key: m.payload.key, ...m.payload.val() }))
         )
       });
+  }
+
+  getTitle() {
+    this.ns.getTitle();
+  }
+
+
+  getBack(){
+    return this.ns.getTask();
+  }
+
+  @ViewChild('drawer') drawer: MatDrawer;
+  hamburger() {
+
+    if (!this.ns.getTask()) {
+      this.drawer.toggle();
+      // var a = document.getElementById("drawer");
+      // console.log(a);
+      // this.drawer.toggle(); 
+
+    }else {
+      this.r.navigate(['/tasks']);
+    }
   }
 
 

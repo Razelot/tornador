@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 export class NavigationService {
   
   title :String;
+  inTask : boolean = false;
 
   constructor() { }
 
@@ -15,6 +16,13 @@ export class NavigationService {
     return this.title;
   }
 
-  //DELETE THIS STUPID TS
+  getTask(){
+    return this.inTask;
+  }
+  
+  setTask(bool :boolean){
+    this.inTask = bool;
+  }
+
 
 }

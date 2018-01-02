@@ -64,8 +64,9 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  
+
   ngOnInit() {
+    this.ns.setTask(false);
   }
 
   deleteTask(key: String) {
@@ -93,17 +94,21 @@ export class TaskListComponent implements OnInit {
 
   }
 
-  getToolbarTitle(): string{
+  getToolbarTitle(): string {
     switch (this.activeTab$) {
       case 0:
         return "Not Started";
       case 1:
         return "In Progress";
       case 2:
-        return "Completed";      
+        return "Completed";
       case 3:
         return "Pending";
     }
+  }
+
+  setTitle(title: String) {
+    this.ns.setTitle(title);
   }
 
 }
