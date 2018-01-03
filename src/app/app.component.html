@@ -5,38 +5,24 @@
     </mat-drawer>
 
     <div>
-        <mat-toolbar style="padding: 0px 5px; position:sticky; top:0px;">
+        <mat-toolbar style="position: sticky; background-color: #363636; color: white;">
+            <!-- <mat-toolbar-row> -->
             <span>
-
                 <button class="{{ getBack() ? 'hamburger hamburger--arrow is-active' : 'hamburger hamburger--arrow' }}" type="button" (click)="hamburger()">
                     <span class="hamburger-box">
                         <span class="hamburger-inner"></span>
                     </span>
                 </button>
 
-                <!-- 
-                <button mat-icon-button (click)="drawer.toggle()">
-                    <i class="material-icons">&#xE5D2;</i>
-                </button> -->
-
-
-                <!-- <button mat-icon-button (click)="toggle()">
-                    <i class="material-icons">&#xE5D2;</i>
-                </button> -->
             </span>
             <span style="flex: 1; margin: 0px 5px;">
                 <!-- Task > {{ getToolbarTitle() }} -->
                 {{getTitle()}}
             </span>
-            <!-- <span>
-                <button id="filter" mat-icon-button (click)="openFilterDialog()" [style.background-color]="isFilterActive$ ? '#363636' : 'transparent'"
-                    [style.color]="isFilterActive$ ? '#FFFFFF' : '#363636'">
-                    <i class="material-icons">&#xE152;</i>
-                </button>
-                <button mat-icon-button>
-                    <i class="material-icons">more_vert</i>
-                </button>
-            </span> -->
+
+
+            <!-- </mat-toolbar-row> -->
+
         </mat-toolbar>
 
     </div>

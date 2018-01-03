@@ -1,13 +1,8 @@
-<div *ngIf="task$ | async as task" style="display: flex; flex-direction:column; height: 100%; overflow: auto;">
+<div *ngIf="task$ | async as task" style="display: flex; flex-direction:column; height: 100%; overflow: auto; margin-top: -56px;">
 
-  <div style="position: sticky; top: 0px; z-index: 2;">
-    <mat-toolbar style="background-color: #363636; color: white;">
+  <div style="position: absolute; right: 0px; top: 0px; z-index: 2; width: calc(100% - 70px); ">
+    <mat-toolbar style="background-color: transparent; color: white;">
       <mat-toolbar-row>
-        <span style="margin: 0px 5px;">
-          <button mat-icon-button routerLink="../../tasks">
-            <i class="material-icons">&#xE5C4;</i>
-          </button>
-        </span>
         <span style="flex: 1; text-overflow: clip; overflow: scroll;">
           <span *ngIf="activeTab > 0">{{ task.title }}</span>
         </span>
@@ -30,7 +25,7 @@
     </mat-toolbar>
   </div>
 
-  <div style="display: block; flex: 1;">
+  <div style="display: block; flex: 1; margin-top: 56px;">
 
     <mat-tab-group id="task" [(selectedIndex)]="activeTab" style="height: 100%;">
       <mat-tab>
