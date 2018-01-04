@@ -20,3 +20,8 @@ button.submit-button :disabled{
     background-color: #36363636;
     color: #FFFFFF !important;
 }
+
+.snackBar-new-task{
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}

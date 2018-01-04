@@ -5,7 +5,7 @@ import { Task } from '../model/task';
 import { TaskOverviewComponent } from '../task/task-overview/task-overview.component';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import {MatChipInputEvent} from '@angular/material';
+import {MatChipInputEvent, MatSnackBar} from '@angular/material';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 
 
@@ -19,7 +19,7 @@ export class NewTaskComponent implements OnInit {
   today: String;
   newTask: any = {};
 
-  constructor(private ds: DataService,
+  constructor(private ds: DataService, public snackBar : MatSnackBar,
     public dialogRef: MatDialogRef<NewTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -48,6 +48,10 @@ isSubmitDisabled$: Boolean = true;
 
       this.ds.createTask(task);
       this.onNoClick();
+      this.snackBar.open("New Task created!", "Dismiss", {
+        duration: 5000
+      });
+
 
   }
 

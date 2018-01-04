@@ -22,7 +22,9 @@
           </button>
         </mat-menu>
 
-        <button mat-icon-button style="float: right;" (click)="openFilterDialog()">
+        <button mat-icon-button style="float: right;" (click)="openFilterDialog()"
+            [style.background-color]="fs.isFilterActive$ ? '#FFFFFF' : 'transparent'"
+            [style.color]="fs.isFilterActive$ ? '#363636' : '#FFFFFF'">
             <i class="material-icons">filter_list</i>
         </button>
       </span>

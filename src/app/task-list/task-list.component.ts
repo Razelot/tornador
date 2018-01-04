@@ -15,6 +15,7 @@ import { FormControl } from '@angular/forms';
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 import { DataService } from '../data.service';
 import { NavigationService } from '../navigation.service';
+import { FilterService } from './filter-dialog/filter.service';
 
 
 @Component({
@@ -26,18 +27,12 @@ import { NavigationService } from '../navigation.service';
 
 export class TaskListComponent implements OnInit {
 
-  isFilterDivVisible$: boolean = false;
-
-  isFilterActive$: boolean = false;
-
   disableSelect = new FormControl(false);
-
   toppings = new FormControl();
-
   toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
   constructor(private ar: ActivatedRoute, private ds: DataService, private ns: NavigationService, private router: Router,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog, public fs : FilterService) { }
 
   openNewTaskDialog(): void {
     let dialogRef = this.dialog.open(NewTaskComponent, {
@@ -54,23 +49,20 @@ export class TaskListComponent implements OnInit {
     let dialogRef = this.dialog.open(FilterDialogComponent, {
       maxWidth: '100%',
       panelClass: 'filter-dialog', backdropClass: 'transparent-backdrop',
-      data: {}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      // this.animal = result;
+    // dialogRef.componentInstance.isFilterActive$ = this.isFilterActive$;
+    //dialogRef.componentInstance.size = "Large";
+
+    dialogRef.afterOpen().subscribe(result => {
+      //  console.log('result', result);
     });
   }
 
 
   ngOnInit() {
-    this.ns.setTask(false, null);
+    
   }
-
-  deleteTask(key: String) {
-    this.ds.deleteTask(key);
-  }
-
 
   activeTab$: number = 0;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };

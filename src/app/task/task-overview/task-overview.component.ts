@@ -35,29 +35,10 @@ export class TaskOverviewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.ds.getDatabase().list('/business_unit/').valueChanges()
-      .subscribe(businessOptions => {
-        this.businessOptions$ = businessOptions;
-        // console.log(this.bu00Options$);
-      });
-
-    this.ds.getDatabase().list('/department/').valueChanges()
-      .subscribe(departmentOptions => {
-        this.departmentOptions$ = departmentOptions;
-        // console.log(this.bu00Options$);
-      });
-
-    this.ds.getDatabase().list('/option-selection/priority/').valueChanges()
-      .subscribe(priorityOptions => {
-        this.priorityOptions$ = priorityOptions;
-        // console.log(this.statusOptions$);
-      });
-
-    this.ds.getDatabase().list('/option-selection/status/').valueChanges()
-      .subscribe(statusOptions => {
-        this.statusOptions$ = statusOptions;
-        // console.log(this.statusOptions$);
-      });
+    this.businessOptions$ = this.ds.getBusinessUnitArray();
+    this.departmentOptions$ = this.ds.getDepartmentArray();
+    this.priorityOptions$ = this.ds.getPriorityArray();
+    this.statusOptions$ = this.ds.getStatusArray();
 
   }
 
@@ -88,22 +69,20 @@ export class TaskOverviewComponent implements OnInit {
   @Output() onCreateClickEvent = new EventEmitter();
   @Output() onCancelClickEvent = new EventEmitter();
 
-  onCreateClick(){
+  onCreateClick() {
 
-    if(this.formGroup$.value['title'] == null ||
-    this.formGroup$.value['business_unit'] == null ||
-    this.formGroup$.value['department'] == null ||
-    this.formGroup$.value['priority'] == null )
-    {
+    if (this.formGroup$.value['title'] == null ||
+      this.formGroup$.value['business_unit'] == null ||
+      this.formGroup$.value['department'] == null ||
+      this.formGroup$.value['priority'] == null) {
       //do nothing, because there are null at requried fields
     }
-    else
-    {
+    else {
       this.onCreateClickEvent.emit();
     }
 
   }
-  onCancelClick(){
+  onCancelClick() {
     this.onCancelClickEvent.emit();
   }
 

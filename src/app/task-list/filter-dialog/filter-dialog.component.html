@@ -1,33 +1,34 @@
 <div style="height: 300px; display:flex; flex-direction: column; background-color: white;">
-        
+
   <p class="roboto-font" style="font-weight: bold; margin-bottom: 8 px;">Filter Options :</p>
 
-  <mat-form-field class="example-full-width">
-      <input matInput placeholder="Title / Tag" >
-    </mat-form-field>
   <mat-form-field>
     <mat-select placeholder="BU00">
-        <mat-option *ngFor="let business of businessOptions$" [value]="business.id">
-            {{ business.id }}
-          </mat-option>
+      <mat-option *ngFor="let business of businessOptions$" [value]="business.id">
+        {{ business.id }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-      <mat-select placeholder="Department">
-          <mat-option *ngFor="let department of departmentOptions$" [value]="department.name">
-              {{ department.name }}
-            </mat-option>
-      </mat-select>
-    </mat-form-field><mat-form-field>
-        <mat-select placeholder="Priority">
-            <mat-option *ngFor="let priority of priorityOptions$" [value]="priority.name">
-                {{ priority.name }}
-              </mat-option>
-        </mat-select>
-      </mat-form-field>
+    <mat-select placeholder="Department">
+      <mat-option *ngFor="let department of departmentOptions$" [value]="department.name">
+        {{ department.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Priority">
+      <mat-option *ngFor="let priority of priorityOptions$" [value]="priority.name">
+        {{ priority.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Title / Tag">
+  </mat-form-field>
 
-    <button mat-button (click)="isFilterActive$ = !isFilterActive$;"
-    [style.background-color]="isFilterActive$ ? '#363636' : '#36363611'"
-    [style.color]="isFilterActive$ ? '#FFFFFF' : '#363636'"
-    [innerHTML]="isFilterActive$ ? 'Clear' : 'Filter'"></button>
+  <button mat-button (click)="fs.isFilterActive$ = !(fs.isFilterActive$);" 
+    [style.background-color]="fs.isFilterActive$ ? '#363636' : '#36363611'"
+    [style.color]="fs.isFilterActive$ ? '#FFFFFF' : '#363636'" 
+    [innerHTML]="fs.isFilterActive$ ? 'Clear' : 'Filter'"></button>
 </div>

@@ -33,7 +33,7 @@
       </mat-expansion-panel-header>
 
       <form class="max-width">
-        <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
+        <mat-form-field [floatLabel]="auto">
           <mat-select name="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit">
             <mat-option *ngFor="let business of businessOptions$" [value]="business.id">
               {{ business.id }}
@@ -41,7 +41,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
+        <mat-form-field [floatLabel]="auto">
           <mat-select name="department" placeholder="Department" [(ngModel)]="task.department">
             <mat-option *ngFor="let department of departmentOptions$" [value]="department.id">
               {{ department.name }}
@@ -49,7 +49,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
+        <mat-form-field [floatLabel]="auto">
           <mat-select name="priority" placeholder="Priority" [(ngModel)]="task.priority">
             <mat-option *ngFor="let priority of priorityOptions$" [value]="priority.id">
               {{ priority.name }}
@@ -57,7 +57,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
+        <mat-form-field [floatLabel]="auto">
           <input name="title" matInput placeholder="Task Name" [(ngModel)]="task.title">
         </mat-form-field>
       </form>
@@ -67,7 +67,7 @@
 
   <form class="max-width" [formGroup]="formGroup$">
 
-    <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
+    <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="auto">
       <mat-select formControlName="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit" required>
         <mat-option *ngFor="let business of businessOptions$" [value]="business.id">
           {{ business.id }}
@@ -76,7 +76,7 @@
       <!-- <mat-error *ngIf="formGroup$.controls['business_unit'].hasError('required')">Please choose a Business Unit</mat-error> -->
     </mat-form-field>
 
-    <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
+    <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="auto">
       <mat-select formControlName="department" placeholder="Department" [(ngModel)]="task.department" required>
         <mat-option *ngFor="let department of departmentOptions$" [value]="department.id">
           {{ department.name }}
@@ -85,7 +85,7 @@
       <!-- <mat-error *ngIf="formGroup$.controls['department'].hasError('required')">Please choose a Department</mat-error> -->
     </mat-form-field>
 
-    <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
+    <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="auto">
       <mat-select formControlName="priority" placeholder="Priority" [(ngModel)]="task.priority" required>
         <mat-option *ngFor="let priority of priorityOptions$" [value]="priority.id">
           {{ priority.name }}
@@ -94,17 +94,17 @@
       <!-- <mat-error *ngIf="formGroup$.controls['priority'].hasError('required')">Please choose a Priority</mat-error> -->
     </mat-form-field>
 
-    <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
+    <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="auto">
       <input matInput formControlName="title" placeholder="Task Name" [(ngModel)]="task.title" required>
       <!-- <mat-error *ngIf="formGroup$.controls['title'].hasError('required')">Please give a Task Name</mat-error> -->
     </mat-form-field>
 
     <mat-form-field [floatLabel]="auto">
-      <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="5" placeholder="Description" formControlName="description"
+      <textarea matInput matTextareaAutosize matAutosizeMinRows="1" placeholder="Description" formControlName="description"
         [(ngModel)]="task.description"></textarea>
     </mat-form-field>
 
-    <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
+    <mat-form-field [floatLabel]="auto">
       <mat-chip-list #chipList>
         <mat-chip *ngFor="let fruit of fruits" selectable="true" removable="true" (remove)="removeTag(fruit)">
           {{fruit.name}}
@@ -115,7 +115,7 @@
       </mat-chip-list>
     </mat-form-field>
 
-    <mat-form-field *ngIf="!isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
+    <mat-form-field *ngIf="!isAddNewTask$" [floatLabel]="auto">
       <mat-select formControlName="status" placeholder="Status" [(ngModel)]="task.status">
         <mat-option *ngFor="let status of statusOptions$" [(value)]="status.id">
           {{ status.name }}

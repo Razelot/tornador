@@ -50,6 +50,7 @@ import { NewTaskComponent } from './new-task/new-task.component';
 import { TaskOverviewComponent } from './task/task-overview/task-overview.component';
 import { TaskCardComponent } from './task-list/task-card/task-card.component';
 import { FilterDialogComponent } from './task-list/filter-dialog/filter-dialog.component';
+import { FilterService } from './task-list/filter-dialog/filter.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
@@ -98,7 +99,7 @@ const appRoutes: Routes = [
     environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
 
   ],
-  providers: [DataService, AuthService, NavigationService,
+  providers: [DataService, AuthService, NavigationService, FilterService,
     { 
       // hammer instantion with custom config
       provide: HAMMER_GESTURE_CONFIG, 
