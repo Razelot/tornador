@@ -32,10 +32,16 @@ export class AppComponent {
 
   // title = 'TORNADOR';
 
-  classburger: String = "hamburger hamburger--arrow is-active";
-
+  // classburger: String = "hamburger hamburger--arrow is-active";
 
   constructor(private ds: DataService, private ns: NavigationService, private r: Router, public snackBar: MatSnackBar) {
+
+    var self = this;
+    ns.changeEmitted$.subscribe(
+      text => {
+        console.log(text);
+        self.openDrawer();
+      });
   }
 
   ngOnInit() {
@@ -75,10 +81,9 @@ export class AppComponent {
     this.ns.getTitle();
   }
 
-
-  getBack() {
-    return this.ns.getTask();
-  }
+  // getBack() {
+  //   return this.ns.getTask();
+  // }
 
   @ViewChild('drawer') drawer: MatDrawer;
   openDrawer() {

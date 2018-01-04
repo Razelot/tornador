@@ -17,7 +17,7 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu" yPosition="below">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="deleteTask()">
               <i class="material-icons">&#xE872;</i>
               <span>Delete</span>
             </button>
