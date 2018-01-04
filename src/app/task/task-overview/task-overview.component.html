@@ -1,11 +1,30 @@
 <div *ngIf="task$ as task">
 
   <mat-accordion *ngIf="!isAddNewTask$">
-    <mat-expansion-panel style="margin-bottom: 24px; margin-left: -24px; margin-right: -24px; margin-top:-24px;">
-      <mat-expansion-panel-header style="padding: 24px; height: unset;">
-        <mat-panel-title style="flex-direction: column;">
-          <div>
-            {{ ds.getBusinessUnit(task.business_unit).id }} > {{ ds.getDepartment(task.department).name }}
+    <mat-expansion-panel style="margin-bottom: 24px; margin-left: -24px; margin-right: -24px; margin-top:-24px; background:#ffffffaa;">
+      <mat-expansion-panel-header style="padding: 24px; height: unset; background: transparent;">
+        <mat-panel-title style="flex-direction: column; margin: 0px;">
+          <div style="margin-bottom: 6px;">
+              <span>
+                  <span [ngStyle]="{'background-color': ds.getBusinessUnit(task.business_unit).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold;">
+                    {{ ds.getBusinessUnit(task.business_unit).id }}
+                  </span>
+                  <span style="margin-right: 4px;"></span>
+                  <span [ngStyle]="{'background-color': ds.getDepartment(task.department).color }" 
+                    style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase; margin-right: 4px;">
+                    {{ ds.getDepartment(task.department).name }}
+                  </span>
+                  <span [ngStyle]="{'background-color': ds.getPriority(task.priority).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform: uppercase;">
+                      {{ ds.getPriority(task.priority).name }}
+                    </span>
+                </span> 
+                <span style="float: right;">
+                  
+                  <!-- <span style="margin-right: 4px;"></span>
+                  <span [ngStyle]="{'background-color': getChipColor(task, 'dept') }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase;">
+                    {{ task.status }}
+                  </span> -->
+                </span>
           </div>
           <div>
             <strong>{{task.title}}</strong>

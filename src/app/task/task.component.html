@@ -1,6 +1,6 @@
 <div *ngIf="task$ | async as task" style="display: flex; flex-direction:column; height: 100%; overflow: auto; margin-top: -56px;">
 
-  <div style="position: absolute; right: 0px; top: 0px; z-index: 2; width: 100%; ">
+  <div style="position: sticky; right: 0px; top: 0px; z-index: 2; width: 100%; ">
     <mat-toolbar style="background-color: transparent; color: white;">
       <mat-toolbar-row>
 
@@ -26,13 +26,13 @@
           <button *ngIf="activeTab == 0" mat-icon-button class="button-navigation" style="float: right;" (click)="onSaveButtonClick(task)">
             <i class="material-icons">&#xE163;</i>
           </button>
-          
+
         </span>
       </mat-toolbar-row>
     </mat-toolbar>
   </div>
 
-  <div style="display: block; flex: 1; margin-top: 56px;">
+  <div style="display: block; flex: 1; height: calc(100% - 56px)">
 
     <mat-tab-group id="task" [(selectedIndex)]="activeTab" style="height: 100%;">
       <mat-tab>

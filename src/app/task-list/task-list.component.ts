@@ -93,7 +93,6 @@ export class TaskListComponent implements OnInit {
   }
 
   toolbarTitle$: string = "Task > Not Started";
-
   setToolbarTitle() {
     switch (this.activeTab$) {
       case 0:
@@ -107,7 +106,7 @@ export class TaskListComponent implements OnInit {
     }
   }
 
-  
+
   @Output() hamburgerClickEvent = new EventEmitter();
   onHamburgerClick(){
     this.hamburgerClickEvent.emit();

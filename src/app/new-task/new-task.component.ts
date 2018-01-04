@@ -47,7 +47,6 @@ isSubmitDisabled$: Boolean = true;
   createTask(task: Task) {
 
       this.ds.createTask(task);
-      this.resetTask();
       this.onNoClick();
 
   }
