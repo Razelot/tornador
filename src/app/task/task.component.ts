@@ -65,4 +65,9 @@ export class TaskComponent implements OnInit {
     this.router.navigate(['/tasks']);
   }
 
+  deleteTask(){
+    this.ds.deleteTask(this.taskID$);
+    this.onBackButtonClick();
+  }
+
 }

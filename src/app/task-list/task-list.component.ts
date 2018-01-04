@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation, Output, EventEmitter, ViewChild } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -34,6 +34,9 @@ export class TaskListComponent implements OnInit {
   constructor(private ar: ActivatedRoute, private ds: DataService, private ns: NavigationService, private router: Router,
     public dialog: MatDialog, public fs : FilterService) { }
 
+    ngOnInit() {
+    }
+
   openNewTaskDialog(): void {
     let dialogRef = this.dialog.open(NewTaskComponent, {
       width: '400px',
@@ -59,9 +62,14 @@ export class TaskListComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
 
   ngOnInit() {
     
+=======
+  deleteTask(key: String) {
+    this.ds.deleteTask(key);
+>>>>>>> 5a61d256c7d396389b3d45683f2fb4f7b02b6997
   }
 
   activeTab$: number = 0;
@@ -98,9 +106,7 @@ export class TaskListComponent implements OnInit {
     }
   }
 
-
-  @Output() hamburgerClickEvent = new EventEmitter();
   onHamburgerClick(){
-    this.hamburgerClickEvent.emit();
+    this.ns.emitChange('toggle');
   }
 }
