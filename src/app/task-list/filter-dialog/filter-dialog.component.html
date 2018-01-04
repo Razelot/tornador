@@ -3,32 +3,32 @@
   <p class="roboto-font" style="font-weight: bold; margin-bottom: 8 px;">Filter Options :</p>
 
   <mat-form-field>
-    <mat-select placeholder="BU00">
+    <mat-select placeholder="BU00" [(ngModel)]="fs.filterBusinessUnit$">
       <mat-option *ngFor="let business of businessOptions$" [value]="business.id">
         {{ business.id }}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <mat-select placeholder="Department">
+    <mat-select placeholder="Department" [(ngModel)]="fs.filterDepartment$">
       <mat-option *ngFor="let department of departmentOptions$" [value]="department.name">
         {{ department.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <mat-select placeholder="Priority">
+    <mat-select placeholder="Priority" [(ngModel)]="fs.filterPriority$">
       <mat-option *ngFor="let priority of priorityOptions$" [value]="priority.name">
         {{ priority.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Title / Tag">
+    <input matInput placeholder="Title / Tag" [(ngModel)]="fs.filterTitle$">
   </mat-form-field>
 
-  <button mat-button (click)="fs.isFilterActive$ = !(fs.isFilterActive$);" 
+  <button mat-button (click)="onFilterClick()" 
     [style.background-color]="fs.isFilterActive$ ? '#363636' : '#36363611'"
     [style.color]="fs.isFilterActive$ ? '#FFFFFF' : '#363636'" 
-    [innerHTML]="fs.isFilterActive$ ? 'Clear' : 'Filter'"></button>
+    [innerHTML]="fs.isFilterActive$ ? 'Show all' : 'Filter'"></button>
 </div>

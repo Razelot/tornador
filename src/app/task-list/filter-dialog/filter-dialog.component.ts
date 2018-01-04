@@ -31,4 +31,9 @@ export class FilterDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  onFilterClick(){
+    this.fs.isFilterActive$ = !(this.fs.isFilterActive$);
+    this.fs.emitChange('isFilterActive');
+  }
+
 }

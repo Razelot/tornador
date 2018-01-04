@@ -18,58 +18,55 @@ export class TaskCardComponent implements OnInit {
 
   constructor(private ds: DataService, private router: Router, private app : AppComponent) { }
 
-  @Input() filterProperty$: string;
-  @Input() filterString$: string;
-
   labelColor$: string = "#369742";
 
   //FILTER_PROPERTY = { status: 'status', priority: 'priority' };
 
-  tasks$: Observable<Task[]>;
+  @Input() task$;
   bu00Array$;
   deptArray$: Array<Department>;
   priorityArray$
 
   ngOnInit() {
 
-    if (this.filterProperty$ != null && this.filterString$ != null) {
-      this.tasks$ = this.getFilteredTasks(this.filterProperty$, this.filterString$);
-    }
-    else {
-      this.tasks$ = this.ds.getTasks();
-    }
+    // if (this.filterProperty$ != null && this.filterString$ != null) {
+    //   this.tasks$ = this.getFilteredTasks(this.filterProperty$, this.filterString$);
+    // }
+    // else {
+    //   this.tasks$ = this.ds.getTasks();
+    // }
 
     // this.tasks$ = this.tasks$.map((tasksSorted) => {
     //   console.log(tasksSorted);
     //   return tasksSorted;
     // });
 
-    this.tasks$ = this.tasks$.map((tasksSorted) => {
-      tasksSorted.sort((a: Task, b: Task) => {
+    // this.tasks$ = this.tasks$.map((tasksSorted) => {
+    //   tasksSorted.sort((a: Task, b: Task) => {
 
-        // let aPriority = this.getPriorityOrder(a.priority);
-        // let bPriority = this.getPriorityOrder(b.priority);
+    //     // let aPriority = this.getPriorityOrder(a.priority);
+    //     // let bPriority = this.getPriorityOrder(b.priority);
 
-        return a.priority < b.priority ? -1 : 1;
+    //     return a.priority < b.priority ? -1 : 1;
 
-      });
-      return tasksSorted;
-    });
+    //   });
+    //   return tasksSorted;
+    // });
 
-    this.ds.getDatabase().list('/business_unit/').valueChanges()
-      .subscribe(businessOptions => {
-        this.bu00Array$ = businessOptions.map(b => <BusinessUnit>b);;
-      });
+    // this.ds.getDatabase().list('/business_unit/').valueChanges()
+    //   .subscribe(businessOptions => {
+    //     this.bu00Array$ = businessOptions.map(b => <BusinessUnit>b);;
+    //   });
 
-    this.ds.getDatabase().list('/department/').valueChanges()
-      .subscribe(departmentOptions => {
-        this.deptArray$ = departmentOptions.map(d => <Department>d);;
-      });
+    // this.ds.getDatabase().list('/department/').valueChanges()
+    //   .subscribe(departmentOptions => {
+    //     this.deptArray$ = departmentOptions.map(d => <Department>d);;
+    //   });
 
-    this.ds.getDatabase().list('/option-selection/priority/').valueChanges()
-      .subscribe(priorityOptions => {
-        this.priorityArray$ = priorityOptions.map(p => <Priority>p);;
-      });
+    // this.ds.getDatabase().list('/option-selection/priority/').valueChanges()
+    //   .subscribe(priorityOptions => {
+    //     this.priorityArray$ = priorityOptions.map(p => <Priority>p);;
+    //   });
   }
 
   getPriorityOrder(priorityName: string) {
@@ -87,17 +84,17 @@ export class TaskCardComponent implements OnInit {
     }
   }
 
-  getFilteredTasks(filterProperty: string, filterString: string): Observable<Task[]> {
+  //getFilteredTasks(filterProperty: string, filterString: string): Observable<Task[]> {
 
-    if (filterProperty == "status") {
-      return this.ds.getTasks()
-        .map(tasks => tasks.filter(task => (<Task>task).status === filterString));
-    }
-    else if (filterProperty == "priority") {
-      return this.ds.getTasks()
-        .map(tasks => tasks.filter(task => (<Task>task).priority === filterString));
-    }
-  }
+    // if (filterProperty == "status") {
+    //   return this.ds.getTasks()
+    //     .map(tasks => tasks.filter(task => (<Task>task).status === filterString));
+    // }
+    // else if (filterProperty == "priority") {
+    //   return this.ds.getTasks()
+    //     .map(tasks => tasks.filter(task => (<Task>task).priority === filterString));
+    // }
+  //}
 
   routerLink(taskID: string) {
     this.router.navigate(["/tasks/" + taskID]);

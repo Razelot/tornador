@@ -38,9 +38,9 @@ export class DataService {
     this.af.object('tasks/' + key).remove();
   }
 
-  getTasks() {
+  getTasks(): Observable<Task[]>{
     return this.af.list('tasks').snapshotChanges().map(changes => {
-      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+      return changes.map(c => <Task>({ key: c.payload.key, ...c.payload.val() }));
     });
   }
 

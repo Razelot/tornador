@@ -1,4 +1,4 @@
-<div *ngFor="let task of tasks$ | async">
+<div *ngIf="task$ as task">
         <mat-card class="example-card" (click)="routerLink(task.key)">
             <mat-card-header>
               <!-- <div mat-card-avatar class="example-header-image"></div> -->

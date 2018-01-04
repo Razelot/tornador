@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewEncapsulation, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation, Output, EventEmitter, ViewChild, SimpleChanges, Input, SimpleChange } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -32,10 +32,81 @@ export class TaskListComponent implements OnInit {
   toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
   constructor(private ar: ActivatedRoute, private ds: DataService, private ns: NavigationService, private router: Router,
-    public dialog: MatDialog, public fs : FilterService) { }
+    public dialog: MatDialog, public fs: FilterService) {
 
-    ngOnInit() {
+    var self = this;
+    fs.changeEmitted$.subscribe(
+      text => {
+        if(text === "isFilterActive"){
+          self.initializeTaskList();
+        }
+      });
+  }
+
+  @Input() isFilterActive$: Boolean = this.fs.isFilterActive$;
+
+  taskList$: Observable<Task[]>;
+  taskList$_status_0: Observable<Task[]>;
+  taskList$_status_1: Observable<Task[]>;
+  taskList$_status_2: Observable<Task[]>;
+  taskList$_status_3: Observable<Task[]>;
+
+  ngOnInit() {
+    this.initializeTaskList();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const isFilterActive$: SimpleChange = changes.isFilterActive$;
+    console.log('prev value: ', isFilterActive$.previousValue);
+    console.log('got name: ', isFilterActive$.currentValue);
+    //this._name = name.currentValue.toUpperCase();
+  }
+
+  initializeTaskList() {
+
+    this.taskList$ = this.ds.getTasks();
+
+    this.taskList$_status_0 = this.getFilteredTaskList("status_0");
+    this.taskList$_status_1 = this.getFilteredTaskList("status_1");
+    this.taskList$_status_2 = this.getFilteredTaskList("status_2");
+    this.taskList$_status_3 = this.getFilteredTaskList("status_3");
+  }
+
+  getFilteredTaskList(statusId: string): Observable<Task[]> {
+
+    let returnTaskList = this.taskList$.map(tasks => tasks.filter(task => (<Task>task).status === statusId));
+
+    if(this.fs.isFilterActive$){
+      if(this.fs.filterBusinessUnit$ != null){
+        returnTaskList = returnTaskList.map(tasks => tasks.filter(task => (<Task>task).business_unit === this.fs.filterBusinessUnit$));
+        console.log('business_unit');
+      }
+      if(this.fs.filterDepartment$ != null){
+        returnTaskList = returnTaskList.map(tasks => tasks.filter(task => (<Task>task).business_unit === this.fs.filterDepartment$));
+        console.log('department');
+      }
+      if(this.fs.filterPriority$ != null){
+        returnTaskList = returnTaskList.map(tasks => tasks.filter(task => (<Task>task).business_unit === this.fs.filterPriority$));
+        console.log('priority');
+      }
+      if(this.fs.filterTitle$ != null){
+        returnTaskList = returnTaskList.map(tasks => tasks.filter(task => (<Task>task).business_unit.indexOf(this.fs.filterTitle$.toString()) >= 0));
+        console.log('title');
+      }
     }
+
+    returnTaskList = returnTaskList.map((tasksSorted) => {
+      tasksSorted.sort((a: Task, b: Task) => {
+        return a.priority < b.priority ? -1 : 1;
+      });
+      return tasksSorted;
+    });
+
+    return returnTaskList;
+  }
+
+
+
 
   openNewTaskDialog(): void {
     let dialogRef = this.dialog.open(NewTaskComponent, {
@@ -60,16 +131,6 @@ export class TaskListComponent implements OnInit {
     dialogRef.afterOpen().subscribe(result => {
       //  console.log('result', result);
     });
-  }
-
-<<<<<<< HEAD
-
-  ngOnInit() {
-    
-=======
-  deleteTask(key: String) {
-    this.ds.deleteTask(key);
->>>>>>> 5a61d256c7d396389b3d45683f2fb4f7b02b6997
   }
 
   activeTab$: number = 0;
@@ -106,7 +167,7 @@ export class TaskListComponent implements OnInit {
     }
   }
 
-  onHamburgerClick(){
+  onHamburgerClick() {
     this.ns.emitChange('toggle');
   }
 }

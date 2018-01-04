@@ -22,10 +22,9 @@
           </button>
         </mat-menu>
 
-        <button mat-icon-button style="float: right;" (click)="openFilterDialog()"
-            [style.background-color]="fs.isFilterActive$ ? '#FFFFFF' : 'transparent'"
-            [style.color]="fs.isFilterActive$ ? '#363636' : '#FFFFFF'">
-            <i class="material-icons">filter_list</i>
+        <button mat-icon-button style="float: right;" (click)="openFilterDialog()" [style.background-color]="fs.isFilterActive$ ? '#FFFFFF' : 'transparent'"
+          [style.color]="fs.isFilterActive$ ? '#363636' : '#FFFFFF'">
+          <i class="material-icons">filter_list</i>
         </button>
       </span>
     </mat-toolbar-row>
@@ -38,7 +37,9 @@
           <i class="material-icons">&#xE835;</i>
         </ng-template>
         <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
-          <app-task-card [filterProperty$]="'status'" [filterString$]="'status_0'"></app-task-card>
+          <div *ngFor="let task of taskList$_status_0 | async">
+            <app-task-card [task$]="task"></app-task-card>
+          </div>
         </div>
       </mat-tab>
       <mat-tab>
@@ -46,7 +47,9 @@
           <i class="material-icons">&#xE871;</i>
         </ng-template>
         <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
-          <app-task-card [filterProperty$]="'status'" [filterString$]="'status_1'"></app-task-card>
+          <div *ngFor="let task of taskList$_status_1 | async">
+            <app-task-card [task$]="task"></app-task-card>
+          </div>
         </div>
       </mat-tab>
       <mat-tab>
@@ -54,7 +57,9 @@
           <i class="material-icons">&#xE834;</i>
         </ng-template>
         <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
-          <app-task-card [filterProperty$]="'status'" [filterString$]="'status_2'"></app-task-card>
+          <div *ngFor="let task of taskList$_status_2 | async">
+            <app-task-card [task$]="task"></app-task-card>
+          </div>
         </div>
       </mat-tab>
       <mat-tab>
@@ -62,7 +67,9 @@
           <i class="material-icons">&#xE034;</i>
         </ng-template>
         <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
-          <app-task-card [filterProperty$]="'status'" [filterString$]="'status_3'"></app-task-card>
+          <div *ngFor="let task of taskList$_status_3 | async">
+            <app-task-card [task$]="task"></app-task-card>
+          </div>
         </div>
       </mat-tab>
     </mat-tab-group>
