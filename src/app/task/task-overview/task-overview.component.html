@@ -54,7 +54,7 @@
           {{ business.id }}
         </mat-option>
       </mat-select>
-      <!-- <mat-error *ngIf="formControl$.hasError('required')">Please choose a Business Unit</mat-error> -->
+      <!-- <mat-error *ngIf="formGroup$.controls['business_unit'].hasError('required')">Please choose a Business Unit</mat-error> -->
     </mat-form-field>
 
     <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
@@ -63,7 +63,7 @@
           {{ department.name }}
         </mat-option>
       </mat-select>
-      <!-- <mat-error *ngIf="formGroup$.value.department.hasError('required')">Please choose a Department</mat-error> -->
+      <!-- <mat-error *ngIf="formGroup$.controls['department'].hasError('required')">Please choose a Department</mat-error> -->
     </mat-form-field>
 
     <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
@@ -72,12 +72,12 @@
           {{ priority.name }}
         </mat-option>
       </mat-select>
-      <!-- <mat-error *ngIf="formControl$.hasError('required')">Please choose a Priority</mat-error> -->
+      <!-- <mat-error *ngIf="formGroup$.controls['priority'].hasError('required')">Please choose a Priority</mat-error> -->
     </mat-form-field>
 
     <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
       <input matInput formControlName="title" placeholder="Task Name" [(ngModel)]="task.title" required>
-      <!-- <mat-error *ngIf="formControl$.hasError('required')">Please give a Task Name</mat-error> -->
+      <!-- <mat-error *ngIf="formGroup$.controls['title'].hasError('required')">Please give a Task Name</mat-error> -->
     </mat-form-field>
 
     <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
@@ -103,6 +103,10 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+
+    <button mat-raised-button class="submit-button" type="submit" (click)="onCreateClick()"> Create </button>
+    <button mat-button style="background-color: #F0F0F0; width: 48%; box-sizing:border-box; float: right;" type="cancel" (click)="onCancelClick()">Cancel</button>  
 
   </form>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../data.service';
 import { FormControl, Validators, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -29,15 +29,11 @@ export class TaskOverviewComponent implements OnInit {
       status: new FormControl('', [Validators.required]),
       priority: new FormControl('', [Validators.required]),
       title: new FormControl('', [Validators.required]),
-      description: new FormControl(''),
+      description: new FormControl('')
     });
-
-
   }
 
   ngOnInit() {
-
-    console.log(this.formGroup$);
 
     this.ds.getDatabase().list('/business_unit/').valueChanges()
       .subscribe(businessOptions => {
@@ -89,5 +85,26 @@ export class TaskOverviewComponent implements OnInit {
 
   }
 
+  @Output() onCreateClickEvent = new EventEmitter();
+  @Output() onCancelClickEvent = new EventEmitter();
+
+  onCreateClick(){
+
+    if(this.formGroup$.value['title'] == null ||
+    this.formGroup$.value['business_unit'] == null ||
+    this.formGroup$.value['department'] == null ||
+    this.formGroup$.value['priority'] == null )
+    {
+      //do nothing, because there are null at requried fields
+    }
+    else
+    {
+      this.onCreateClickEvent.emit();
+    }
+
+  }
+  onCancelClick(){
+    this.onCancelClickEvent.emit();
+  }
 
 }
