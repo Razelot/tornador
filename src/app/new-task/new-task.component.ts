@@ -44,8 +44,16 @@ export class NewTaskComponent implements OnInit {
 
   createTask(task: Task) {
 
-    if(this.taskOverview.formGroup$.hasError('required')){ // has error
+console.log(this.taskOverview.formGroup$);
 
+    if
+    (
+      this.taskOverview.formGroup$.value['title'] == null ||
+      this.taskOverview.formGroup$.value['business_unit'] == null ||
+      this.taskOverview.formGroup$.value['department'] == null ||
+      this.taskOverview.formGroup$.value['priority'] == null )
+    { 
+      // has error
     } else{
       this.ds.createTask(task);
       this.resetTask();

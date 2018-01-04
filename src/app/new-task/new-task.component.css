@@ -8,3 +8,15 @@
     font-size: 14px;
     color: rgba(0,0,0,.26);
 }
+
+button.submit-button{
+    background-color: #363636; 
+    color: #FFFFFF; 
+    width: 48%; 
+    box-sizing:border-box;
+}
+
+button.submit-button :disabled{
+    background-color: #36363636;
+    color: #FFFFFF !important;
+}

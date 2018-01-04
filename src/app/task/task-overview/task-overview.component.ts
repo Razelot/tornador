@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../data.service';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-overview',
@@ -15,31 +15,27 @@ export class TaskOverviewComponent implements OnInit {
 
   businessOptions$;
   departmentOptions$;
-  
+
   statusOptions$;
   priorityOptions$
 
-  formControl$ = new FormControl('', [Validators.required]);
-  formGroup$ : FormGroup;
+  formGroup$: FormGroup;
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router, formBuilder : FormBuilder) {
+  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router, formBuilder: FormBuilder) {
     this.formGroup$ = formBuilder.group({
       floatLabel: 'never',
-      business_unit: new FormControl(),
-      department: new FormControl(),
-      status: new FormControl(),
-      priority: new FormControl(),
-      title: new FormControl(),
-      description: new FormControl(),
-
+      business_unit: new FormControl('', [Validators.required]),
+      department: new FormControl('', [Validators.required]),
+      status: new FormControl('', [Validators.required]),
+      priority: new FormControl('', [Validators.required]),
+      title: new FormControl('', [Validators.required]),
+      description: new FormControl(''),
     });
-
-
-   }
+  }
 
   ngOnInit() {
 
-console.log(this.formGroup$);
+    console.log(this.formGroup$);
 
     this.ds.getDatabase().list('/business_unit/').valueChanges()
       .subscribe(businessOptions => {
@@ -47,7 +43,7 @@ console.log(this.formGroup$);
         // console.log(this.bu00Options$);
       });
 
-      this.ds.getDatabase().list('/department/').valueChanges()
+    this.ds.getDatabase().list('/department/').valueChanges()
       .subscribe(departmentOptions => {
         this.departmentOptions$ = departmentOptions;
         // console.log(this.bu00Options$);
@@ -59,7 +55,7 @@ console.log(this.formGroup$);
         // console.log(this.statusOptions$);
       });
 
-      this.ds.getDatabase().list('/option-selection/status/').valueChanges()
+    this.ds.getDatabase().list('/option-selection/status/').valueChanges()
       .subscribe(statusOptions => {
         this.statusOptions$ = statusOptions;
         // console.log(this.statusOptions$);
