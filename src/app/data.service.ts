@@ -28,6 +28,9 @@ export class DataService {
   }
 
   updateTask(taskID: String, task: Task) {
+    if(task.description == null){
+      task.description = "";
+    }
     this.af.object('/tasks/' + taskID).update(task);
   }
 

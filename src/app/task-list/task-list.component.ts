@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -92,21 +92,24 @@ export class TaskListComponent implements OnInit {
 
   }
 
-  getToolbarTitle(): string {
+  toolbarTitle$: string = "Task > Not Started";
+
+  setToolbarTitle() {
     switch (this.activeTab$) {
       case 0:
-        return "Not Started";
+        this.toolbarTitle$ = "Task > Not Started";
       case 1:
-        return "In Progress";
+        this.toolbarTitle$ = "Task > In Progress";
       case 2:
-        return "Completed";
+        this.toolbarTitle$ = "Task > Completed";
       case 3:
-        return "Pending";
+        this.toolbarTitle$ = "Task > Pending";
     }
   }
 
-  setTitle(title: String) {
-    this.ns.setTitle(title);
+  
+  @Output() hamburgerClickEvent = new EventEmitter();
+  onHamburgerClick(){
+    this.hamburgerClickEvent.emit();
   }
-
 }

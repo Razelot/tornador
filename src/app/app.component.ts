@@ -81,17 +81,8 @@ export class AppComponent {
   }
 
   @ViewChild('drawer') drawer: MatDrawer;
-  hamburger() {
-
-    if (!this.ns.getTask()) {
-      this.drawer.toggle();
-      // var a = document.getElementById("drawer");
-      // console.log(a);
-      // this.drawer.toggle(); 
-
-    } else {
-      this.r.navigate(['/tasks']);
-    }
+  openDrawer() {
+    this.drawer.toggle();
   }
 
 }

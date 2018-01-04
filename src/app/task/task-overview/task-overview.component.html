@@ -13,9 +13,9 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <form class="max-width" [formGroup]="formGroup$">
+      <form class="max-width">
         <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
-          <mat-select formControlName="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit">
+          <mat-select name="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit">
             <mat-option *ngFor="let business of businessOptions$" [value]="business.id">
               {{ business.id }}
             </mat-option>
@@ -23,7 +23,7 @@
         </mat-form-field>
 
         <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
-          <mat-select formControlName="department" placeholder="Department" [(ngModel)]="task.department">
+          <mat-select name="department" placeholder="Department" [(ngModel)]="task.department">
             <mat-option *ngFor="let department of departmentOptions$" [value]="department.id">
               {{ department.name }}
             </mat-option>
@@ -31,7 +31,7 @@
         </mat-form-field>
 
         <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
-          <mat-select formControlName="priority" placeholder="Priority" [(ngModel)]="task.priority">
+          <mat-select name="priority" placeholder="Priority" [(ngModel)]="task.priority">
             <mat-option *ngFor="let priority of priorityOptions$" [value]="priority.id">
               {{ priority.name }}
             </mat-option>
@@ -39,14 +39,14 @@
         </mat-form-field>
 
         <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
-          <input formControlName="title" matInput placeholder="Task Name" [(ngModel)]="task.title">
+          <input name="title" matInput placeholder="Task Name" [(ngModel)]="task.title">
         </mat-form-field>
       </form>
 
     </mat-expansion-panel>
   </mat-accordion>
 
-  <form class="max-width" [formGroup]="formGroup$" >
+  <form class="max-width" [formGroup]="formGroup$">
 
     <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
       <mat-select formControlName="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit" required>
@@ -80,9 +80,9 @@
       <!-- <mat-error *ngIf="formGroup$.controls['title'].hasError('required')">Please give a Task Name</mat-error> -->
     </mat-form-field>
 
-    <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
-      <textarea matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"  placeholder="Description"
-      formControlName="description" [(ngModel)]="task.description"></textarea>
+    <mat-form-field [floatLabel]="auto">
+      <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="5" placeholder="Description" formControlName="description"
+        [(ngModel)]="task.description"></textarea>
     </mat-form-field>
 
     <mat-form-field [floatLabel]="formGroup$.value.floatLabel">
@@ -97,7 +97,7 @@
     </mat-form-field>
 
     <mat-form-field *ngIf="!isAddNewTask$" [floatLabel]="formGroup$.value.floatLabel">
-      <mat-select formControlName="status" placeholder="Status" [(ngModel)]="task.status" >
+      <mat-select formControlName="status" placeholder="Status" [(ngModel)]="task.status">
         <mat-option *ngFor="let status of statusOptions$" [(value)]="status.id">
           {{ status.name }}
         </mat-option>
@@ -105,8 +105,10 @@
     </mat-form-field>
 
 
-    <button mat-raised-button class="submit-button" type="submit" (click)="onCreateClick()"> Create </button>
-    <button mat-button style="background-color: #F0F0F0; width: 48%; box-sizing:border-box; float: right;" type="cancel" (click)="onCancelClick()">Cancel</button>  
+    <div *ngIf="isAddNewTask$">
+      <button mat-raised-button class="submit-button" type="submit" (click)="onCreateClick()"> Create </button>
+      <button mat-button style="background-color: #F0F0F0; width: 48%; box-sizing:border-box; float: right;" type="cancel" (click)="onCancelClick()">Cancel</button>
+    </div>
 
   </form>
 </div>

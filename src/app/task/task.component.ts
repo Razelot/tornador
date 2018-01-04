@@ -21,51 +21,21 @@ import { NavigationService } from '../navigation.service';
 })
 export class TaskComponent implements OnInit {
 
-  taskID: string;
+  taskID$: string;
   task$: Observable<{}>;
-
-  task: any;
-
 
   constructor(private ar: ActivatedRoute, private ds: DataService, private ns: NavigationService, private router: Router,
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
-
-    var self = this;
-    this.taskID = this.ar.snapshot.params.taskID;
-
-    this.ns.setTask(true, this.taskID);
-
-
-    // this.ds.getTask(this.taskID).subscribe(t => {
-    //   this.task$ = t;
-    //   console.log(this.task$);
-    // });
-
-    this.task$ = this.ds.getTask(this.taskID);
-
-    this.ns.task$ = this.task$;
-
-
-
-    // Check if character exists in database
-    // this.task.subscribe(snapshot => {
-    //   if (snapshot.val() != null) {
-    //     console.log('task exists');
-    //   } else {
-    //     console.log('task does not exist');
-    //     this.router.navigate(['']); // Redeirect to index
-    //   }
-    // });
+    this.taskID$ = this.ar.snapshot.params.taskID;
+    this.task$ = this.ds.getTask(this.taskID$);
 
   }
 
-
   activeTab: number = 0;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
-
   onSwipe(action: String) {
     // next
     if (action === this.SWIPE_ACTION.RIGHT) {
@@ -84,12 +54,15 @@ export class TaskComponent implements OnInit {
   }
 
   onSaveButtonClick(task: Task): void {
-    // this.ds.updateTask(this.taskID, task);
-    // this.snackBar.open("Task Saved!", "Dismiss", {
-    //   duration: 3000,
-    // });
 
-    console.log(this.task);
+    this.ds.updateTask(this.taskID$, task);
+    this.snackBar.open("Task Saved!", "Dismiss", {
+      duration: 3000,
+    });
+  }
+
+  onBackButtonClick(){
+    this.router.navigate(['/tasks']);
   }
 
 }

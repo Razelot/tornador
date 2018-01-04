@@ -1,11 +1,17 @@
 <div *ngIf="task$ | async as task" style="display: flex; flex-direction:column; height: 100%; overflow: auto; margin-top: -56px;">
 
-  <div style="position: absolute; right: 0px; top: 0px; z-index: 2; width: calc(100% - 70px); ">
+  <div style="position: absolute; right: 0px; top: 0px; z-index: 2; width: 100%; ">
     <mat-toolbar style="background-color: transparent; color: white;">
       <mat-toolbar-row>
+
+        <button mat-icon-button class="button-navigation" style="float: left; margin: 0px 5px;" (click)="onBackButtonClick()">
+          <i class="material-icons">arrow_back</i>
+        </button>
+
         <span style="flex: 1; text-overflow: clip; overflow: scroll;">
           <span *ngIf="activeTab > 0">{{ task.title }}</span>
         </span>
+        
         <span style="margin: 0px 5px;">
           <button mat-icon-button [matMenuTriggerFor]="menu" class="button-navigation" style="float: right;">
             <mat-icon>more_vert</mat-icon>
@@ -20,6 +26,7 @@
           <button *ngIf="activeTab == 0" mat-icon-button class="button-navigation" style="float: right;" (click)="onSaveButtonClick(task)">
             <i class="material-icons">&#xE163;</i>
           </button>
+          
         </span>
       </mat-toolbar-row>
     </mat-toolbar>

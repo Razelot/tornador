@@ -1,9 +1,36 @@
-<div style="height: calc(100% - 56px); width: 100%; display: flex; flex-direction: column;">
+<div style="height: 100%; width: 100%; margin-top: -56px; display: flex; flex-direction: column;">
 
+  <mat-toolbar style="background-color: transparent; color: white;">
+    <mat-toolbar-row style="padding: 0px;">
+      <span style="margin: 0px 5px;">
+        <button mat-icon-button style="color: white;" (click)="onHamburgerClick()">
+          <i class="material-icons">menu</i>
+        </button>
+      </span>
+      <span style="flex: 1; text-overflow: clip; overflow: scroll; color:white;">
+        <span>dfjsoifis</span>
+      </span>
+      <span style="margin: 0px 5px;">
+        <button mat-icon-button [matMenuTriggerFor]="menu" style="float: right;">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" yPosition="below">
+          <button mat-menu-item>
+            <i class="material-icons">&#xE871;</i>
+            <span>Inside Menu</span>
+          </button>
+        </mat-menu>
+
+        <button mat-icon-button style="float: right;" (click)="openFilterDialog()">
+            <i class="material-icons">filter_list</i>
+        </button>
+      </span>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
   <div style="flex: 1; height: calc(100% - 56px);">
-    <mat-tab-group (selectedTabChange)="setTitle(getToolbarTitle())"  [(selectedIndex)]="activeTab$" style="height: 100%;">
-      <mat-tab >
+    <mat-tab-group (selectedTabChange)="setToolbarTitle()" [(selectedIndex)]="activeTab$" style="height: 100%;">
+      <mat-tab>
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE835;</i>
         </ng-template>
@@ -39,8 +66,7 @@
   </div>
 </div>
 
-<button mat-fab (click)="openNewTaskDialog()"
-        style="background-color: #363636; position: fixed; top: auto; left: auto; right: 20px; bottom: 20px; z-index: 9;">
+<button mat-fab (click)="openNewTaskDialog()" style="background-color: #363636; position: fixed; top: auto; left: auto; right: 20px; bottom: 20px; z-index: 9;">
   <i class="material-icons" style="color: #FFFFFF">
     &#xE145;
   </i>

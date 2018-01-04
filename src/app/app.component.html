@@ -6,29 +6,13 @@
 
     <div>
         <mat-toolbar style="position: sticky; background-color: #363636; color: white;">
-            <!-- <mat-toolbar-row> -->
-            <span>
-                <button class="{{ getBack() ? 'hamburger hamburger--arrow is-active' : 'hamburger hamburger--arrow' }}" type="button" (click)="hamburger()">
-                    <span class="hamburger-box">
-                        <span class="hamburger-inner"></span>
-                    </span>
-                </button>
-
-            </span>
-            <span style="flex: 1; margin: 0px 5px;">
-                <!-- Task > {{ getToolbarTitle() }} -->
-                {{getTitle()}}
-            </span>
-
-
-            <!-- </mat-toolbar-row> -->
-
+            
         </mat-toolbar>
 
     </div>
 
     <!-- Main content goes here -->
-    <router-outlet></router-outlet>
+    <router-outlet (hamburgerClickEvent)="openDrawer()"></router-outlet>
 
 
 </mat-drawer-container>
