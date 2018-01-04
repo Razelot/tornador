@@ -17,22 +17,27 @@ import { NavigationService } from '../navigation.service';
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None, 
 })
 export class TaskComponent implements OnInit {
 
   taskID: string;
   task$: Observable<{}>;
 
+  task: any;
+
+
   constructor(private ar: ActivatedRoute, private ds: DataService, private ns: NavigationService, private router: Router,
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
-    this.ns.setTask(true);
 
     var self = this;
     this.taskID = this.ar.snapshot.params.taskID;
+
+    this.ns.setTask(true, this.taskID);
+
 
     // this.ds.getTask(this.taskID).subscribe(t => {
     //   this.task$ = t;
@@ -40,6 +45,9 @@ export class TaskComponent implements OnInit {
     // });
 
     this.task$ = this.ds.getTask(this.taskID);
+
+    this.ns.task$ = this.task$;
+
 
 
     // Check if character exists in database
@@ -76,9 +84,12 @@ export class TaskComponent implements OnInit {
   }
 
   onSaveButtonClick(task: Task): void {
-    this.ds.updateTask(this.taskID, task);
-    this.snackBar.open("Task Saved!", "Dismiss", {
-      duration: 3000,
-    });
+    // this.ds.updateTask(this.taskID, task);
+    // this.snackBar.open("Task Saved!", "Dismiss", {
+    //   duration: 3000,
+    // });
+
+    console.log(this.task);
   }
+
 }

@@ -16,6 +16,11 @@ import { Priority } from './model/priority';
 import { Status } from './model/status';
 import { MatDrawer } from '@angular/material';
 
+import { MatSnackBar } from '@angular/material';
+
+import { Task } from './model/task';
+
+
 // import * as $ from 'jquery';
 
 @Component({
@@ -30,7 +35,7 @@ export class AppComponent {
   classburger: String = "hamburger hamburger--arrow is-active";
 
 
-  constructor(private ds: DataService, private ns: NavigationService, private r: Router) {
+  constructor(private ds: DataService, private ns: NavigationService, private r: Router, public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -71,7 +76,7 @@ export class AppComponent {
   }
 
 
-  getBack(){
+  getBack() {
     return this.ns.getTask();
   }
 
@@ -84,10 +89,9 @@ export class AppComponent {
       // console.log(a);
       // this.drawer.toggle(); 
 
-    }else {
+    } else {
       this.r.navigate(['/tasks']);
     }
   }
-
 
 }

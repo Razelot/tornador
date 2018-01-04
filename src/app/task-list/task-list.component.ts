@@ -26,8 +26,6 @@ import { NavigationService } from '../navigation.service';
 
 export class TaskListComponent implements OnInit {
 
-
-
   isFilterDivVisible$: boolean = false;
 
   isFilterActive$: boolean = false;
@@ -66,7 +64,7 @@ export class TaskListComponent implements OnInit {
 
 
   ngOnInit() {
-    this.ns.setTask(false);
+    this.ns.setTask(false, null);
   }
 
   deleteTask(key: String) {

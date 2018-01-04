@@ -1,10 +1,22 @@
 import { Injectable } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
+
+
 @Injectable()
 export class NavigationService {
   
+
+  taskID: String;
+
+  task$: Observable<{}>;
+
+  foo: Observable<{}>;
+
+
   title :String;
-  inTask : boolean = false;
+  isTask : boolean = false;
+  isEdit : boolean = false;
 
   constructor() { }
 
@@ -17,11 +29,12 @@ export class NavigationService {
   }
 
   getTask(){
-    return this.inTask;
+    return this.isTask;
   }
   
-  setTask(bool :boolean){
-    this.inTask = bool;
+  setTask(bool :boolean, taskID :String){
+    this.isTask = bool;
+    this.taskID = taskID;
   }
 
 
