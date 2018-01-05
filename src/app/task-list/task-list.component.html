@@ -8,8 +8,7 @@
         </button>
       </span>
       <span style="flex: 1; color:white;">
-        <!-- {{ toolbarTitle$ }} -->
-        Task > Not Started
+        {{ getToolbarTitle() }}
       </span>
       <span style="margin: 0px 5px;">
         <button mat-icon-button [matMenuTriggerFor]="menu" style="float: right;">
@@ -31,7 +30,7 @@
   </mat-toolbar>
 
   <div style="flex: 1; height: calc(100% - 56px);">
-    <mat-tab-group (selectedTabChange)="setToolbarTitle()" [(selectedIndex)]="activeTab$" style="height: 100%;">
+    <mat-tab-group [(selectedIndex)]="activeTab$" style="height: 100%;">
       <mat-tab>
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE835;</i>

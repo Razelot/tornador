@@ -4,11 +4,8 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class FilterService {
 
-  // Observable string sources
   private emitChangeSource = new Subject<any>();
-  // Observable string streams
   changeEmitted$ = this.emitChangeSource.asObservable();
-  // Service message commands
   emitChange(change: any) {
     this.emitChangeSource.next(change);
   }
@@ -16,9 +13,28 @@ export class FilterService {
   constructor() { }
 
   isFilterActive$: Boolean = false;
-  filterBusinessUnit$: String;
-  filterDepartment$: String;
-  filterPriority$: String;
+  filterBusinessUnit$: String[];
+  filterDepartment$: String[];
+  filterPriority$: String[];
   filterTitle$: String;
 
+
+  isAllFilterPropertyNull(): boolean {
+    let r = (
+      this.filterBusinessUnit$ == null &&
+      this.filterDepartment$ == null &&
+      this.filterPriority$ == null &&
+      this.filterTitle$ == null
+    );
+
+    return r;
+  }
+
+  setAllFilterPropertyNull() {
+    this.filterBusinessUnit$ = null;
+    this.filterDepartment$ = null;
+    this.filterPriority$ = null;
+    this.filterTitle$ = null;
+    this.emitChange('filterProperty');
+  }
 }
