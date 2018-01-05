@@ -1,0 +1,9 @@
+<p>
+  task-chat works!
+</p>
+<div style="padding: 16px;">
+  <div *ngFor="let post of chat$ | async">
+    {{post}}
+    <app-task-chat-card [post$]="post"></app-task-chat-card>
+  </div>
+</div>

@@ -48,7 +48,7 @@
           <i class="material-icons">&#xE0B7;</i>
         </ng-template>
         <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
-          Conversation
+          <app-task-chat [task$]="task"></app-task-chat>
         </div>
       </mat-tab>
       <mat-tab>
