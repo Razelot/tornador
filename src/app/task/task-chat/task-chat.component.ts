@@ -24,7 +24,6 @@ export class TaskChatComponent implements OnInit {
 
   ngOnInit() {
     this.chat$ = this.ds.getChat(this.taskID$);
-    console.log(this.chat$);
   }
 
 }

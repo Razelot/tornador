@@ -17,7 +17,6 @@ export class TaskChatCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.post$)
   }
 
 }

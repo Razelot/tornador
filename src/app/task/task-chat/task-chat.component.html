@@ -3,7 +3,6 @@
 </p>
 <div style="padding: 16px;">
   <div *ngFor="let post of chat$ | async">
-    {{post.sender}} {{post.message}}
-    <!-- <app-task-chat-card [post$]="post"></app-task-chat-card> -->
+    <app-task-chat-card [post$]="post"></app-task-chat-card>
   </div>
 </div>

@@ -107,8 +107,9 @@ export class DataService {
     return this.getStatusArray().find(obj => obj.id === id);
   }
 
-  getChat(taskID : string){
-    return this.af.list('tasks/' + taskID + '/chat').valueChanges();
+  getChat(taskID : string): Observable<Post[]>{
+    return this.af.list('tasks/' + taskID + '/chat').valueChanges()
+    .map(posts => (<Post[]>posts));
   }
 
 } 

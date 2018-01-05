@@ -2,16 +2,16 @@
   <mat-card-header>
     <mat-card-title style="width: 100%;">
       <span class="chat-name">
-        {{post.sender}}
+        {{post$.sender}}
       </span>
       <span class="chat-date">
-        {{post.date_sent}}
+        {{post$.time_sent}}
       </span>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <p>
-      {{post.message}}
+      {{post$.message}}
     </p>
   </mat-card-content>
 </mat-card>

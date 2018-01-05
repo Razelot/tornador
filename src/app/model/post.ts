@@ -1,5 +1,5 @@
 export interface Post {
     sender: string;
     message: string;
-    time_sent: DateTimeFormat;
+    time_sent: string;
   }
