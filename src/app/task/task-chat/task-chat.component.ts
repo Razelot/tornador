@@ -14,17 +14,17 @@ import { Post } from '../../model/post';
 })
 export class TaskChatComponent implements OnInit {
 
-  chat$: Observable<Post[]>;
+  chat$: Observable<any>;
 
-  @Input() task$;
+  @Input() taskID$;
   
 
   constructor(private ds: DataService) {
   }
 
   ngOnInit() {
-    this.chat$ = this.ds.getChat(this.task$.key);
-    // console.log(this.chat$);
+    this.chat$ = this.ds.getChat(this.taskID$);
+    console.log(this.chat$);
   }
 
 }

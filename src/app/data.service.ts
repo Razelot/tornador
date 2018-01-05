@@ -107,11 +107,8 @@ export class DataService {
     return this.getStatusArray().find(obj => obj.id === id);
   }
 
-  getChat(taskID : string): Observable<Post[]>{
-    return this.af.list('tasks/' + taskID + '/chat').snapshotChanges().map(changes => {
-      console.log(changes)
-      return changes.map(c => <Post>{});
-    });;
+  getChat(taskID : string){
+    return this.af.list('tasks/' + taskID + '/chat').valueChanges();
   }
 
 } 
