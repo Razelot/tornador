@@ -51,6 +51,8 @@ import { TaskOverviewComponent } from './task/task-overview/task-overview.compon
 import { TaskCardComponent } from './task-list/task-card/task-card.component';
 import { FilterDialogComponent } from './task-list/filter-dialog/filter-dialog.component';
 import { FilterService } from './task-list/filter-dialog/filter.service';
+import { TaskChatComponent } from './task/task-chat/task-chat.component';
+import { TaskChatCardComponent } from './task/Task-Chat/task-chat-card/task-chat-card.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
@@ -80,6 +82,8 @@ const appRoutes: Routes = [
     TaskOverviewComponent,
     TaskCardComponent,
     FilterDialogComponent,
+    TaskChatComponent,
+    TaskChatCardComponent,
   ],
   imports: [
     BrowserModule,

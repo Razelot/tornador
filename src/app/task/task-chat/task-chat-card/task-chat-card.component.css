@@ -1,0 +1,13 @@
+div.mat-card-header-text{
+    margin: 0px;
+    width: 100%;
+}
+
+.chat-name{
+    font-weight: bold;
+}
+
+.chat-date{
+    font-weight: none;
+    float: right;
+}
