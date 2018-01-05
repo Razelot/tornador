@@ -37,7 +37,12 @@ export class TaskListComponent implements OnInit {
     var self = this;
     fs.changeEmitted$.subscribe(
       text => {
-        if(text === "isFilterActive"){
+        if (text === "filterProperty") {
+          if (this.fs.isFilterActive$) {
+            self.initializeTaskList();
+          }
+        }
+        if (text === "filterToggle") {
           self.initializeTaskList();
         }
       });
@@ -52,6 +57,9 @@ export class TaskListComponent implements OnInit {
   taskList$_status_3: Observable<Task[]>;
 
   ngOnInit() {
+
+    this.taskList$ = this.ds.getTasks();
+
     this.initializeTaskList();
   }
 
@@ -63,9 +71,6 @@ export class TaskListComponent implements OnInit {
   }
 
   initializeTaskList() {
-
-    this.taskList$ = this.ds.getTasks();
-
     this.taskList$_status_0 = this.getFilteredTaskList("status_0");
     this.taskList$_status_1 = this.getFilteredTaskList("status_1");
     this.taskList$_status_2 = this.getFilteredTaskList("status_2");
@@ -76,22 +81,18 @@ export class TaskListComponent implements OnInit {
 
     let returnTaskList = this.taskList$.map(tasks => tasks.filter(task => (<Task>task).status === statusId));
 
-    if(this.fs.isFilterActive$){
-      if(this.fs.filterBusinessUnit$ != null){
-        returnTaskList = returnTaskList.map(tasks => tasks.filter(task => (<Task>task).business_unit === this.fs.filterBusinessUnit$));
-        console.log('business_unit');
+    if (this.fs.isFilterActive$) {
+      if (this.fs.filterBusinessUnit$ != null && this.fs.filterBusinessUnit$.length > 0) {
+        returnTaskList = returnTaskList.map(tasks => tasks.filter(task => this.fs.filterBusinessUnit$.indexOf((<Task>task).business_unit) >= 0));
       }
-      if(this.fs.filterDepartment$ != null){
-        returnTaskList = returnTaskList.map(tasks => tasks.filter(task => (<Task>task).business_unit === this.fs.filterDepartment$));
-        console.log('department');
+      if (this.fs.filterDepartment$ != null && this.fs.filterDepartment$.length > 0) {
+        returnTaskList = returnTaskList.map(tasks => tasks.filter(task => this.fs.filterDepartment$.indexOf((<Task>task).department) >= 0));
       }
-      if(this.fs.filterPriority$ != null){
-        returnTaskList = returnTaskList.map(tasks => tasks.filter(task => (<Task>task).business_unit === this.fs.filterPriority$));
-        console.log('priority');
+      if (this.fs.filterPriority$ != null && this.fs.filterPriority$.length > 0) {
+        returnTaskList = returnTaskList.map(tasks => tasks.filter(task => this.fs.filterPriority$.indexOf((<Task>task).priority) >= 0));
       }
-      if(this.fs.filterTitle$ != null){
-        returnTaskList = returnTaskList.map(tasks => tasks.filter(task => (<Task>task).business_unit.indexOf(this.fs.filterTitle$.toString()) >= 0));
-        console.log('title');
+      if (this.fs.filterTitle$ != null) {
+        returnTaskList = returnTaskList.map(tasks => tasks.filter(task => (<Task>task).title.indexOf(this.fs.filterTitle$.toString()) >= 0));
       }
     }
 
@@ -128,12 +129,19 @@ export class TaskListComponent implements OnInit {
     // dialogRef.componentInstance.isFilterActive$ = this.isFilterActive$;
     //dialogRef.componentInstance.size = "Large";
 
-    dialogRef.afterOpen().subscribe(result => {
-      //  console.log('result', result);
+    dialogRef.afterClosed().subscribe(result => {
+      if (this.fs.isFilterActive$) {
+        if (this.fs.isAllFilterPropertyNull()) {
+          this.fs.isFilterActive$ = false;
+        }
+      } else{ // if isFilterActive$ == false
+        this.fs.setAllFilterPropertyNull();
+      }
+      
     });
   }
 
-  activeTab$: number = 0;
+  @Input() activeTab$: number = 0;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
   onSwipe(action: String) {
@@ -153,17 +161,16 @@ export class TaskListComponent implements OnInit {
 
   }
 
-  toolbarTitle$: string = "Task > Not Started";
-  setToolbarTitle() {
+  getToolbarTitle() {
     switch (this.activeTab$) {
       case 0:
-        this.toolbarTitle$ = "Task > Not Started";
+        return "Task > Not Started";
       case 1:
-        this.toolbarTitle$ = "Task > In Progress";
+        return "Task > In Progress";
       case 2:
-        this.toolbarTitle$ = "Task > Completed";
+        return "Task > Completed";
       case 3:
-        this.toolbarTitle$ = "Task > Pending";
+        return "Task > Pending";
     }
   }
 

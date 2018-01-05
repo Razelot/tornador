@@ -95,7 +95,7 @@
     </mat-form-field>
 
     <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="auto">
-      <input matInput formControlName="title" placeholder="Task Name" [(ngModel)]="task.title" required>
+      <input matInput formControlName="title" placeholder="Task Name" [(ngModel)]="task.title" autocomplete="off" required>
       <!-- <mat-error *ngIf="formGroup$.controls['title'].hasError('required')">Please give a Task Name</mat-error> -->
     </mat-form-field>
 

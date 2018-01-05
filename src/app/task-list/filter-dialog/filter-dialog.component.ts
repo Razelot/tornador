@@ -12,12 +12,12 @@ import { FilterService } from './filter.service';
 export class FilterDialogComponent implements OnInit {
 
   constructor(private ds: DataService, public dialogRef: MatDialogRef<FilterDialogComponent>, public fs: FilterService,
-    @Inject(MAT_DIALOG_DATA) public data: any) { 
-    }
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
-    businessOptions$;
-    departmentOptions$;
-    priorityOptions$;
+  businessOptions$;
+  departmentOptions$;
+  priorityOptions$;
 
   ngOnInit() {
 
@@ -28,12 +28,19 @@ export class FilterDialogComponent implements OnInit {
   }
 
   onNoClick(): void {
+    console.log('onNoClick');
     this.dialogRef.close();
   }
 
-  onFilterClick(){
+  onFilterToggleClick() {
     this.fs.isFilterActive$ = !(this.fs.isFilterActive$);
-    this.fs.emitChange('isFilterActive');
+    this.fs.emitChange('filterToggle');
+  }
+
+  onResetClick() {
+    if (this.fs.isAllFilterPropertyNull() == false) {
+      this.fs.setAllFilterPropertyNull();
+    }
   }
 
 }
