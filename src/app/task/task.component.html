@@ -24,7 +24,7 @@
           </mat-menu>
 
           <button *ngIf="activeTab == 0" mat-icon-button class="button-navigation" style="float: right;" (click)="onSaveButtonClick(task)">
-            <i class="material-icons">&#xE163;</i>
+            <i class="material-icons">save</i>
           </button>
 
         </span>
@@ -32,7 +32,7 @@
     </mat-toolbar>
   </div>
 
-  <div style="display: block; flex: 1; height: calc(100% - 56px)">
+  <div style="display: block; flex: 1; height: calc(100% - 56px);">
 
     <mat-tab-group id="task" [(selectedIndex)]="activeTab" style="height: 100%;">
       <mat-tab>

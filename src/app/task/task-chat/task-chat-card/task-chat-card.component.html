@@ -1,4 +1,4 @@
-<mat-card>
+<!-- <mat-card>
   <mat-card-header>
     <mat-card-title style="width: 100%;">
       <span class="chat-name">
@@ -14,4 +14,17 @@
       {{post$.message}}
     </p>
   </mat-card-content>
-</mat-card>
+</mat-card> -->
+<div class="comment-container">
+  <div style="display: flex; flex-direction: row; width: 100%;">  
+      <span class="chat-name" style="flex: 1;">
+          {{post$.sender}}
+        </span>
+        <span class="chat-date" style="float: right;">
+          {{post$.time_sent}}
+        </span>
+  </div>
+  <p>
+      {{post$.message}}
+    </p>
+</div>

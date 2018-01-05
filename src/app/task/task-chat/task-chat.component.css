@@ -1,0 +1,12 @@
+
+.form-full-width {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .vertical-center{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+  }
