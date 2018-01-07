@@ -34,7 +34,7 @@
 
   <div style="display: block; flex: 1; height: calc(100% - 56px);">
 
-    <mat-tab-group id="task" [(selectedIndex)]="activeTab" style="height: 100%;">
+    <mat-tab-group id="task" [(selectedIndex)]="activeTab" (selectedTabChange)="selectedTabChange()" style="height: 100%;">
       <mat-tab>
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE871;</i>

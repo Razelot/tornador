@@ -71,6 +71,7 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'tasks', pathMatch: 'full' },
   { path: 'tasks', component: TaskListComponent },
   { path: 'tasks/:taskID', component: TaskComponent },
+  { path: 'tasks/:taskID/:tab', component: TaskComponent },
   { path: 'tasks?new', component: NewTaskComponent },
   { path: 'tasks?filter', component: FilterDialogComponent },
   { path: 'tasks/:taskID?img', component: ImgDialog }
