@@ -13,6 +13,10 @@ export class AuthService {
     this.user = firebaseAuth.authState;
   }
 
+  getUser(){
+    return this.user;
+  }
+
   signup(email: string, password: string) {
     this.firebaseAuth
       .auth

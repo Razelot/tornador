@@ -10,22 +10,22 @@
         </div> -->
 
   <div style="display: block; flex: 1; width: inherit; background: white;">
-    <div *ngFor="let post of chat$ | async">
-      <app-task-chat-card [post$]="post"></app-task-chat-card>
+    <div *ngFor="let message of messages$ | async">
+      <app-task-chat-card [message$]="message"></app-task-chat-card>
     </div>
   </div>
   <div style="display: block; position: sticky; bottom: 0px; width: inherit; background-color: #F2F2F2; padding: 0px 10px 0px 20px; box-sizing: border-box;">
-    <form style="display: flex; flex-direction: row;">
+    <div style="display: flex; flex-direction: row;">
       <mat-form-field class="form-full-width" [floatLabel]="'never'">
-        <textarea matInput matTextareaAutosize placeholder="Write your comment here" matAutosizeMinRows="1" matAutosizeMaxRows="8"></textarea>
+        <textarea matInput matTextareaAutosize placeholder="Write your comment here" matAutosizeMinRows="1" matAutosizeMaxRows="8" [(ngModel)]="draftMessage$" (keydown.enter)="onEnter($event)"></textarea>
       </mat-form-field>
 
       <div style="margin: 0px 0px 0px 16px;">
-        <button mat-icon-button class="vertical-center" style="color:#363636;">
+        <button mat-icon-button class="vertical-center" style="color:#363636;" (click)="onEnter($event)">
           <i class="material-icons">send</i>
         </button>
       </div>
 
-    </form>
+    </div>
   </div>
 </div>

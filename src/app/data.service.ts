@@ -5,7 +5,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { Task } from './model/task';
-import { Post } from './model/post';
+import { Message } from './model/message';
 
 import { Observable } from 'rxjs/Observable';
 import { Department } from './model/department';
@@ -107,9 +107,13 @@ export class DataService {
     return this.getStatusArray().find(obj => obj.id === id);
   }
 
-  getChat(taskID : string): Observable<Post[]>{
+  getMessages(taskID : string): Observable<Message[]>{
     return this.af.list('tasks/' + taskID + '/chat').valueChanges()
-    .map(posts => (<Post[]>posts));
+    .map(message => (<Message[]>message));
+  }
+
+  sendMessage(taskID : string, message : Message) {
+    this.af.list('tasks/' + taskID + '/chat').push(message);
   }
 
 } 

@@ -4,7 +4,7 @@ import { AuthService } from '../../auth.service';
 
 import { Observable } from 'rxjs/Observable';
 
-import { Post } from '../../model/post';
+import { Message } from '../../model/message';
 
 
 @Component({
@@ -16,17 +16,17 @@ import { Post } from '../../model/post';
 })
 export class TaskChatComponent implements OnInit {
 
-  chat$: Observable<any>;
+  messages$: Observable<any>;
   draftMessage$: String;
 
   @Input() taskID$;
   
 
-  constructor(public authService: AuthService, private ds: DataService) {
+  constructor(private authService: AuthService, private ds: DataService) {
   }
 
   ngOnInit() {
-    this.chat$ = this.ds.getChat(this.taskID$);
+    this.messages$ = this.ds.getMessages(this.taskID$);
   }
 
   onEnter(event: any): void {
@@ -35,15 +35,26 @@ export class TaskChatComponent implements OnInit {
   }
 
   sendMessage(): void {
-    // const m: String = this.draftMessage$;
-    // m.author = this.currentUser;
-    // m.thread = this.currentThread;
-    // m.isRead = true;
-    // this.messagesService.addMessage(m);
-    // this.draftMessage = new Message();
+    var newMessage$: Message = <Message>{};
 
-    console.log(this.draftMessage$);
+    newMessage$.text = this.draftMessage$;
+
+    newMessage$.timestamp = new Date();
+
+    var self = this;
+
+    this.authService.user.subscribe(user => {
+
+      newMessage$.sender = user.email;
+
+      console.log(newMessage$);
+
+      self.ds.sendMessage(self.taskID$, newMessage$);
+
+    });
+
     this.draftMessage$ = "";
   }
+  
 
 }
