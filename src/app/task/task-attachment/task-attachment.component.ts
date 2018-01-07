@@ -14,16 +14,19 @@ export class TaskAttachmentComponent implements OnInit {
   constructor(public storage: StorageService, public dialog: MatDialog) { }
 
   @Input() task$: Task;
+  @Input() taskID$: String;
   URL$: string[] = [];
 
   ngOnInit() {
     //console.log(this.task$.attachment_URL);
-
-    for(let i = 0, length = this.task$.attachment_URL.length; i < length; i++){
-      if(this.task$.attachment_URL[i] != null){
-        this.URL$.push(this.task$.attachment_URL[i]);
+    if(this.task$.attachment_URL != null){
+      for(let i = 0, length = this.task$.attachment_URL.length; i < length; i++){
+        if(this.task$.attachment_URL[i] != null){
+          this.URL$.push(this.task$.attachment_URL[i]);
+        }
       }
     }
+
   }
 
   onImgClick(url: string){
@@ -32,7 +35,32 @@ export class TaskAttachmentComponent implements OnInit {
       data: { img_src: url }
     });
   }
+
+
+  onInputFileChange(){
+    let files : FileList = (<HTMLInputElement>document.getElementById('inputFile')).files;
+
+    // for(let i = 0; i < files.length; i++){
+    //   console.log(files[i]);
+    // }
+
+    this.storage.uploadAttachment(this.taskID$, this.task$, files);
+
+    
+  }
+
+
 }
+
+
+
+
+
+
+// ====================
+// IMG DIALOG COMPONENT
+// ====================
+
 
 @Component({
   selector: 'img-dialog',

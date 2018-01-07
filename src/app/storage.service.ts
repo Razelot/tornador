@@ -4,11 +4,14 @@ import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { storage } from 'firebase/app';
+import { Task } from './model/task';
+import { DataService } from './data.service';
 
 @Injectable()
 export class StorageService {
 
-  constructor(private firebaseApp: FirebaseApp,
+  constructor(private firebaseApp: FirebaseApp, private ds: DataService,
     public afAuth: AngularFireAuth, public afDb: AngularFireDatabase, ) {
 
     const storageRef = firebaseApp.storage();
@@ -54,23 +57,24 @@ export class StorageService {
 
   }
 
-  uploadAttachment(files: FileList) {
+  uploadAttachment(taskId: String, task: Task, files: FileList) {
 
-
-    // Create a root reference
-    const storageRef = firebase.storage().ref();
+    let self = this;
+    let downloadURLs: String[] = <String[]>{};
 
     for (var i = 0, numFiles = files.length; i < numFiles; i++) {
 
       var file = files[i]; // use the Blob or File API
+      var fileRef = firebase.storage().ref(taskId + '/' + file.name);
 
-      console.log(file.name);
-      console.log('put file');
+      fileRef.put(file).then(function (snapshot) {
 
-      storageRef.put(file).then(function (snapshot) {
-        console.log('Uploaded a blob or file!');
+        task.attachment_URL.push(snapshot.downloadURL);
+
       });
-
     }
+
+    this.ds.updateTask(taskId, task);
+
   }
 }

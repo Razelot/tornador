@@ -49,7 +49,7 @@ isSubmitDisabled$: Boolean = true;
       this.ds.createTask(task);
       this.onNoClick();
       this.snackBar.open("New Task created!", "Dismiss", {
-        duration: 5000
+        duration: 3000
       });
 
 

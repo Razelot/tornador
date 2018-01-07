@@ -1,19 +1,23 @@
 <!-- <div *ngFor="let url of task$.attachment_URL">
   <img [src]="url">
 </div> -->
-<div style="padding: 5px;">
-  <mat-grid-list cols="3" rowHeight="1:1">
+<div style="padding: 5px; background-color: white; height: 100%; box-sizing: border-box; ">
+  <mat-grid-list *ngIf="URL$.length > 0" cols="3" rowHeight="1:1" style="max-height: 100%; background-color: white; ">
     <mat-grid-tile *ngFor="let URL of URL$">
       <div style="height: 100%; width: 100%; overflow: hidden;">
-        <img [src]="URL" style="padding: 2px; object-fit:cover; overflow:hidden; box-sizing:border-box; height: 100%; width: 100%;" (click)="onImgClick(URL)">
+        <img [src]="URL" style="padding: 2px; object-fit:cover; overflow:hidden; box-sizing:border-box; height: 100%; width: 100%;"
+          (click)="onImgClick(URL)">
       </div>
     </mat-grid-tile>
   </mat-grid-list>
+  <div *ngIf="URL$.length == 0">
+    null lul. TODO: Add splash screen 'no attachment, click FAB to upload new file'. Add splash screen for task-comment too.
+  </div>
 </div>
 
+<input #inputFile id="inputFile" type="file" accept="image/*" style="visibility: collapse;" (change)="onInputFileChange()" multiple>
 
-<button mat-fab style="background-color: #363636; position: fixed; top: auto; left: auto; right: 20px; bottom: 20px; z-index: 9;">
-    <i class="material-icons" style="color: #FFFFFF">
-      &#xE145;
-    </i>
-  </button>
+<button mat-fab (click)="inputFile.click()" 
+style="background-color: #E2E2E2;; position: fixed; top: auto; left: auto; right: 20px; bottom: 20px; z-index: 9;">
+  <i class="material-icons" style="color: #363636;">file_upload</i>
+</button>
