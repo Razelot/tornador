@@ -4,12 +4,12 @@
     <mat-toolbar style="background-color: transparent; color: white;">
       <mat-toolbar-row>
 
-        <button mat-icon-button class="button-navigation" style="float: left; margin: 0px 5px;" (click)="onBackButtonClick()">
+        <button mat-icon-button class="button-navigation" style="float: left; margin: 0px 5px;" (click)="onBackButtonClick(task)">
           <i class="material-icons">arrow_back</i>
         </button>
 
         <span style="flex: 1; text-overflow: clip; overflow: scroll;">
-          <span *ngIf="activeTab > 0">{{ task.title }}</span>
+          <span *ngIf="activeTab$ > 0">{{ task.title }}</span>
         </span>
         
         <span style="margin: 0px 5px;">
@@ -23,7 +23,7 @@
             </button>
           </mat-menu>
 
-          <button *ngIf="activeTab == 0" mat-icon-button class="button-navigation" style="float: right;" (click)="onSaveButtonClick(task)">
+          <button *ngIf="activeTab$ == 0" mat-icon-button class="button-navigation" style="float: right;" (click)="onSaveButtonClick(task)">
             <i class="material-icons">save</i>
           </button>
 
@@ -34,12 +34,12 @@
 
   <div style="display: block; flex: 1; height: calc(100% - 56px);">
 
-    <mat-tab-group id="task" [(selectedIndex)]="activeTab" (selectedTabChange)="selectedTabChange()" style="height: 100%;">
+    <mat-tab-group id="task" [(selectedIndex)]="activeTab$" (selectedTabChange)="selectedTabChange()" style="height: 100%;">
       <mat-tab>
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE871;</i>
         </ng-template>
-        <div *ngIf="activeTab === 0" style="padding: 24px;" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+        <div *ngIf="activeTab$ === 0" style="padding: 24px;" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
           <app-task-overview [task$]="task"></app-task-overview>
         </div>
       </mat-tab>
@@ -47,7 +47,7 @@
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE0B7;</i>
         </ng-template>
-        <div *ngIf="activeTab === 1" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+        <div *ngIf="activeTab$ === 1" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
           <app-task-chat [taskID$]="taskID$"></app-task-chat>
         </div>
       </mat-tab>
@@ -55,7 +55,7 @@
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE226;</i>
         </ng-template>
-        <div *ngIf="activeTab === 2" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)" style="height: 100%;">
+        <div *ngIf="activeTab$ === 2" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)" style="height: 100%;">
           <app-task-attachment [task$]="task" [taskID$]="taskID$"></app-task-attachment>
         </div>
       </mat-tab>
@@ -63,7 +63,7 @@
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE8B3;</i>
         </ng-template>
-        <div *ngIf="activeTab === 3" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+        <div *ngIf="activeTab$ === 3" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
           History
         </div>
       </mat-tab>

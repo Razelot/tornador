@@ -24,9 +24,9 @@ import { Location } from '@angular/common';
 export class TaskComponent implements OnInit {
 
   taskID$: string;
-  task$: Observable<{}>;
+  task$: Observable<Task>;
 
-  activeTab: number = 0;
+  activeTab$: number = 0;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
   constructor(private ar: ActivatedRoute, private ds: DataService, private ns: NavigationService, private router: Router,
@@ -38,7 +38,8 @@ export class TaskComponent implements OnInit {
     this.task$ = this.ds.getTask(this.taskID$);
 
     if (this.ar.snapshot.params.tab) {
-      this.activeTab = this.getTabID(this.ar.snapshot.params.tab);
+      this.activeTab$ = this.getTabID(
+        this.ns.camelize(this.ar.snapshot.params.tab);
     }
 
   }
@@ -46,15 +47,15 @@ export class TaskComponent implements OnInit {
   onSwipe(action: String) {
     // next
     if (action === this.SWIPE_ACTION.RIGHT) {
-      if (this.activeTab > 0) {
-        this.activeTab = this.activeTab - 1;
+      if (this.activeTab$ > 0) {
+        this.activeTab$ = this.activeTab$ - 1;
       }
     }
 
     // previous
     if (action === this.SWIPE_ACTION.LEFT) {
-      if (this.activeTab < 4) {
-        this.activeTab = this.activeTab + 1;
+      if (this.activeTab$ < 4) {
+        this.activeTab$ = this.activeTab$ + 1;
       }
     }
 
@@ -68,29 +69,30 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  onBackButtonClick() {
-    this.router.navigate(['/tasks']);
+  onBackButtonClick(task: Task) {
+    this.router.navigate(['/tasks'], { queryParams: { status: this.getStatusByID(task.status) } });
   }
 
   deleteTask() {
     this.ds.deleteTask(this.taskID$);
-    this.onBackButtonClick();
+    //this.onBackButtonClick();
   }
 
   getTabID(tab: string) {
-    if (tab == 'chat') {
-      return 1;
-    }
-    else if (tab == 'attachments') {
-      return 2;
-    }
-    else {
-      return 0;
+    switch (tab) {
+      case "chat":
+        return 1;
+      case "attachments":
+        return 2;
+      case "history":
+        return 3;
+      default:
+        return 0;
     }
   }
 
   selectedTabChange() {
-    switch (this.activeTab) {
+    switch (this.activeTab$) {
       case 0:
         this.location.replaceState("/tasks/" + this.taskID$);
         break;
@@ -107,6 +109,21 @@ export class TaskComponent implements OnInit {
         this.location.replaceState("/tasks/" + this.taskID$);
     }
 
+  }
+
+  getStatusByID(statusID: string) {
+    switch (statusID) {
+      case "status_0":
+        return 'notStarted'
+      case "status_1":
+        return 'inProgress'
+      case "status_2":
+        return 'completed'
+      case "status_3":
+        return 'pending'
+      default:
+        return null;
+    }
   }
 
 }

@@ -46,8 +46,8 @@ export class DataService {
     });
   }
 
-  getTask(taskID): Observable<{}> {
-    return this.af.object('tasks/' + taskID).valueChanges();
+  getTask(taskID): Observable<Task> {
+    return this.af.object('tasks/' + taskID).valueChanges().map(task => <Task>task);
   }
 
   // getTaskTitle(taskID){
