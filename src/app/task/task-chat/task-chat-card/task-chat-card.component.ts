@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { Post } from '../../../model/post';
+import { Message } from '../../../model/message';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { Post } from '../../../model/post';
 })
 export class TaskChatCardComponent implements OnInit {
 
-  @Input() post$;
+  @Input() message$;
 
   constructor() { }
 

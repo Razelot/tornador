@@ -16,15 +16,15 @@
   </mat-card-content>
 </mat-card> -->
 <div class="comment-container">
-  <div style="display: flex; flex-direction: row; width: 100%;">  
-      <span class="chat-name" style="flex: 1;">
-          {{post$.sender}}
-        </span>
-        <span class="chat-date" style="float: right;">
-          {{post$.time_sent}}
-        </span>
+  <div style="display: flex; flex-direction: row; width: 100%;">
+    <span class="chat-name" style="flex: 1;">
+      {{message$.sender}}
+    </span>
+    <span class="chat-date" style="float: right;">
+      {{message$.timestamp}}
+    </span>
   </div>
   <p>
-      {{post$.message}}
-    </p>
+    {{message$.text}}
+  </p>
 </div>
