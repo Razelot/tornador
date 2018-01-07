@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div style="display: flex; flex-direction: column; height: 100%; width: 100%;">
   <!-- <div style="height: flex;">
         <div *ngFor="let post of chat$ | async" style="padding: 16px 0px;">
@@ -28,4 +29,38 @@
 
     </form>
   </div>
+=======
+<div style="display: flex; flex-direction: column; height: 100%; width: 100%;">
+  <!-- <div style="height: flex;">
+        <div *ngFor="let post of chat$ | async" style="padding: 16px 0px;">
+          <app-task-chat-card [post$]="post"></app-task-chat-card>
+        </div>
+      </div>
+      
+      <div style="height: auto;">
+          <textarea></textarea>
+        </div> -->
+        
+  <div style="display: block; flex: 1; width: inherit; background: white;">
+    <div *ngFor="let post of chat$ | async">
+      <app-task-chat-card [post$]="post"></app-task-chat-card>
+    </div>
+  </div>
+
+  <div *ngIf="authService.user | async" style="display: block; position: sticky; bottom: 0px; width: inherit; background-color: #F2F2F2; padding: 0px 10px 0px 20px; box-sizing: border-box;">
+    <div style="display: flex; flex-direction: row;">
+      <mat-form-field class="form-full-width">
+        <textarea (keydown.enter)="onEnter($event)" [(ngModel)]="draftMessage$" matInput placeholder="Write your comment here"></textarea>
+      </mat-form-field>
+
+      <div style="margin: 0px 0px 0px 16px;">
+        <button (click)="onEnter($event)" mat-icon-button class="vertical-center" style="color:#363636;">
+          <i class="material-icons">send</i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+>>>>>>> ec4de9da7bf70e342a26098650430c6a5d4e657b
 </div>
