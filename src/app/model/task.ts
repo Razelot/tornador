@@ -13,4 +13,5 @@ export interface Task {
     date_due: Date;
     members_assigned: {};
     tags: {};
+    attachment_URL: string[];
   }

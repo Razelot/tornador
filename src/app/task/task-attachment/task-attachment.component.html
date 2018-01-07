@@ -1,0 +1,19 @@
+<!-- <div *ngFor="let url of task$.attachment_URL">
+  <img [src]="url">
+</div> -->
+<div style="padding: 5px;">
+  <mat-grid-list cols="3" rowHeight="1:1">
+    <mat-grid-tile *ngFor="let URL of URL$">
+      <div style="height: 100%; width: 100%; overflow: hidden;">
+        <img [src]="URL" style="padding: 2px; object-fit:cover; overflow:hidden; box-sizing:border-box; height: 100%; width: 100%;" (click)="onImgClick(URL)">
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+
+<button mat-fab style="background-color: #363636; position: fixed; top: auto; left: auto; right: 20px; bottom: 20px; z-index: 9;">
+    <i class="material-icons" style="color: #FFFFFF">
+      &#xE145;
+    </i>
+  </button>

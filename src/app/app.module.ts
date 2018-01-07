@@ -15,8 +15,9 @@ import
 { 
   MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule,
   MatChipsModule, MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, 
-  MatSnackBarModule, MatCheckboxModule, MatSidenavModule
+  MatSnackBarModule, MatCheckboxModule, MatSidenavModule, MatGridListModule,
 } from '@angular/material';
+
 
 import{ FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -34,6 +35,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
 // New imports to update based on AngularFire2 version 4
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import 'firebase/storage';
 
 import { DataService } from './data.service';
 import { NavigationService } from './navigation.service';
@@ -52,7 +54,9 @@ import { TaskCardComponent } from './task-list/task-card/task-card.component';
 import { FilterDialogComponent } from './task-list/filter-dialog/filter-dialog.component';
 import { FilterService } from './task-list/filter-dialog/filter.service';
 import { TaskChatComponent } from './task/task-chat/task-chat.component';
-import { TaskChatCardComponent } from './task/Task-Chat/task-chat-card/task-chat-card.component';
+import { TaskChatCardComponent } from './task/task-chat/task-chat-card/task-chat-card.component';
+import { TaskAttachmentComponent, ImgDialog } from './task/task-attachment/task-attachment.component';
+import { StorageService } from './storage.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
@@ -68,7 +72,8 @@ const appRoutes: Routes = [
   { path: 'tasks', component: TaskListComponent },
   { path: 'tasks/:taskID', component: TaskComponent },
   { path: 'tasks?new', component: NewTaskComponent },
-  { path: 'tasks?filter', component: FilterDialogComponent }
+  { path: 'tasks?filter', component: FilterDialogComponent },
+  { path: 'tasks/:taskID?img', component: ImgDialog }
 ];
 
 
@@ -84,26 +89,30 @@ const appRoutes: Routes = [
     FilterDialogComponent,
     TaskChatComponent,
     TaskChatCardComponent,
+    TaskAttachmentComponent,
+    ImgDialog,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule, AngularFireModule.initializeApp(firebaseConfig),
+    
     AngularFireDatabaseModule,
-    AngularFireAuthModule,
+
     BrowserAnimationsModule,
 
     MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatChipsModule,
-    MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, MatSnackBarModule, MatCheckboxModule, MatSidenavModule,
+    MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, MatSnackBarModule, MatCheckboxModule, 
+    MatSidenavModule, MatGridListModule,
     
     FormsModule, ReactiveFormsModule,
 
     environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
 
   ],
-  providers: [DataService, AuthService, NavigationService, FilterService,
+  providers: [DataService, AuthService, NavigationService, FilterService, StorageService,
     { 
       // hammer instantion with custom config
       provide: HAMMER_GESTURE_CONFIG, 

@@ -61,6 +61,7 @@ isSubmitDisabled$: Boolean = true;
     this.newTask.date_due = this.today;
     this.newTask.status = "status_0";
     this.newTask.description = "";
+    this.newTask.attachment_URL = [];
   }
 
   separatorKeysCodes = [ENTER, COMMA];
