@@ -13,9 +13,8 @@ import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 })
 export class TaskAttachmentComponent implements OnInit {
 
-  constructor(public storage: StorageService, public dialog: MatDialog) 
-  { 
-    
+  constructor(public storage: StorageService, public dialog: MatDialog) {
+
   }
 
   @Input() task$: Task;
@@ -25,13 +24,18 @@ export class TaskAttachmentComponent implements OnInit {
 
   }
 
-  getDownloadURL(): String[]{
+  getDownloadURL(): String[] {
+
+    if (this.task$.attachment_URL == null) {
+      return [];
+    }
+
     let r: String[] = Object.values(this.task$.attachment_URL);
     //console.log(r);
     return r;
   }
 
-  onImgClick(url: string){
+  onImgClick(url: string) {
     let self = this;
 
     let dialogRef = this.dialog.open(ImageDialogComponent, {
@@ -42,8 +46,8 @@ export class TaskAttachmentComponent implements OnInit {
   }
 
 
-  onInputFileChange(){
-    let files : FileList = (<HTMLInputElement>document.getElementById('inputFile')).files;
+  onInputFileChange() {
+    let files: FileList = (<HTMLInputElement>document.getElementById('inputFile')).files;
 
     // for(let i = 0; i < files.length; i++){
     //   console.log(files[i]);
@@ -51,7 +55,7 @@ export class TaskAttachmentComponent implements OnInit {
 
     this.storage.uploadAttachment(this.taskID$, this.task$, files);
 
-    
+
   }
 
 

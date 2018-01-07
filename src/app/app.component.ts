@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
-// import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 
@@ -20,9 +19,6 @@ import { MatSnackBar } from '@angular/material';
 
 import { Task } from './model/task';
 
-
-// import * as $ from 'jquery';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -32,14 +28,11 @@ export class AppComponent {
 
   // title = 'TORNADOR';
 
-  // classburger: String = "hamburger hamburger--arrow is-active";
-
   constructor(private ds: DataService, private ns: NavigationService, private r: Router, public snackBar: MatSnackBar) {
 
     var self = this;
     ns.changeEmitted$.subscribe(
       text => {
-        console.log(text);
         self.openDrawer();
       });
   }
@@ -80,10 +73,6 @@ export class AppComponent {
   getTitle() {
     this.ns.getTitle();
   }
-
-  // getBack() {
-  //   return this.ns.getTask();
-  // }
 
   @ViewChild('drawer') drawer: MatDrawer;
   openDrawer() {
