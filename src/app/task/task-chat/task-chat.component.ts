@@ -22,7 +22,7 @@ export class TaskChatComponent implements OnInit {
   @Input() taskID$;
   
 
-  constructor(private authService: AuthService, private ds: DataService) {
+  constructor(public authService: AuthService, private ds: DataService) {
   }
 
   ngOnInit() {

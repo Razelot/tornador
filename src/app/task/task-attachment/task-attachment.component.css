@@ -1,3 +1,4 @@
-.img-dialog{
-    padding: 0px;
+mat-dialog-container.mat-dialog-container{
+    background-color: transparent;
+    box-shadow: none;
 }

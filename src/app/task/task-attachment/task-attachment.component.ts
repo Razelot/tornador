@@ -1,17 +1,22 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, ViewEncapsulation } from '@angular/core';
 import { StorageService } from '../../storage.service';
 import { InputDecorator } from '@angular/core/src/metadata/directives';
 import { Task } from '../../model/task';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-task-attachment',
   templateUrl: './task-attachment.component.html',
-  styleUrls: ['./task-attachment.component.css']
+  styleUrls: ['./task-attachment.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TaskAttachmentComponent implements OnInit {
 
-  constructor(public storage: StorageService, public dialog: MatDialog) { }
+  constructor(public storage: StorageService, public dialog: MatDialog) 
+  { 
+    
+  }
 
   @Input() task$: Task;
   @Input() taskID$: String;
@@ -27,9 +32,12 @@ export class TaskAttachmentComponent implements OnInit {
   }
 
   onImgClick(url: string){
-    let dialogRef = this.dialog.open(ImgDialog, {
-      panelClass: 'img-dialog',
-      data: { img_src: url }
+    let self = this;
+
+    let dialogRef = this.dialog.open(ImageDialogComponent, {
+      maxHeight: '100%',
+      panelClass: 'image-dialog',
+      data: { img_selected: url, img_array: self.getDownloadURL() }
     });
   }
 
@@ -46,37 +54,5 @@ export class TaskAttachmentComponent implements OnInit {
     
   }
 
-
-}
-
-
-
-
-
-
-// ====================
-// IMG DIALOG COMPONENT
-// ====================
-
-
-@Component({
-  selector: 'img-dialog',
-  template: '<img [src]="url$" style="max-height: 100%; max-width: 100%;">',
-})
-export class ImgDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<ImgDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { 
-
-      this.url$ = data.img_src;
-
-    }
-
-  url$: string;
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
 
 }

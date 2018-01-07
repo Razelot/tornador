@@ -55,9 +55,9 @@ import { FilterDialogComponent } from './task-list/filter-dialog/filter-dialog.c
 import { FilterService } from './task-list/filter-dialog/filter.service';
 import { TaskChatComponent } from './task/task-chat/task-chat.component';
 import { TaskChatCardComponent } from './task/task-chat/task-chat-card/task-chat-card.component';
-import { TaskAttachmentComponent, ImgDialog } from './task/task-attachment/task-attachment.component';
+import { TaskAttachmentComponent } from './task/task-attachment/task-attachment.component';
 import { StorageService } from './storage.service';
-
+import { ImageDialogComponent } from './task/task-attachment/image-dialog/image-dialog.component';
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
   authDomain: "tornador-bcc1d.firebaseapp.com",
@@ -74,7 +74,7 @@ const appRoutes: Routes = [
   { path: 'tasks/:taskID/:tab', component: TaskComponent },
   { path: 'tasks?new', component: NewTaskComponent },
   { path: 'tasks?filter', component: FilterDialogComponent },
-  { path: 'tasks/:taskID?img', component: ImgDialog }
+  { path: 'tasks/:taskID/:tab?img', component: ImageDialogComponent }
 ];
 
 
@@ -91,7 +91,7 @@ const appRoutes: Routes = [
     TaskChatComponent,
     TaskChatCardComponent,
     TaskAttachmentComponent,
-    ImgDialog,
+    ImageDialogComponent,
   ],
   imports: [
     BrowserModule,

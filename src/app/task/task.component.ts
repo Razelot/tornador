@@ -57,7 +57,6 @@ export class TaskComponent implements OnInit {
         this.activeTab = this.activeTab + 1;
       }
     }
-
   }
 
   onSaveButtonClick(task: Task): void {
