@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewEncapsulation, Output, EventEmitter, ViewChild, SimpleChanges, Input, SimpleChange } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
@@ -61,6 +61,12 @@ export class TaskListComponent implements OnInit {
     this.taskList$ = this.ds.getTasks();
 
     this.initializeTaskList();
+
+    if (this.ar.snapshot.queryParams.status) {
+      this.activeTab$ = this.getTabID(
+        this.ns.camelize(this.ar.snapshot.queryParams.status));
+    }
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -106,9 +112,6 @@ export class TaskListComponent implements OnInit {
     return returnTaskList;
   }
 
-
-
-
   openNewTaskDialog(): void {
     let dialogRef = this.dialog.open(NewTaskComponent, {
       width: '400px',
@@ -134,10 +137,10 @@ export class TaskListComponent implements OnInit {
         if (this.fs.isAllFilterPropertyNull()) {
           this.fs.isFilterActive$ = false;
         }
-      } else{ // if isFilterActive$ == false
+      } else { // if isFilterActive$ == false
         this.fs.setAllFilterPropertyNull();
       }
-      
+
     });
   }
 
@@ -177,4 +180,42 @@ export class TaskListComponent implements OnInit {
   onHamburgerClick() {
     this.ns.emitChange('toggle');
   }
+
+  getTabID(tab: string) {
+    switch (tab) {
+      case "notStarted":
+        return 0;
+      case "inProgress":
+        return 1;
+      case "completed":
+        return 2;
+      case "pending":
+        return 3;
+      default:
+        return 0;
+    }
+  }
+
+  selectedTabChange() {
+    var queryParams: Params = Object.assign({}, this.ar.snapshot.queryParams);
+    switch (this.activeTab$) {
+      case 0:
+        queryParams['status'] = 'notStarted';
+        break;
+      case 1:
+        queryParams['status'] = 'inProgress';
+        break;
+      case 2:
+        queryParams['status'] = 'completed';
+        break;
+      case 3:
+        queryParams['status'] = 'pending';
+        break;
+      default:
+        queryParams['status'] = null;
+    }
+
+    this.router.navigate(['.'], { queryParams: queryParams });
+  }
+
 }
