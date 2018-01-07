@@ -55,7 +55,7 @@
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE226;</i>
         </ng-template>
-        <div *ngIf="activeTab === 2" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+        <div *ngIf="activeTab === 2" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)" style="height: 100%;">
           <app-task-attachment [task$]="task" [taskID$]="taskID$"></app-task-attachment>
         </div>
       </mat-tab>

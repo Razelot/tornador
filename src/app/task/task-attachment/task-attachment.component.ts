@@ -15,18 +15,15 @@ export class TaskAttachmentComponent implements OnInit {
 
   @Input() task$: Task;
   @Input() taskID$: String;
-  URL$: string[] = [];
 
   ngOnInit() {
-    //console.log(this.task$.attachment_URL);
-    if(this.task$.attachment_URL != null){
-      for(let i = 0, length = this.task$.attachment_URL.length; i < length; i++){
-        if(this.task$.attachment_URL[i] != null){
-          this.URL$.push(this.task$.attachment_URL[i]);
-        }
-      }
-    }
 
+  }
+
+  getDownloadURL(): String[]{
+    let r: String[] = Object.values(this.task$.attachment_URL);
+    //console.log(r);
+    return r;
   }
 
   onImgClick(url: string){
