@@ -1,4 +1,9 @@
-mat-dialog-container.mat-dialog-container{
+.image-dialog-panel > mat-dialog-container.mat-dialog-container{
     background-color: transparent;
     box-shadow: none;
+}
+
+.image-dialog-backdrop{
+    opacity: 1 !important;
+    background-color: #363636cc;
 }

@@ -1,3 +1,20 @@
-<div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
-  <img [src]="url$" style="max-width: 100%; max-height: 100%;">
+<div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)"
+style="width: fit-content; height:fit-content;">
+  
+<img [src]="url$" style="max-width: 100%; max-height: calc(100% - 160px); margin: 20px auto;">
+</div>
+
+<div style="position: absolute; bottom: 20px; left: 0px; right: auto; top: auto; width: 100%;">
+  <div style="margin: auto; width: fit-content;">
+    <button mat-button class="navigation-button" (click)="onSwipe('swiperight')" tabindex="-1">
+      <i class="material-icons">keyboard_arrow_left</i>
+    </button>
+  <span class="index-span">
+    {{ urlIndex$ + 1}}/{{ urlArray$.length}}
+
+  </span>
+  <button mat-button class="navigation-button" (click)="onSwipe('swipeleft')" tabindex="-1">
+    <i class="material-icons">keyboard_arrow_right</i>
+  </button>
+  </div>
 </div>

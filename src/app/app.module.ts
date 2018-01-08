@@ -10,6 +10,8 @@ import { AngularFireModule } from 'angularfire2';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { Ng2ImgMaxModule } from 'ng2-img-max';
+
 // Material Modules
 import 
 { 
@@ -108,7 +110,8 @@ const appRoutes: Routes = [
     MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, MatSnackBarModule, MatCheckboxModule, 
     MatSidenavModule, MatGridListModule,
     
-    FormsModule, ReactiveFormsModule,
+    FormsModule, ReactiveFormsModule, 
+    Ng2ImgMaxModule,
 
     environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
 

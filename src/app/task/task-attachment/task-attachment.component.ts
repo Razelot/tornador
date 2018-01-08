@@ -4,16 +4,18 @@ import { InputDecorator } from '@angular/core/src/metadata/directives';
 import { Task } from '../../model/task';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
+import { ImageResult, ResizeOptions } from 'ng2-imageupload';
+import { Ng2ImgMaxService } from 'ng2-img-max/dist/src/ng2-img-max.service';
 
 @Component({
   selector: 'app-task-attachment',
   templateUrl: './task-attachment.component.html',
   styleUrls: ['./task-attachment.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class TaskAttachmentComponent implements OnInit {
 
-  constructor(public storage: StorageService, public dialog: MatDialog) {
+  constructor(public storage: StorageService, public dialog: MatDialog, private ng2ImgMax: Ng2ImgMaxService) {
 
   }
 
@@ -40,20 +42,36 @@ export class TaskAttachmentComponent implements OnInit {
 
     let dialogRef = this.dialog.open(ImageDialogComponent, {
       maxHeight: '100%',
-      panelClass: 'image-dialog',
+      panelClass: 'image-dialog-panel',
+      backdropClass: 'image-dialog-backdrop',
       data: { img_selected: url, img_array: self.getDownloadURL() }
     });
   }
 
+  resizeOptions$: ResizeOptions = {
+    resizeMaxHeight: 1200,
+    resizeMaxWidth: 1200,
+  };
 
-  onInputFileChange() {
-    let files: FileList = (<HTMLInputElement>document.getElementById('inputFile')).files;
+  onInputFileChange(event) {
 
-    // for(let i = 0; i < files.length; i++){
-    //   console.log(files[i]);
-    // }
+    let imageArray = event.target.files;
 
-    this.storage.uploadAttachment(this.taskID$, this.task$, files);
+    for(let i = 0; i < imageArray.length; i++){
+      let image = event.target.files[i];
+
+      this.ng2ImgMax.resizeImage(image, 1200, 1200).subscribe(
+        result => {
+          this.storage.uploadImageFile(this.taskID$, this.task$, result);
+        },
+        error => {
+          console.log('😢 Oh no!', error);
+        }
+      );
+  
+    }
+
+    
 
 
   }

@@ -18,7 +18,7 @@
   </div>
 </div>
 
-<input #inputFile id="inputFile" type="file" accept="image/*" style="visibility: collapse;" (change)="onInputFileChange()" multiple>
+<input #inputFile id="inputFile" type="file" accept="image/*" style="visibility: collapse;" (change)="onInputFileChange($event)" multiple>
 
 <button mat-fab (click)="inputFile.click()" 
 style="background-color: #E2E2E2;; position: fixed; top: auto; left: auto; right: 20px; bottom: 20px; z-index: 9;">

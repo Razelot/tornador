@@ -1,4 +1,10 @@
-.image-dialog{
-    padding: 0px;
-    background-color: red;
+.navigation-button{
+    width: 50px;
+    margin: 0px 20px;
+    color: white;
+}
+
+.index-span{
+    font-weight: bold;
+    color:white;
 }

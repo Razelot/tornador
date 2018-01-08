@@ -21,4 +21,5 @@ button#filter.filter-button :active{
 
 mat-dialog-container.mat-dialog-container{
     margin: 0px;
+    background-color: white;
 }

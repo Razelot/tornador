@@ -17,24 +17,31 @@ export class StorageService {
     const storageRef = firebaseApp.storage();
   }
 
-  uploadAttachment(taskID: String, task: Task, files: FileList) {
+
+
+  uploadImageFile(taskID: String, task: Task, file: File) {
 
     let self = this;
-   
-    if(task.attachment_URL == null){
-      task.attachment_URL = [];
-    }
 
-    for (var i = 0, numFiles = files.length; i < numFiles; i++) {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
 
-      var file = files[i]; // use the Blob or File API
-      var fileRef = firebase.storage().ref(taskID + '/' + file.name);
+    var hh = today.getHours();
+    var nn = today.getMinutes();
+    var ss = today.getSeconds();
 
-      fileRef.put(file).then(function (snapshot) {
+    let now = "" + yyyy + mm + dd + hh + nn + ss;
 
-        self.ds.getDatabase().list('tasks/' + taskID + '/attachment_URL').push(snapshot.downloadURL);
+    var fileRef = firebase.storage().ref(taskID + '/' + now + "-" + file.name);
 
-      });
-    }
+    fileRef.put(file).then(function (snapshot) {
+
+      self.ds.getDatabase().list('tasks/' + taskID + '/attachment_URL').push(snapshot.downloadURL);
+
+    });
+
   }
+
 }
