@@ -13,6 +13,7 @@ import { NavigationService } from '../navigation.service';
 })
 export class LoginComponent implements OnInit {
 
+  hide$: boolean = true;
   email$: string;
   password$: string;
 
