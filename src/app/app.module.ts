@@ -13,19 +13,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 // Material Modules
-import 
-{ 
+import {
   MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule,
-  MatChipsModule, MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, 
+  MatChipsModule, MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule,
   MatSnackBarModule, MatCheckboxModule, MatSidenavModule, MatGridListModule,
 } from '@angular/material';
 
 
-import{ FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 declare var Hammer: any;
-export class MyHammerConfig extends HammerGestureConfig  {
+export class MyHammerConfig extends HammerGestureConfig {
   buildHammer(element: HTMLElement) {
     let mc = new Hammer(element, {
       touchAction: "pan-y"
@@ -41,6 +40,7 @@ import 'firebase/storage';
 
 import { DataService } from './data.service';
 import { NavigationService } from './navigation.service';
+import { AuthGuard } from './auth.guard';
 
 
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -60,6 +60,7 @@ import { TaskChatCardComponent } from './task/task-chat/task-chat-card/task-chat
 import { TaskAttachmentComponent } from './task/task-attachment/task-attachment.component';
 import { StorageService } from './storage.service';
 import { ImageDialogComponent } from './task/task-attachment/image-dialog/image-dialog.component';
+import { LoginComponent } from './login/login.component';
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
   authDomain: "tornador-bcc1d.firebaseapp.com",
@@ -71,12 +72,19 @@ export const firebaseConfig = {
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'tasks', pathMatch: 'full' },
-  { path: 'tasks', component: TaskListComponent },
-  { path: 'tasks/:taskID', component: TaskComponent },
-  { path: 'tasks/:taskID/:tab', component: TaskComponent },
-  { path: 'tasks?new', component: NewTaskComponent },
-  { path: 'tasks?filter', component: FilterDialogComponent },
-  { path: 'tasks/:taskID/:tab?img', component: ImageDialogComponent }
+  {
+    path: 'tasks',
+    canActivateChild: [AuthGuard],
+    children: [
+      { path: '', component: TaskListComponent },
+      { path: ':taskID', component: TaskComponent, canActivate: [AuthGuard] },
+      { path: ':taskID/:tab', component: TaskComponent },
+      { path: '?new', component: NewTaskComponent },
+      { path: '?filter', component: FilterDialogComponent },
+      { path: ':taskID/:tab?img', component: ImageDialogComponent },
+    ]
+  },
+  { path: 'login', component: LoginComponent },
 ];
 
 
@@ -94,6 +102,7 @@ const appRoutes: Routes = [
     TaskChatCardComponent,
     TaskAttachmentComponent,
     ImageDialogComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,13 +110,13 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes),
     AngularFireAuthModule, AngularFireModule.initializeApp(firebaseConfig),
-    
+
     AngularFireDatabaseModule,
 
     BrowserAnimationsModule,
 
     MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatChipsModule,
-    MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, MatSnackBarModule, MatCheckboxModule, 
+    MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, MatSnackBarModule, MatCheckboxModule,
     MatSidenavModule, MatGridListModule,
     
     FormsModule, ReactiveFormsModule, 
@@ -116,13 +125,13 @@ const appRoutes: Routes = [
     environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
 
   ],
-  providers: [DataService, AuthService, NavigationService, FilterService, StorageService,
-    { 
+  providers: [DataService, AuthService, NavigationService, FilterService, StorageService, AuthGuard,
+    {
       // hammer instantion with custom config
-      provide: HAMMER_GESTURE_CONFIG, 
-      useClass: MyHammerConfig 
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig
     }
   ],
-  bootstrap: [AppComponent,SideMenuComponent]
+  bootstrap: [AppComponent, SideMenuComponent]
 })
 export class AppModule { }

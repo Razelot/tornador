@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject, ViewEncapsulation, Output, EventEmitter, ViewChild, SimpleChanges, Input, SimpleChange } from '@angular/core';
 
-import { ActivatedRoute, Params } from '@angular/router';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
