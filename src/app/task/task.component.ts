@@ -29,13 +29,18 @@ export class TaskComponent implements OnInit {
   activeTab$: number = 0;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
+  prevListStatus$: string;
+
   constructor(private ar: ActivatedRoute, private ds: DataService, private ns: NavigationService, private router: Router,
     public snackBar: MatSnackBar, private location: Location) { }
 
   ngOnInit() {
 
     this.taskID$ = this.ar.snapshot.params.taskID;
-    this.task$ = this.ds.getTask(this.taskID$);
+    this.task$ = this.ds.getTask(this.taskID$).take(1)
+    .do(task => {
+      this.prevListStatus$ = task.status;
+    });
 
     if (this.ar.snapshot.params.tab) {
       this.activeTab$ = this.getTabID(
@@ -68,8 +73,8 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  onBackButtonClick(task: Task) {
-    this.router.navigate(['/tasks'], { queryParams: { status: this.getStatusByID(task.status) } });
+  onBackButtonClick() {
+    this.router.navigate(['/tasks'], { queryParams: { status: this.getStatusByID(this.prevListStatus$) } });
   }
 
   deleteTask() {
