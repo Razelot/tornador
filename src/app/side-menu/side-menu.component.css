@@ -1,26 +1,7 @@
-div.task-properties {
-    margin: 10px 0px 10px 0px;
-    color: #757575;
+.drawer-button > i{
+    color: #363636cc;
 }
 
-.menu-icon{
-    margin: 0px 10px 0px 10px;
-    display: inline-block;
-    vertical-align: middle;
-}
-.menu-text{
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.login-btn{
-    width: 75px;
-}
-
-.login-txt{
-    font-size: 11px;
-}
-
-.active-link {
-    color:red;
+.drawer-button > span{
+    margin: 0px 0px 0px 10px;
 }

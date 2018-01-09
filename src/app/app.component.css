@@ -1,6 +1,10 @@
 mat-drawer-container {
     height: 100%;
 }
+mat-drawer {
+    width: 80%;
+    max-width: 400px;
+  }
 
 .hamburger{
     padding: 0;

@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { AuthService } from '../auth.service';
+import { RouterLink } from '@angular/router/src/directives/router_link';
+import { Router } from '@angular/router';
+import { MatDrawer } from '@angular/material';
+import { NavigationService } from '../navigation.service';
 
 
 @Component({
@@ -13,7 +17,7 @@ export class SideMenuComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, public router : Router, public ns: NavigationService) { }
 
   ngOnInit() {
   }
@@ -29,7 +33,10 @@ export class SideMenuComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
+    this.ns.emitChange('closeDrawer');
+    this.authService.logout().then(value =>{
+      this.router.navigate(['/login']);
+    });
   }
 
 }

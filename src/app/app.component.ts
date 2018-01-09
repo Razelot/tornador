@@ -33,7 +33,14 @@ export class AppComponent {
     var self = this;
     ns.changeEmitted$.subscribe(
       text => {
-        self.openDrawer();
+
+        console.log(text);
+
+        if (text == 'openDrawer') {
+          self.openDrawer();
+        } else if (text == 'closeDrawer') {
+          self.closeDrawer();
+        }
       });
   }
 
@@ -74,9 +81,13 @@ export class AppComponent {
     this.ns.getTitle();
   }
 
-  @ViewChild('drawer') drawer: MatDrawer;
+  @ViewChild('drawer') drawer$: MatDrawer;
   openDrawer() {
-    this.drawer.toggle();
+    this.drawer$.open();
+  }
+
+  closeDrawer() {
+    this.drawer$.close();
   }
 
 }

@@ -177,7 +177,7 @@ export class TaskListComponent implements OnInit {
   }
 
   onHamburgerClick() {
-    this.ns.emitChange('toggle');
+    this.ns.emitChange('openDrawer');
   }
 
   getTabID(tab: string) {

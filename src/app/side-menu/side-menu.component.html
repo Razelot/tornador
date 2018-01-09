@@ -1,69 +1,44 @@
-<!-- Sidebar user profile -->
+<div style="display: flex; flex-direction: column; height: 100%">
+  <div *ngIf="(authService.user | async) as user" style="background-color: #363636; padding: 20px;">
 
+    <button mat-fab [matMenuTriggerFor]="menu" style="margin: 10px 0px;">
+      <i class="material-icons">face</i>
+    </button>
+    <mat-menu #menu="matMenu" yPosition="below" xPosition="after">
+      <button mat-menu-item (click)="logout()">
+        <i class="material-icons">settings_power</i>
+        <span>Sign out</span>
+      </button>
+    </mat-menu>
+    <p style="color: white;">{{ user.email }}</p>
+  </div>
 
+  <div style="flex: 1; position: relative;">
+    <button mat-menu-item class="drawer-button">
+      <i class="material-icons">check_box</i>
+      <span style="margin: 0px 0px 0px 10px;">Task</span>
+    </button>
+    <button mat-menu-item class="drawer-button">
+        <i class="material-icons">markunread</i>
+      <span>News</span>
+    </button>
+    <button mat-menu-item class="drawer-button">
+        <i class="material-icons">archive</i>
+      <span>Archive</span>
+    </button>
+    
 
-<div class="mui-container">
-  <div *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</div>
-
-
-  <button class="login-btn mui-btn mui-btn--primary mui-btn--small" (click)="logout()" *ngIf="authService.user | async">
-    <div class="login-txt">Logout</div>
-  </button>
-
-  <div *ngIf="!(authService.user | async)">
-
-    <div class="mui-textfield mui-textfield--float-label">
-      <input type="text" [(ngModel)]="email">
-      <label>Email</label>
+    <div style="position: absolute; bottom: 0px;">
+        <button mat-menu-item  class="drawer-button">
+            <i class="material-icons">settings</i>
+          <span>Settings</span>
+        </button>
+        <button mat-menu-item class="drawer-button">
+            <i class="material-icons">help</i>
+            <span>Help & feedback</span>
+          </button>
     </div>
 
-    <div class="mui-textfield mui-textfield--float-label">
-      <input type="password" [(ngModel)]="password">
-      <label>Password</label>
-    </div>
-
-    <button class="login-btn mui-btn mui-btn--primary mui-btn--small" (click)="login()" [disabled]="!email || !password">
-      <div class="login-txt">Login</div>
-    </button>
-
-    <button class="login-btn mui-btn mui-btn--primary mui-btn--small" (click)="signup()" [disabled]="!email || !password">
-      <div class="login-txt">Signup</div>
-    </button>
-
-
   </div>
 
-</div>
-
-<!-- Sidebar items -->
-<div class="mui-divider"></div>
-<div>
-  <div class="menu-text">
-    <i class="material-icons menu-icon">&#xE88A;</i>
-    <a routerLink="tasks" routerLinkActive="active-link" class="menu-text"> Home </a>
-  </div>
-</div>
-
-<div class="mui-divider"></div>
-<div>
-  <div class="menu-text">
-    <i class="material-icons menu-icon">&#xE85E;</i>
-    <div class="menu-text"> My Tasks </div>
-  </div>
-</div>
-
-<div class="mui-divider"></div>
-<div>
-  <div class="menu-text">
-    <i class="material-icons menu-icon">&#xE89C;</i>
-    <a routerLink="new" routerLinkActive="active-link" class="menu-text"> Create Tasks </a>
-  </div>
-</div>
-
-<div class="mui-divider"></div>
-<div>
-  <div class="menu-text">
-    <i class="material-icons menu-icon">&#xE85A;</i>
-    <div class="menu-text"> Announcements </div>
-  </div>
 </div>
