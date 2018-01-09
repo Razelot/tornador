@@ -42,4 +42,8 @@ export class NavigationService {
     });
   }
 
+  toQueryParamsObject(str) {
+    return JSON.parse('{"' + str.replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+  }
+
 }

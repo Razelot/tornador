@@ -39,8 +39,7 @@ export class TaskComponent implements OnInit {
 
     if (this.ar.snapshot.params.tab) {
       this.activeTab$ = this.getTabID(
-        this.ns.camelize(this.ar.snapshot.params.tab)
-      );
+        this.ns.camelize(this.ar.snapshot.params.tab));
     }
 
   }
@@ -108,7 +107,6 @@ export class TaskComponent implements OnInit {
       default:
         this.location.replaceState("/tasks/" + this.taskID$);
     }
-
   }
 
   getStatusByID(statusID: string) {
