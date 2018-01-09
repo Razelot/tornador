@@ -15,6 +15,7 @@ import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 import { DataService } from '../data.service';
 import { NavigationService } from '../navigation.service';
 import { FilterService } from './filter-dialog/filter.service';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class TaskListComponent implements OnInit {
   toppings = new FormControl();
   toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private ns: NavigationService, private router: Router,
+  constructor(private ar: ActivatedRoute, private ds: DataService, private authService: AuthService, private ns: NavigationService, private router: Router,
     public dialog: MatDialog, public fs: FilterService) {
 
     var self = this;
@@ -215,6 +216,14 @@ export class TaskListComponent implements OnInit {
     }
 
     this.router.navigate(['.'], { queryParams: queryParams });
+  }
+
+  isBelongsToUser(task: Task): boolean {
+
+
+
+
+    return true;
   }
 
 }

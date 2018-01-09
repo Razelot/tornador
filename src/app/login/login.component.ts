@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.email$, this.password$)
       .then(value => {
+
+        console.log(value);
         console.log('Nice, it worked!');
         if (this.ar.snapshot.queryParams.returnUrl) {
           var returnUrl = decodeURIComponent(this.ar.snapshot.queryParams.returnUrl).split('?')[0];

@@ -116,4 +116,12 @@ export class DataService {
     this.af.list('tasks/' + taskID + '/chat').push(message);
   }
 
+  getUserDepartments(uid: string) {
+    return this.af.list('user_settings/' + uid + '/departments').snapshotChanges();
+  }
+
+  getUserBusinessUnits(uid: string) {
+    return this.af.list('user_settings/' + uid + '/business_units').snapshotChanges();
+  }
+
 } 
