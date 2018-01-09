@@ -115,13 +115,34 @@
       </mat-chip-list>
     </mat-form-field>
 
-    <mat-form-field *ngIf="!isAddNewTask$" [floatLabel]="auto">
-      <mat-select formControlName="status" placeholder="Status" [(ngModel)]="task.status">
-        <mat-option *ngFor="let status of statusOptions$" [(value)]="status.id">
-          {{ status.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div *ngIf="!isAddNewTask$" style="display: flex; flex-direction: row;">
+        
+      <div style="flex: 1;">
+            <mat-form-field  [floatLabel]="auto" style="width: 100%; min-width: 100px;">
+                <mat-select formControlName="status" placeholder="Status" [(ngModel)]="task.status">
+                  <mat-option *ngFor="let status of statusOptions$" [(value)]="status.id">
+                    {{ status.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div *ngIf="task.status == 'status_0' || task.status == 'status_1'" style="flex: 1;">
+            <button mat-button *ngIf="task.status === 'status_0'" style="height: 40px !important; background-color: #ffffffcc; width: 90%; margin-left: 10%"
+            (click)="task.status = 'status_1'">
+                <span> 
+                    <i class="material-icons" style="vertical-align: middle; margin-top: -4px; color: #696969;">play_circle_filled</i>
+                  Start
+                </span>
+              </button>  
+                <button mat-button *ngIf="task.status === 'status_1'" style="height: 40px !important; background-color: #ffffffcc; width: 90%; margin-left: 10%"
+                (click)="task.status = 'status_2'">
+                    <span>
+                        <i class="material-icons" style="vertical-align: middle; margin-top: -4px; color: #696969;">check_box</i>
+                        Completed
+                    </span>
+                  </button>
+        </div>
+    </div>
 
 
     <div *ngIf="isAddNewTask$">
