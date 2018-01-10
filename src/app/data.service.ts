@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { BusinessUnit } from './model/businessUnit';
 import { Priority } from './model/priority';
 import { Status } from './model/status';
+import { UserSetting } from './model/user-setting';
 
 @Injectable()
 export class DataService {
@@ -122,6 +123,10 @@ export class DataService {
 
   getUserBusinessUnits(uid: string) {
     return this.af.list('user_settings/' + uid + '/business_units').snapshotChanges();
+  }
+
+  getUserSetting(uid: string): Observable<UserSetting>{
+    return this.af.object('user_settings/' + uid).valueChanges().map(userSetting => <UserSetting>userSetting)
   }
 
 } 

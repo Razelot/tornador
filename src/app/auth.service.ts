@@ -7,11 +7,14 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/do';
+import { UserSetting } from './model/user-setting';
 
 
 @Injectable()
 export class AuthService {
+
   user: Observable<firebase.User>;
+  userSetting$: UserSetting;
 
   constructor(private firebaseAuth: AngularFireAuth) {
     this.user = firebaseAuth.authState;
@@ -28,6 +31,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
+    let self = this;
     return this.firebaseAuth
       .auth
       .signInWithEmailAndPassword(email, password);

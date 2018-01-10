@@ -5,3 +5,8 @@
 .drawer-button > span{
     margin: 0px 0px 0px 10px;
 }
+
+div.child-float-right > div{
+    color: white;
+    text-align: right;
+}

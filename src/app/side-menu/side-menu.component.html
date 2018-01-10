@@ -1,15 +1,33 @@
 <div style="display: flex; flex-direction: column; height: 100%">
   <div *ngIf="(authService.user | async) as user" style="background-color: #363636; padding: 20px;">
 
-    <button mat-fab [matMenuTriggerFor]="menu" style="margin: 10px 0px;">
-      <i class="material-icons">face</i>
-    </button>
-    <mat-menu #menu="matMenu" yPosition="below" xPosition="after">
-      <button mat-menu-item (click)="logout()">
-        <i class="material-icons">settings_power</i>
-        <span>Sign out</span>
+    <div>
+      <button mat-fab [matMenuTriggerFor]="menu" style="margin: 10px 0px;">
+        <i class="material-icons">face</i>
       </button>
-    </mat-menu>
+      <mat-menu #menu="matMenu" yPosition="below" xPosition="after">
+        <button mat-menu-item (click)="logout()">
+          <i class="material-icons">settings_power</i>
+          <span>Sign out</span>
+        </button>
+      </mat-menu>
+
+      <div *ngIf="authService.userSetting$ != null" class="child-float-right" style="float: right;">
+        <div>BU00</div>
+        <div>
+          <span *ngFor="let bu00 of authService.userSetting$.business_units">
+            {{ bu00 }}
+          </span>
+        </div>
+          <div>DEPARTMENT</div>
+          <div>
+            <span *ngFor="let department of authService.userSetting$.departments">
+              {{ department }}
+            </span>
+          </div>
+      </div>
+
+    </div>
     <p style="color: white;">{{ user.email }}</p>
   </div>
 

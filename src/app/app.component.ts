@@ -18,6 +18,8 @@ import { MatDrawer } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 
 import { Task } from './model/task';
+import { AuthService } from './auth.service';
+import { UserSetting } from './model/user-setting';
 
 @Component({
   selector: 'app-root',
@@ -28,14 +30,11 @@ export class AppComponent {
 
   // title = 'TORNADOR';
 
-  constructor(private ds: DataService, private ns: NavigationService, private r: Router, public snackBar: MatSnackBar) {
+  constructor(private ds: DataService, private ns: NavigationService, private r: Router, public snackBar: MatSnackBar, public authService: AuthService) {
 
     var self = this;
     ns.changeEmitted$.subscribe(
       text => {
-
-        console.log(text);
-
         if (text == 'openDrawer') {
           self.openDrawer();
         } else if (text == 'closeDrawer') {
@@ -47,6 +46,15 @@ export class AppComponent {
   ngOnInit() {
 
     this.ns.setTitle("TORNADOR");
+
+    this.authService.getUser().take(1)
+      .subscribe(user => {
+
+        this.ds.getUserSetting(user.uid).subscribe(userSetting => {
+          this.authService.userSetting$ = (<UserSetting>userSetting);
+        });
+
+      });
 
     this.ds.getDatabase().list('/business_unit/').snapshotChanges()
       .subscribe(array => {
