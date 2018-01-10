@@ -12,23 +12,31 @@
         </button>
       </mat-menu>
 
-      <div *ngIf="authService.userSetting$ != null" class="child-float-right" style="float: right;">
-        <div>BU00</div>
-        <div>
-          <span *ngFor="let bu00 of authService.userSetting$.business_units">
-            {{ bu00 }}
-          </span>
-        </div>
-          <div>DEPARTMENT</div>
-          <div>
-            <span *ngFor="let department of authService.userSetting$.departments">
-              {{ department }}
-            </span>
-          </div>
-      </div>
+
 
     </div>
     <p style="color: white;">{{ user.email }}</p>
+
+
+    <div *ngIf="authService.userSetting$ != null">
+      <div>
+        <span *ngFor="let bu00 of authService.userSetting$.business_units">
+          <span *ngIf="ds.getBusinessUnit(bu00) != null" [ngStyle]="{'background-color': ds.getBusinessUnit(bu00).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold;">
+            {{ bu00 }}
+          </span>
+        </span>
+      </div>
+      <!-- <br> -->
+      <div>
+        <span *ngFor="let department of authService.userSetting$.departments">
+          <span *ngIf="ds.getDepartment(department) != null" [ngStyle]="{'background-color': ds.getDepartment(department).color }"
+            style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase;">
+            {{ department }}
+          </span>
+        </span>
+      </div>
+
+    </div>
   </div>
 
   <div style="flex: 1; position: relative;">
@@ -37,24 +45,24 @@
       <span style="margin: 0px 0px 0px 10px;">Task</span>
     </button>
     <button mat-menu-item class="drawer-button">
-        <i class="material-icons">markunread</i>
+      <i class="material-icons">markunread</i>
       <span>News</span>
     </button>
     <button mat-menu-item class="drawer-button">
-        <i class="material-icons">archive</i>
+      <i class="material-icons">archive</i>
       <span>Archive</span>
     </button>
-    
+
 
     <div style="position: absolute; bottom: 0px;">
-        <button mat-menu-item  class="drawer-button">
-            <i class="material-icons">settings</i>
-          <span>Settings</span>
-        </button>
-        <button mat-menu-item class="drawer-button">
-            <i class="material-icons">help</i>
-            <span>Help & feedback</span>
-          </button>
+      <button mat-menu-item class="drawer-button">
+        <i class="material-icons">settings</i>
+        <span>Settings</span>
+      </button>
+      <button mat-menu-item class="drawer-button">
+        <i class="material-icons">help</i>
+        <span>Help & feedback</span>
+      </button>
     </div>
 
   </div>

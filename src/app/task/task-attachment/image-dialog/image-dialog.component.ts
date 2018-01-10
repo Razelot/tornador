@@ -38,19 +38,13 @@ export class ImageDialogComponent implements OnInit {
 
     // next
     if (action === this.SWIPE_ACTION.RIGHT) {
-      this.urlIndex$ -= 1 + this.urlArray$.length;
-      this.urlIndex$ = this.urlIndex$ % this.urlArray$.length;
-
-      // if(this.urlIndex$ < 0){
-      //   this.urlIndex$ = (this.urlArray$.length - 1)
-      // }
+      this.urlIndex$ = (this.urlIndex$ - 1 + this.urlArray$.length ) % this.urlArray$.length;
       this.url$ = this.urlArray$[this.urlIndex$];
     }
 
     // previous
     if (action === this.SWIPE_ACTION.LEFT) {
-      this.urlIndex$ += 1;
-      this.urlIndex$ = this.urlIndex$ % this.urlArray$.length;
+      this.urlIndex$ = (this.urlIndex$ + 1) % this.urlArray$.length;
       this.url$ = this.urlArray$[this.urlIndex$];
     }
   }
