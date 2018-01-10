@@ -31,7 +31,7 @@ export class TaskListComponent implements OnInit {
   toppings = new FormControl();
   toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private authService: AuthService, private ns: NavigationService, private router: Router,
+  constructor(private ar: ActivatedRoute, public ds: DataService, private authService: AuthService, private ns: NavigationService, private router: Router,
     public dialog: MatDialog, public fs: FilterService) {
 
     var self = this;
@@ -58,7 +58,12 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.taskList$ = this.ds.getTasks();
+    let taskList = this.ds.getTasks().map(m => m.filter(task => 
+      this.authService.userSetting$.business_units.indexOf(task.business_unit) >= 0  && 
+      this.authService.userSetting$.departments.indexOf(task.department) >= 0
+    ));
+
+    this.taskList$ = taskList;
 
     this.initializeTaskList();
 

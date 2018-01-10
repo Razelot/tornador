@@ -16,7 +16,7 @@ import { AppComponent } from '../../app.component';
 })
 export class TaskCardComponent implements OnInit {
 
-  constructor(private ds: DataService, private router: Router, private app : AppComponent) { }
+  constructor(public ds: DataService, private router: Router, private app : AppComponent) { }
 
   labelColor$: string = "#369742";
 
@@ -28,45 +28,6 @@ export class TaskCardComponent implements OnInit {
   priorityArray$
 
   ngOnInit() {
-
-    // if (this.filterProperty$ != null && this.filterString$ != null) {
-    //   this.tasks$ = this.getFilteredTasks(this.filterProperty$, this.filterString$);
-    // }
-    // else {
-    //   this.tasks$ = this.ds.getTasks();
-    // }
-
-    // this.tasks$ = this.tasks$.map((tasksSorted) => {
-    //   console.log(tasksSorted);
-    //   return tasksSorted;
-    // });
-
-    // this.tasks$ = this.tasks$.map((tasksSorted) => {
-    //   tasksSorted.sort((a: Task, b: Task) => {
-
-    //     // let aPriority = this.getPriorityOrder(a.priority);
-    //     // let bPriority = this.getPriorityOrder(b.priority);
-
-    //     return a.priority < b.priority ? -1 : 1;
-
-    //   });
-    //   return tasksSorted;
-    // });
-
-    // this.ds.getDatabase().list('/business_unit/').valueChanges()
-    //   .subscribe(businessOptions => {
-    //     this.bu00Array$ = businessOptions.map(b => <BusinessUnit>b);;
-    //   });
-
-    // this.ds.getDatabase().list('/department/').valueChanges()
-    //   .subscribe(departmentOptions => {
-    //     this.deptArray$ = departmentOptions.map(d => <Department>d);;
-    //   });
-
-    // this.ds.getDatabase().list('/option-selection/priority/').valueChanges()
-    //   .subscribe(priorityOptions => {
-    //     this.priorityArray$ = priorityOptions.map(p => <Priority>p);;
-    //   });
   }
 
   getPriorityOrder(priorityName: string) {

@@ -1,4 +1,5 @@
-<div style="height: 100%; width: 100%; margin-top: -56px; display: flex; flex-direction: column;">
+<div *ngIf="ds.getBusinessUnitArray() != null"
+  style="height: 100%; width: 100%; margin-top: -56px; display: flex; flex-direction: column;">
 
   <mat-toolbar style="background-color: transparent; color: white; z-index: 1;">
     <mat-toolbar-row style="padding: 0px; display: flex; flex-direction: row;">
@@ -35,7 +36,7 @@
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE835;</i>
         </ng-template>
-        <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+        <div *ngIf="activeTab$ == 0" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
           <div *ngFor="let task of taskList$_status_0 | async">
             <app-task-card [task$]="task"></app-task-card>
           </div>
@@ -45,7 +46,7 @@
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE871;</i>
         </ng-template>
-        <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+        <div *ngIf="activeTab$ == 1" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
           <div *ngFor="let task of taskList$_status_1 | async">
             <app-task-card [task$]="task"></app-task-card>
           </div>
@@ -55,7 +56,7 @@
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE834;</i>
         </ng-template>
-        <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+        <div *ngIf="activeTab$ == 2" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
           <div *ngFor="let task of taskList$_status_2 | async">
             <app-task-card [task$]="task"></app-task-card>
           </div>
@@ -65,7 +66,7 @@
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE034;</i>
         </ng-template>
-        <div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
+        <div *ngIf="activeTab$ == 3" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
           <div *ngFor="let task of taskList$_status_3 | async">
             <app-task-card [task$]="task"></app-task-card>
           </div>
