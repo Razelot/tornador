@@ -21,7 +21,7 @@
     <div *ngIf="authService.userSetting$ != null">
       <div>
         <span *ngFor="let bu00 of authService.userSetting$.business_units">
-          <span *ngIf="ds.getBusinessUnit(bu00) != null" [ngStyle]="{'background-color': ds.getBusinessUnit(bu00).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold;">
+          <span *ngIf="ds.getBusinessUnit(bu00) != null" [ngStyle]="{'background-color': ds.getBusinessUnit(bu00).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; margin-right: 5px;">
             {{ bu00 }}
           </span>
           <span style="margin-right: 4px;"></span>
@@ -31,7 +31,7 @@
       <div>
         <span *ngFor="let department of authService.userSetting$.departments">
           <span *ngIf="ds.getDepartment(department) != null" [ngStyle]="{'background-color': ds.getDepartment(department).color }"
-            style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase;">
+            style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase; margin-right: 5px;">
             {{ department }}
           </span>
           <span style="margin-right: 4px;"></span>
