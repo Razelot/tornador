@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() { }
 
   signup() {
-    this.authService.signup(this.email$, this.password$)
+    this.authService.signup(this.email$.trim(), this.password$)
       .then(value => {
         console.log('Success!', value);
       })
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.login(this.email$, this.password$)
+    this.authService.login(this.email$.trim(), this.password$)
       .then(value => {
 
         console.log(value);
