@@ -36,9 +36,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.email$.trim(), this.password$)
       .then(value => {
-
-        console.log(value);
-        console.log('Nice, it worked!');
+        // console.log('Nice, it worked!');
         if (this.ar.snapshot.queryParams.returnUrl) {
           var returnUrl = decodeURIComponent(this.ar.snapshot.queryParams.returnUrl).split('?')[0];
 
@@ -53,7 +51,7 @@ export class LoginComponent implements OnInit {
 
       })
       .catch(err => {
-        console.log('Something went wrong:', err.message);
+        // console.log('Something went wrong:', err.message);
       });
 
     this.email$ = this.password$ = '';

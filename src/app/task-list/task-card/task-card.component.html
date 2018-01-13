@@ -1,41 +1,43 @@
 <div *ngIf="ds.businessUnitArray$.length > 0">
   <div *ngIf="task$ as task">
     <mat-card class="example-card" (click)="routerLink(task.key)">
-        <mat-card-header>
-          <!-- <div mat-card-avatar class="example-header-image"></div> -->
-          <mat-card-subtitle style="width: 100%;">
-            <span>
-              <span [ngStyle]="{'background-color': ds.getBusinessUnit(task.business_unit).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold;">
-                {{ ds.getBusinessUnit(task.business_unit).id }}
-              </span>
-              <span style="margin-right: 4px;"></span>
-              <span [ngStyle]="{'background-color': ds.getDepartment(task.department).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase;">
-                {{ ds.getDepartment(task.department).name }}
-              </span>
+      <mat-card-header>
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <mat-card-subtitle style="width: 100%;">
+          <span>
+            <span *ngIf="ds.getBusinessUnit(task.business_unit)" [ngStyle]="{'background-color': ds.getBusinessUnit(task.business_unit).color }"
+              style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold;">
+              {{ ds.getBusinessUnit(task.business_unit).id }}
             </span>
-            <span style="float: right;">
-              <span [ngStyle]="{'background-color': ds.getPriority(task.priority).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform: uppercase;">
-                {{ ds.getPriority(task.priority).name }}
-              </span>
-              <!-- <span style="margin-right: 4px;"></span>
+            <span style="margin-right: 4px;"></span>
+            <span *ngIf="ds.getDepartment(task.department)" [ngStyle]="{'background-color': ds.getDepartment(task.department).color }"
+              style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase;">
+              {{ ds.getDepartment(task.department).name }}
+            </span>
+          </span>
+          <span style="float: right;">
+            <span *ngIf="ds.getPriority(task.priority)" [ngStyle]="{'background-color': ds.getPriority(task.priority).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform: uppercase;">
+              {{ ds.getPriority(task.priority).name }}
+            </span>
+            <!-- <span style="margin-right: 4px;"></span>
               <span [ngStyle]="{'background-color': getChipColor(task, 'dept') }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase;">
                 {{ task.status }}
               </span> -->
-            </span>
+          </span>
 
-          </mat-card-subtitle>
-          <mat-card-title>{{task.title}}</mat-card-title>
-        </mat-card-header>
-        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-        <mat-card-content>
-          <p>
-            {{ task.description }}
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <!-- <button mat-button>LIKE</button>
+        </mat-card-subtitle>
+        <mat-card-title>{{task.title}}</mat-card-title>
+      </mat-card-header>
+      <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+      <mat-card-content>
+        <p>
+          {{ task.description }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- <button mat-button>LIKE</button>
           <button mat-button>SHARE</button> -->
-        </mat-card-actions>
-      </mat-card>
-</div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
