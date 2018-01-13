@@ -19,7 +19,7 @@ export class SideMenuComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(private authService: AuthService, private ds: DataService, public router: Router, public ns: NavigationService) { }
+  constructor(public authService: AuthService, private ds: DataService, public router: Router, public ns: NavigationService) { }
 
   ngOnInit() {
   }
