@@ -5,26 +5,27 @@
       <mat-expansion-panel-header style="padding: 24px; height: unset; background: transparent;">
         <mat-panel-title style="flex-direction: column; margin: 0px;">
           <div style="margin-bottom: 6px;">
-              <span>
-                  <span [ngStyle]="{'background-color': ds.getBusinessUnit(task.business_unit).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold;">
-                    {{ ds.getBusinessUnit(task.business_unit).id }}
-                  </span>
-                  <span style="margin-right: 4px;"></span>
-                  <span [ngStyle]="{'background-color': ds.getDepartment(task.department).color }" 
-                    style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase; margin-right: 4px;">
-                    {{ ds.getDepartment(task.department).name }}
-                  </span>
-                  <span [ngStyle]="{'background-color': ds.getPriority(task.priority).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform: uppercase;">
-                      {{ ds.getPriority(task.priority).name }}
-                    </span>
-                </span> 
-                <span style="float: right;">
-                  
-                  <!-- <span style="margin-right: 4px;"></span>
+            <span>
+              <span *ngIf="ds.getBusinessUnit(task.business_unit)" [ngStyle]="{'background-color': ds.getBusinessUnit(task.business_unit).color }"
+                style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold;">
+                {{ ds.getBusinessUnit(task.business_unit).id }}
+              </span>
+              <span style="margin-right: 4px;"></span>
+              <span *ngIf="ds.getDepartment(task.department)" [ngStyle]="{'background-color': ds.getDepartment(task.department).color }"
+                style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase; margin-right: 4px;">
+                {{ ds.getDepartment(task.department).name }}
+              </span>
+              <span *ngIf="ds.getPriority(task.priority)" [ngStyle]="{'background-color': ds.getPriority(task.priority).color }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform: uppercase;">
+                {{ ds.getPriority(task.priority).name }}
+              </span>
+            </span>
+            <span style="float: right;">
+
+              <!-- <span style="margin-right: 4px;"></span>
                   <span [ngStyle]="{'background-color': getChipColor(task, 'dept') }" style="color: white; padding: 2px 4px; font-size: 11px; font-weight: bold; text-transform:uppercase;">
                     {{ task.status }}
                   </span> -->
-                </span>
+            </span>
           </div>
           <div>
             <strong>{{task.title}}</strong>
@@ -100,8 +101,7 @@
     </mat-form-field>
 
     <mat-form-field [floatLabel]="auto">
-      <textarea matInput matTextareaAutosize matAutosizeMinRows="1" placeholder="Description" formControlName="description"
-        [(ngModel)]="task.description"></textarea>
+      <textarea matInput matTextareaAutosize matAutosizeMinRows="1" placeholder="Description" formControlName="description" [(ngModel)]="task.description"></textarea>
     </mat-form-field>
 
     <mat-form-field [floatLabel]="auto">
@@ -116,32 +116,32 @@
     </mat-form-field>
 
     <div *ngIf="!isAddNewTask$" style="display: flex; flex-direction: row;">
-        
+
       <div style="flex: 1;">
-            <mat-form-field  [floatLabel]="auto" style="width: 100%; min-width: 100px;">
-                <mat-select formControlName="status" placeholder="Status" [(ngModel)]="task.status">
-                  <mat-option *ngFor="let status of statusOptions$" [(value)]="status.id">
-                    {{ status.name }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-        </div>
-        <div *ngIf="task.status == 'status_0' || task.status == 'status_1'" style="flex: 1;">
-            <button mat-button *ngIf="task.status === 'status_0'" style="height: 40px !important; background-color: #ffffffcc; width: 90%; margin-left: 10%"
-            (click)="task.status = 'status_1'">
-                <span> 
-                    <i class="material-icons" style="vertical-align: middle; margin-top: -4px; color: #696969;">play_circle_filled</i>
-                  Start
-                </span>
-              </button>  
-                <button mat-button *ngIf="task.status === 'status_1'" style="height: 40px !important; background-color: #ffffffcc; width: 90%; margin-left: 10%"
-                (click)="task.status = 'status_2'">
-                    <span>
-                        <i class="material-icons" style="vertical-align: middle; margin-top: -4px; color: #696969;">check_box</i>
-                        Completed
-                    </span>
-                  </button>
-        </div>
+        <mat-form-field [floatLabel]="auto" style="width: 100%; min-width: 100px;">
+          <mat-select formControlName="status" placeholder="Status" [(ngModel)]="task.status">
+            <mat-option *ngFor="let status of statusOptions$" [(value)]="status.id">
+              {{ status.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="task.status == 'status_0' || task.status == 'status_1'" style="flex: 1;">
+        <button mat-button *ngIf="task.status === 'status_0'" style="height: 40px !important; background-color: #ffffffcc; width: 90%; margin-left: 10%"
+          (click)="task.status = 'status_1'">
+          <span>
+            <i class="material-icons" style="vertical-align: middle; margin-top: -4px; color: #696969;">play_circle_filled</i>
+            Start
+          </span>
+        </button>
+        <button mat-button *ngIf="task.status === 'status_1'" style="height: 40px !important; background-color: #ffffffcc; width: 90%; margin-left: 10%"
+          (click)="task.status = 'status_2'">
+          <span>
+            <i class="material-icons" style="vertical-align: middle; margin-top: -4px; color: #696969;">check_box</i>
+            Completed
+          </span>
+        </button>
+      </div>
     </div>
 
 
