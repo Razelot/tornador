@@ -123,7 +123,7 @@ const appRoutes: Routes = [
     FormsModule, ReactiveFormsModule, 
     Ng2ImgMaxModule,
 
-    environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
+    environment.production ? ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}) : []
 
   ],
   providers: [DataService, AuthService, NavigationService, FilterService, StorageService, AuthGuard,
