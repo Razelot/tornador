@@ -119,11 +119,10 @@ const appRoutes: Routes = [
     MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatChipsModule,
     MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, MatSnackBarModule, MatCheckboxModule,
     MatSidenavModule, MatGridListModule,
-    
-    FormsModule, ReactiveFormsModule, 
-    Ng2ImgMaxModule,
 
-    environment.production ? ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}) : []
+    FormsModule, ReactiveFormsModule,
+    Ng2ImgMaxModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 
   ],
   providers: [DataService, AuthService, NavigationService, FilterService, StorageService, AuthGuard,
