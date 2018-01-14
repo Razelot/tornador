@@ -46,6 +46,7 @@
       <mat-tab>
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE0B7;</i>
+          <span style="margin-left: 4px;">{{ getCommentsLength() }}</span>
         </ng-template>
         <div *ngIf="activeTab$ === 1" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
           <app-task-chat [taskID$]="taskID$"></app-task-chat>
@@ -54,6 +55,7 @@
       <mat-tab>
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE226;</i>
+          <span>{{ getAttachmentsLength() }}</span>
         </ng-template>
         <div *ngIf="activeTab$ === 2" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)" style="height: 100%;">
           <app-task-attachment [task$]="task" [taskID$]="taskID$"></app-task-attachment>

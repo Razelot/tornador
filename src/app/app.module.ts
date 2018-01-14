@@ -61,6 +61,7 @@ import { TaskAttachmentComponent } from './task/task-attachment/task-attachment.
 import { StorageService } from './storage.service';
 import { ImageDialogComponent } from './task/task-attachment/image-dialog/image-dialog.component';
 import { LoginComponent } from './login/login.component';
+import { ResponsiveComponent } from './responsive/responsive.component';
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
   authDomain: "tornador-bcc1d.firebaseapp.com",
@@ -76,7 +77,7 @@ const appRoutes: Routes = [
     path: 'tasks',
     canActivateChild: [AuthGuard],
     children: [
-      { path: '', component: TaskListComponent },
+      { path: '', component: ResponsiveComponent },
       { path: ':taskID', component: TaskComponent, canActivate: [AuthGuard] },
       { path: ':taskID/:tab', component: TaskComponent },
       { path: '?new', component: NewTaskComponent },
@@ -84,6 +85,7 @@ const appRoutes: Routes = [
       { path: ':taskID/:tab?img', component: ImageDialogComponent },
     ]
   },
+  { path: 'responsive', component: ResponsiveComponent },
   { path: 'login', component: LoginComponent },
 ];
 
@@ -103,6 +105,7 @@ const appRoutes: Routes = [
     TaskAttachmentComponent,
     ImageDialogComponent,
     LoginComponent,
+    ResponsiveComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,6 +25,7 @@ export class TaskComponent implements OnInit {
 
   taskID$: string;
   task$: Observable<Task>;
+  task$Object: Task;
 
   activeTab$: number = 0;
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
@@ -36,17 +37,39 @@ export class TaskComponent implements OnInit {
 
   ngOnInit() {
 
+    let self = this;
+
     this.taskID$ = this.ar.snapshot.params.taskID;
     this.task$ = this.ds.getTask(this.taskID$).take(1)
     .do(task => {
-      this.prevListStatus$ = task.status;
+      self.prevListStatus$ = task.status;
+      self.task$Object = task;
     });
 
     if (this.ar.snapshot.params.tab) {
       this.activeTab$ = this.getTabID(
         this.ns.camelize(this.ar.snapshot.params.tab));
     }
+  }
 
+  getAttachmentsLength(): string{
+    let r = "";
+
+    if(this.task$Object.attachment_URL != null){
+      r =  Object.values(this.task$Object.attachment_URL).length.toString();
+    }
+
+    return r;
+  }
+
+  getCommentsLength(): string {
+    let r = "";
+    
+    if(this.task$Object.chat != null){
+      r =  Object.values(this.task$Object.chat).length.toString();
+    }
+
+    return r;
   }
 
   onSwipe(action: String) {

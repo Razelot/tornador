@@ -1,5 +1,4 @@
-<div *ngIf="ds.getBusinessUnitArray() != null"
-  style="height: 100%; width: 100%; margin-top: -56px; display: flex; flex-direction: column;">
+<div *ngIf="ds.getBusinessUnitArray() != null" style="height: 100%; width: 100%; display: flex; flex-direction: column;">
 
   <mat-toolbar style="background-color: transparent; color: white; z-index: 1;">
     <mat-toolbar-row style="padding: 0px; display: flex; flex-direction: row;">
@@ -30,7 +29,7 @@
     </mat-toolbar-row>
   </mat-toolbar>
 
-  <div style="flex: 1; height: calc(100% - 56px);">
+  <div class="mobile-view">
     <mat-tab-group [(selectedIndex)]="activeTab$" (selectedTabChange)="selectedTabChange()" style="height: 100%;">
       <mat-tab>
         <ng-template mat-tab-label>
@@ -74,9 +73,56 @@
       </mat-tab>
     </mat-tab-group>
   </div>
+
+  <div class="desktop-view">
+    <div class="flex-container">
+      <div>
+        <div>
+          NOT STARTED
+        </div>
+        <div class="card-container">
+          <div *ngFor="let task of taskList$_status_0 | async">
+            <app-task-card [task$]="task"></app-task-card>
+          </div>
+        </div>
+      </div>
+      <div>
+
+        <div>
+          IN PROGRESS
+        </div>
+        <div class="card-container">
+            <div *ngFor="let task of taskList$_status_1 | async">
+              <app-task-card [task$]="task"></app-task-card>
+            </div>
+          </div>
+      </div>
+      <div>
+        <div>
+          COMPLETED
+        </div>
+        <div class="card-container">
+            <div *ngFor="let task of taskList$_status_2 | async">
+              <app-task-card [task$]="task"></app-task-card>
+            </div>
+          </div>
+      </div>
+      <div>
+        <div>
+          PENDING
+        </div>
+        <div class="card-container">
+            <div *ngFor="let task of taskList$_status_3 | async">
+              <app-task-card [task$]="task"></app-task-card>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<button mat-fab (click)="openNewTaskDialog()" style="background-color: #363636; position: fixed; top: auto; left: auto; right: 20px; bottom: 20px; z-index: 9;">
+<button mat-fab (click)="openNewTaskDialog()" class="mat-fab-new-task">
   <i class="material-icons" style="color: #FFFFFF">
     &#xE145;
   </i>
