@@ -80,6 +80,7 @@ const appRoutes: Routes = [
       { path: '', component: ResponsiveComponent },
       { path: ':taskID', component: TaskComponent, canActivate: [AuthGuard] },
       { path: ':taskID/:tab', component: TaskComponent },
+      { path: ':taskID/:tab/:imgNum', component: TaskComponent },
       { path: '?new', component: NewTaskComponent },
       { path: '?filter', component: FilterDialogComponent },
       { path: ':taskID/:tab?img', component: ImageDialogComponent },
@@ -121,11 +122,10 @@ const appRoutes: Routes = [
     MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatChipsModule,
     MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, MatSnackBarModule, MatCheckboxModule,
     MatSidenavModule, MatGridListModule,
-    
-    FormsModule, ReactiveFormsModule, 
-    Ng2ImgMaxModule,
 
-    environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
+    FormsModule, ReactiveFormsModule,
+    Ng2ImgMaxModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 
   ],
   providers: [DataService, AuthService, NavigationService, FilterService, StorageService, AuthGuard,

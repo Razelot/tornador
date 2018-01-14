@@ -50,6 +50,8 @@ export class AppComponent {
     let userSubscription = this.authService.getUser().take(1)
       .subscribe(user => {
 
+        if (user == null) { return; }
+
         let userSettingSubscription = this.ds.getUserSetting(user.uid).subscribe(userSetting => {
           this.authService.userSetting$ = (<UserSetting>userSetting);
 
@@ -59,7 +61,7 @@ export class AppComponent {
               let filter = (<UserSetting>userSetting).business_units;
               let filteredArray: Array<BusinessUnit> = array.filter(f => filter.indexOf(f.id) >= 0);
               this.ds.setBusinessUnitArray(filteredArray);
-              
+
               businessUnitSubscription.unsubscribe();
             });
 
@@ -74,7 +76,7 @@ export class AppComponent {
               departmentSubscription.unsubscribe();
             });
 
-            userSettingSubscription.unsubscribe();
+          userSettingSubscription.unsubscribe();
         });
 
         userSubscription.unsubscribe();
