@@ -4,11 +4,11 @@
 </div> -->
 <div style="padding: 5px; background-color: white; height: 100%; box-sizing: border-box; ">
   <mat-grid-list *ngIf="getDownloadURL().length > 0" cols="3" rowHeight="1:1" style="background-color: white; ">
-    <div *ngFor="let URL of getDownloadURL()">
+    <div *ngFor="let URL of getDownloadURL(); let index$ = index">
       <mat-grid-tile *ngIf="URL != null">
         <div style="height: 100%; width: 100%; overflow: hidden;">
           <img [src]="URL" style="padding: 2px; object-fit:cover; overflow:hidden; box-sizing:border-box; height: 100%; width: 100%;"
-            (click)="onImgClick(URL)">
+            (click)="onImgClick(URL, index$ + 1)">
         </div>
       </mat-grid-tile>
     </div>

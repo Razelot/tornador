@@ -1,4 +1,8 @@
-import { Component, OnInit, Input, Inject, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+
+
+import { Component, OnInit, AfterViewInit, Input, Inject, ViewEncapsulation } from '@angular/core';
 import { StorageService } from '../../storage.service';
 import { InputDecorator } from '@angular/core/src/metadata/directives';
 import { Task } from '../../model/task';
@@ -15,16 +19,31 @@ import { Ng2ImgMaxService } from 'ng2-img-max/dist/src/ng2-img-max.service';
 })
 export class TaskAttachmentComponent implements OnInit {
 
-  constructor(public storage: StorageService, public dialog: MatDialog, private ng2ImgMax: Ng2ImgMaxService) {
+  constructor(private ar: ActivatedRoute, public storage: StorageService,
+    public dialog: MatDialog, private ng2ImgMax: Ng2ImgMaxService, private location: Location) {
 
   }
 
   @Input() task$: Task;
   @Input() taskID$: String;
 
+  imgNum$: number;
+
+
   ngOnInit() {
 
+    this.imgNum$ = this.ar.snapshot.params.imgNum;
+
+    if (this.imgNum$ == undefined) { return; }
+
+
+    var imgURL = this.getDownloadURL()[this.imgNum$ - 1];
+
+    this.onImgClick(imgURL.toString(), this.imgNum$);
+
+
   }
+
 
   getDownloadURL(): String[] {
 
@@ -37,15 +56,19 @@ export class TaskAttachmentComponent implements OnInit {
     return r;
   }
 
-  onImgClick(url: string) {
-    let self = this;
+  onImgClick(imgURL: string, imgNum: number) {
 
-    let dialogRef = this.dialog.open(ImageDialogComponent, {
-      maxHeight: '100%',
-      panelClass: 'image-dialog-panel',
-      backdropClass: 'image-dialog-backdrop',
-      data: { img_selected: url, img_array: self.getDownloadURL() }
-    });
+    setTimeout(() => {
+      let dialogRef = this.dialog.open(ImageDialogComponent, {
+        maxHeight: '100%',
+        panelClass: 'image-dialog-panel',
+        backdropClass: 'image-dialog-backdrop',
+        data: { img_selected: imgURL, img_array: this.getDownloadURL(),
+        taskID: this.taskID$ }
+      });
+      this.location.replaceState("/tasks/" + this.taskID$ + "/attachments/" + imgNum);
+
+    }, 1);
   }
 
   resizeOptions$: ResizeOptions = {
@@ -57,7 +80,7 @@ export class TaskAttachmentComponent implements OnInit {
 
     let imageArray = event.target.files;
 
-    for(let i = 0; i < imageArray.length; i++){
+    for (let i = 0; i < imageArray.length; i++) {
       let image = event.target.files[i];
 
       this.ng2ImgMax.resizeImage(image, 1200, 1200).subscribe(
@@ -68,10 +91,10 @@ export class TaskAttachmentComponent implements OnInit {
           console.log('😢 Oh no!', error);
         }
       );
-  
+
     }
 
-    
+
 
 
   }

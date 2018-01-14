@@ -79,6 +79,7 @@ const appRoutes: Routes = [
       { path: '', component: TaskListComponent },
       { path: ':taskID', component: TaskComponent, canActivate: [AuthGuard] },
       { path: ':taskID/:tab', component: TaskComponent },
+      { path: ':taskID/:tab/:imgNum', component: TaskComponent },
       { path: '?new', component: NewTaskComponent },
       { path: '?filter', component: FilterDialogComponent },
       { path: ':taskID/:tab?img', component: ImageDialogComponent },
