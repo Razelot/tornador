@@ -26,10 +26,12 @@ button#filter.filter-button :active{
     opacity: 0;
 }
 
-mat-dialog-container.mat-dialog-container{
+/* mat-dialog-container.mat-dialog-container{
     margin: 0px;
     background-color: white;
-}
+} */
+
+
 @media (max-width: 600px){
     div.mobile-view {
         display: block;

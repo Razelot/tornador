@@ -31,46 +31,9 @@
 
 <body style="width: 100%; height: 100%;">
 
-    <!-- Main content goes here -->
-    <app-root></app-root>
+  <!-- Main content goes here -->
+  <app-root></app-root>
 
 </body>
-
-<script>
-  jQuery(function ($) {
-    var $bodyEl = $('body'),
-      $sidedrawerEl = $('#sidedrawer');
-    function showSidedrawer() {
-      // show overlay
-      var options = {
-        onclose: function () {
-          $sidedrawerEl
-            .removeClass('active')
-            .appendTo(document.body);
-        }
-      };
-      var $overlayEl = $(mui.overlay('on', options));
-      // show element
-      $sidedrawerEl.appendTo($overlayEl);
-      setTimeout(function () {
-        $sidedrawerEl.addClass('active');
-      }, 20);
-    }
-    function hideSidedrawer() {
-      $bodyEl.toggleClass('hide-sidedrawer');
-    }
-    $('.js-show-sidedrawer').on('click', showSidedrawer);
-    $('.js-hide-sidedrawer').on('click', hideSidedrawer);
-
-    var $titleEls = $('strong', $sidedrawerEl);
-    $titleEls
-      .next()
-      .hide();
-    $titleEls.on('click', function () {
-      $(this).next().slideToggle(200);
-    });
-
-  });
-</script>
 
 </html>

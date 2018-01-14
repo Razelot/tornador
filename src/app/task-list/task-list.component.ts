@@ -59,8 +59,8 @@ export class TaskListComponent implements OnInit {
   ngOnInit() {
 
     let taskList = this.ds.getTasks().map(m => m.filter(task => 
-      this.authService.userSetting$.business_units.indexOf(task.business_unit) >= 0  && 
-      this.authService.userSetting$.departments.indexOf(task.department) >= 0
+      this.ds.userSetting$.business_units.indexOf(task.business_unit) >= 0  && 
+      this.ds.userSetting$.departments.indexOf(task.department) >= 0
     ));
 
     this.taskList$ = taskList;
@@ -221,14 +221,6 @@ export class TaskListComponent implements OnInit {
     }
 
     this.router.navigate(['.'], { queryParams: queryParams });
-  }
-
-  isBelongsToUser(task: Task): boolean {
-
-
-
-
-    return true;
   }
 
 }
