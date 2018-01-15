@@ -35,8 +35,8 @@ button#filter.filter-button :active{
 @media (max-width: 600px){
     div.mobile-view {
         display: block;
-        flex: 1; height: 
-        calc(100% - 64px);
+        flex: 1; 
+        height: 100%;
     }
     div.desktop-view {
         display: none;
@@ -50,7 +50,7 @@ button#filter.filter-button :active{
     div.desktop-view {
         display: block;
         width: 100%;
-        height: calc(100% - 64px);
+        height: 100%;
     }
 }
 

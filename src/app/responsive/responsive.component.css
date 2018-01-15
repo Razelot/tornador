@@ -27,22 +27,12 @@ mat-sidenav.task-detail{
     flex-direction: row;
 }
 
-.grid-container > div.task-list {
-    max-width: 100%;
-}
-
-.grid-container > div.task-detail {
-    height: 100%;
-    width: 480px;
-    max-width: 480px;
-    min-width: 480px;
-}
 
   div.hint-width{
     display: none;
 }
 
-@media (max-width: 359px){
+@media (max-width: 319px){
     div.hint-width{
         display: block;
         width: 100%;
@@ -54,5 +44,19 @@ mat-sidenav.task-detail{
 
     .task-detail {
         display: none;
+    }
+}
+
+@media (max-width: 480px){
+    mat-sidenav.task-detail{
+        min-width: 100%;
+        max-width: 480px;
+    }
+}
+
+@media (min-width: 480px){
+    mat-sidenav.task-detail{
+        min-width: 480px;
+        max-width: 480px;
     }
 }

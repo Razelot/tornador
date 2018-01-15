@@ -24,21 +24,32 @@ export class ResponsiveComponent implements OnInit {
 
         this.sidenav$.open();
         this.task$.setTaskById(taskId);
+      }
     });
-
+  
   }
 
 
   ngOnInit() {
-    window.addEventListener('resize', () => {
-      if(window.innerWidth > 420 && window.innerWidth < 900){
-          this.sidenav$.mode = 'over';
-      } 
-      else if(window.innerWidth >= 900)
-      {
-          this.sidenav$.mode = 'side';
-      }
-    });
+
+    //STUPID CODE DOESN'T WORK, WE'RE SWITCHING 'OVER'.
+
+    // if(window.innerWidth >= 900){
+    //   this.sidenav$.mode = 'side';
+    // } else{
+    //   this.sidenav$.mode = 'over';
+    // }
+
+    // window.addEventListener('resize', () => {
+    //   if(window.innerWidth > 420 && window.innerWidth < 900){
+    //       this.sidenav$.mode = 'over';
+    //   } 
+    //   else if(window.innerWidth >= 900)
+    //   {
+    //       this.sidenav$.mode = 'side';
+    //   }
+    // });
+
   }
 
 
