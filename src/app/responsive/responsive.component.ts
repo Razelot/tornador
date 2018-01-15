@@ -52,6 +52,17 @@ export class ResponsiveComponent implements OnInit {
 
   }
 
+  onHamburgerClick(){
+    console.log('hamburgerClick');
+  }
+
+  onSaveButtonClick(taskId: string){
+    console.log('saveButtonClick');
+  }
+
+  deleteTask(){
+    console.log('deleteTask');
+  }
 
 
   onBackdropClick(){
