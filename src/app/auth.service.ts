@@ -9,12 +9,13 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/do';
 import { UserSetting } from './model/user-setting';
 
+import { Subject } from 'rxjs/Subject';
+
 
 @Injectable()
 export class AuthService {
 
   user: Observable<firebase.User>;
-  userSetting$: UserSetting;
 
   constructor(private firebaseAuth: AngularFireAuth) {
     this.user = firebaseAuth.authState;

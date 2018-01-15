@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-
+import { DataService } from '../data.service';
 import { AuthService } from '../auth.service';
 import { NavigationService } from '../navigation.service';
 
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   email$: string;
   password$: string;
 
-  constructor(public authService: AuthService, private ar: ActivatedRoute, private router: Router, private ns: NavigationService) { }
+  constructor(private ds: DataService, public authService: AuthService, private ar: ActivatedRoute, private router: Router, private ns: NavigationService) { }
 
   ngOnInit() { }
 
@@ -35,8 +35,11 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.login(this.email$.trim(), this.password$)
-      .then(value => {
+      .then(user => {
         // console.log('Nice, it worked!');
+
+        this.ds.loadUserData(user);
+
         if (this.ar.snapshot.queryParams.returnUrl) {
           var returnUrl = decodeURIComponent(this.ar.snapshot.queryParams.returnUrl).split('?')[0];
 
