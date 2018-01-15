@@ -8,8 +8,8 @@
           <i class="material-icons">arrow_back</i>
         </button>
 
-        <span style="flex: 1; text-overflow: clip; overflow: scroll;">
-          <span *ngIf="activeTab$ > 0">{{ task.title }}</span>
+        <span style="flex: 1; overflow-x: auto; ">
+          <span *ngIf="activeTab$ > 0" >{{ task.title }}</span>
         </span>
         
         <span style="margin: 0px 5px;">

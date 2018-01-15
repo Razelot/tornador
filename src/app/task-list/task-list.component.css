@@ -57,7 +57,7 @@ button#filter.filter-button :active{
 div.flex-container {
     display: flex;
     flex-direction: row;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     height: 100%;
     scroll-behavior: smooth;

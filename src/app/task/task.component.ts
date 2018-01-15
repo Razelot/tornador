@@ -39,11 +39,14 @@ export class TaskComponent implements OnInit {
     let self = this;
 
     this.taskID$ = this.ar.snapshot.params.taskID;
-    this.task$ = this.ds.getTask(this.taskID$).take(1)
-    .do(task => {
-      self.prevListStatus$ = task.status;
-      self.task$Object = task;
-    });
+
+    if (this.taskID$ != null) {
+      this.task$ = this.ds.getTask(this.taskID$).take(1)
+        .do(task => {
+          self.prevListStatus$ = task.status;
+          self.task$Object = task;
+        });
+    }
 
     if (this.ar.snapshot.params.tab) {
       this.activeTab$ = this.getTabID(
@@ -51,22 +54,22 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  setTaskById(taskId: string){
-    
+  setTaskById(taskId: string) {
+
     let self = this;
     this.taskID$ = taskId;
 
     this.task$ = this.ds.getTask(this.taskID$).take(1)
-    .do(task => {
-      self.task$Object = task;
-    });
+      .do(task => {
+        self.task$Object = task;
+      });
   }
 
-  getAttachmentsLength(): string{
+  getAttachmentsLength(): string {
     let r = "";
 
-    if(this.task$Object.attachment_URL != null){
-      r =  Object.values(this.task$Object.attachment_URL).length.toString();
+    if (this.task$Object.attachment_URL != null) {
+      r = Object.values(this.task$Object.attachment_URL).length.toString();
     }
 
     return r;
@@ -74,9 +77,9 @@ export class TaskComponent implements OnInit {
 
   getCommentsLength(): string {
     let r = "";
-    
-    if(this.task$Object.chat != null){
-      r =  Object.values(this.task$Object.chat).length.toString();
+
+    if (this.task$Object.chat != null) {
+      r = Object.values(this.task$Object.chat).length.toString();
     }
 
     return r;
