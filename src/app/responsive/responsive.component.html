@@ -1,7 +1,26 @@
-<div class="grid-container">
+<!-- <div class="grid-container">
   <div class="hint-width"> Window too small, please enlarge width dumbass </div>
   <div class="task-list">
-    <app-task-list></app-task-list>
+    
   </div>
-  <div class="task-detail">TASKDETAIL</div>
+  <div id="backdrop" class="backdrop" (click)="onBackdropClick()">
+     
+  </div>
+  <div id="task-detail" class="task-detail">TASKDETAIL</div>
+</div> -->
+<div class="grid-container">
+
+  <div class="hint-width"> Window too small, please enlarge width dumbass </div>
+  <mat-sidenav-container class="main-content" style="background-color: transparent; width: 100%;">
+
+    <mat-sidenav #sidenav mode="side" position="end" class="task-detail" >
+      <div id="task-detail" style="height: 100%; max-height: 100%; min-height: 100%;">
+        <app-task #task></app-task>
+      </div>
+    </mat-sidenav>
+
+    <!--main content-->
+    <app-task-list ></app-task-list>
+
+  </mat-sidenav-container>
 </div>

@@ -7,6 +7,7 @@ import { BusinessUnit } from '../../model/businessUnit';
 import { Department } from '../../model/department';
 import { Priority } from '../../model/priority';
 import { AppComponent } from '../../app.component';
+import { NavigationService } from '../../navigation.service';
 
 @Component({
   selector: 'app-task-card',
@@ -16,7 +17,7 @@ import { AppComponent } from '../../app.component';
 })
 export class TaskCardComponent implements OnInit {
 
-  constructor(public ds: DataService, private router: Router, private app : AppComponent) { }
+  constructor(public ds: DataService, private router: Router, private app : AppComponent, private navigationService: NavigationService) { }
 
   labelColor$: string = "#369742";
 
@@ -59,6 +60,10 @@ export class TaskCardComponent implements OnInit {
 
   routerLink(taskID: string) {
     this.router.navigate(["/tasks/" + taskID]);
+  }
+
+  onTaskCardClick(taskID: string){
+    this.navigationService.emitChange(['task-card', taskID]);
   }
 
   getChipColor(task: Task, property: String): string {

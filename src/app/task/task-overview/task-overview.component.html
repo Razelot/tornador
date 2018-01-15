@@ -1,4 +1,4 @@
-<div *ngIf="task$ as task">
+<div *ngIf="task$ as task" style="flex: 1; display: flex; flex-direction: column;">
 
   <mat-accordion *ngIf="!isAddNewTask$">
     <mat-expansion-panel style="margin-bottom: 24px; margin-left: -24px; margin-right: -24px; margin-top:-24px; background:#ffffffaa;">
@@ -66,7 +66,7 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <form class="max-width" [formGroup]="formGroup$">
+  <form class="max-width" [formGroup]="formGroup$" style="flex: 1; display: flex; flex-direction: column;">
 
     <mat-form-field *ngIf="isAddNewTask$" [floatLabel]="auto">
       <mat-select formControlName="business_unit" placeholder="BU00" [(ngModel)]="task.business_unit" required>
@@ -101,7 +101,7 @@
     </mat-form-field>
 
     <mat-form-field [floatLabel]="auto">
-      <textarea matInput matTextareaAutosize matAutosizeMinRows="1" placeholder="Description" formControlName="description" [(ngModel)]="task.description"></textarea>
+      <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="12" placeholder="Description" formControlName="description" [(ngModel)]="task.description"></textarea>
     </mat-form-field>
 
     <mat-form-field [floatLabel]="auto">

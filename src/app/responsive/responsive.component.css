@@ -3,8 +3,19 @@
     box-sizing: border-box;
 }
 
+mat-sidenav.task-detail{
+    width: 480px;
+}
+
+.backdrop{
+    background-color: #36363656;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+}
+
 .display-none{
-    display: none;
+    display: none !important;
 }
 
 .grid-container {
@@ -34,59 +45,14 @@
 @media (max-width: 359px){
     div.hint-width{
         display: block;
-        background-color: lightsalmon;
         width: 100%;
     }
 
-    div.task-list {
+    .main-content {
         display: none;
     }
 
-    div.task-detail {
+    .task-detail {
         display: none;
-    }
-}
-
-@media (min-width: 360px){
-    div.side-nav {
-        display: none;
-    }
-    div.task-list {
-        display: block;
-        background-color: lightcoral;
-        flex: 1;
-    }
-    div.task-detail {
-        display: none;
-    }
-}
-
-@media (min-width: 600px) {
-    div.side-nav {
-        display: none;
-    }
-    div.task-list {
-        display: block;
-        background-color: lightcoral;
-    }
-    div.task-detail {
-        display: block;
-        position: absolute;
-        right: 0;
-        background-color: lightseagreen;
-        z-index: 3;
-    }
-}
-
-@media (min-width: 900px) {
-    div.task-list {
-        display: block;
-        background-color: violet;
-        width: calc(100% - 480px);
-        max-width: calc(100% - 480px);
-    }
-    div.task-detail {
-        position: initial;
-        background-color: seagreen;
     }
 }

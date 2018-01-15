@@ -1,6 +1,6 @@
 <div *ngIf="ds.businessUnitArray$.length > 0">
   <div *ngIf="task$ as task">
-    <mat-card class="example-card" (click)="routerLink(task.key)">
+    <mat-card class="example-card" (click)="onTaskCardClick(task.key)">
       <mat-card-header>
         <!-- <div mat-card-avatar class="example-header-image"></div> -->
         <mat-card-subtitle style="width: 100%;">

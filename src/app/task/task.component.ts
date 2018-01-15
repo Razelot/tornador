@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -22,7 +22,7 @@ import { Location } from '@angular/common';
 })
 export class TaskComponent implements OnInit {
 
-  taskID$: string;
+  @Input() taskID$: string;
   task$: Observable<Task>;
   task$Object: Task;
 
@@ -49,6 +49,17 @@ export class TaskComponent implements OnInit {
       this.activeTab$ = this.getTabID(
         this.ns.camelize(this.ar.snapshot.params.tab));
     }
+  }
+
+  setTaskById(taskId: string){
+    
+    let self = this;
+    this.taskID$ = taskId;
+
+    this.task$ = this.ds.getTask(this.taskID$).take(1)
+    .do(task => {
+      self.task$Object = task;
+    });
   }
 
   getAttachmentsLength(): string{
