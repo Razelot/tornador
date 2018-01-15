@@ -11,7 +11,8 @@ import { TaskComponent } from '../task/task.component';
 })
 export class ResponsiveComponent implements OnInit {
 
-
+  @ViewChild('sidenav') private sidenav$: MatSidenav;
+  @ViewChild('task') private task$: TaskComponent;
   
   constructor(private navigationService: NavigationService, private router: Router) { 
 
@@ -21,21 +22,12 @@ export class ResponsiveComponent implements OnInit {
 
         let taskId = (<string[]>event)[1];
 
-        if(window.innerWidth < 600){
-          this.router.navigate(["/tasks/" + taskId]);
-        } else 
-        {
-          this.sidenav$.open();
-          this.task$.setTaskById(taskId);
-        }
-      }
-
+        this.sidenav$.open();
+        this.task$.setTaskById(taskId);
     });
 
   }
 
-  @ViewChild('sidenav') private sidenav$: MatSidenav;
-  @ViewChild('task') private task$: TaskComponent;
 
   ngOnInit() {
     window.addEventListener('resize', () => {
@@ -54,6 +46,10 @@ export class ResponsiveComponent implements OnInit {
   onBackdropClick(){
     this.hideTaskDetail();
     this.hideBackdrop();
+  }
+
+  onHideButtonClick(){
+    this.sidenav$.close();
   }
 
   hideBackdrop(){
