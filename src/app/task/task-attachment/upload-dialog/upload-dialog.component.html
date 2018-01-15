@@ -1,0 +1,14 @@
+<div>
+  <mat-spinner *ngIf="!isComplete$" style="margin: auto;"></mat-spinner>
+
+  <p *ngIf="!isComplete$" style="margin-top: 12px;  text-align: center;">
+    Uploading image(s), please wait.
+  </p>
+
+  <p *ngIf="isComplete$" style="margin-top: 12px;  text-align: center;">
+    Done uploading image(s), please refresh your browser.
+  </p>
+
+  <!-- <button mat-button *ngIf="isComplete$" (click)="onCloseButtonClick()" style="margin: auto;">Close</button> -->
+
+</div>

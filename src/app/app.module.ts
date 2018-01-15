@@ -16,7 +16,7 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
 import {
   MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule,
   MatChipsModule, MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule,
-  MatSnackBarModule, MatCheckboxModule, MatSidenavModule, MatGridListModule,
+  MatSnackBarModule, MatCheckboxModule, MatSidenavModule, MatGridListModule, MatProgressSpinnerModule,
 } from '@angular/material';
 
 
@@ -57,11 +57,12 @@ import { FilterDialogComponent } from './task-list/filter-dialog/filter-dialog.c
 import { FilterService } from './task-list/filter-dialog/filter.service';
 import { TaskChatComponent } from './task/task-chat/task-chat.component';
 import { TaskChatCardComponent } from './task/task-chat/task-chat-card/task-chat-card.component';
-import { TaskAttachmentComponent } from './task/task-attachment/task-attachment.component';
+import { TaskAttachmentComponent} from './task/task-attachment/task-attachment.component';
 import { StorageService } from './storage.service';
 import { ImageDialogComponent } from './task/task-attachment/image-dialog/image-dialog.component';
 import { LoginComponent } from './login/login.component';
 import { ResponsiveComponent } from './responsive/responsive.component';
+import { UploadDialogComponent } from './task/task-attachment/upload-dialog/upload-dialog.component';
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
   authDomain: "tornador-bcc1d.firebaseapp.com",
@@ -84,6 +85,8 @@ const appRoutes: Routes = [
       { path: '?new', component: NewTaskComponent },
       { path: '?filter', component: FilterDialogComponent },
       { path: ':taskID/:tab?img', component: ImageDialogComponent },
+      { path: ':taskID/:tab?upload', component: UploadDialogComponent },
+
     ]
   },
   { path: 'responsive', component: ResponsiveComponent },
@@ -107,6 +110,7 @@ const appRoutes: Routes = [
     ImageDialogComponent,
     LoginComponent,
     ResponsiveComponent,
+    UploadDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -121,7 +125,7 @@ const appRoutes: Routes = [
 
     MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatChipsModule,
     MatIconModule, MatTabsModule, MatCardModule, MatMenuModule, MatExpansionModule, MatSnackBarModule, MatCheckboxModule,
-    MatSidenavModule, MatGridListModule,
+    MatSidenavModule, MatGridListModule, MatProgressSpinnerModule,
 
     FormsModule, ReactiveFormsModule,
     Ng2ImgMaxModule,
