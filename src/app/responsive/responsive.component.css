@@ -4,7 +4,8 @@
 }
 
 mat-sidenav.task-detail{
-    width: 480px;
+    /* width: 480px; */
+    max-width: 480px;
 }
 
 .backdrop{
@@ -19,8 +20,7 @@ mat-sidenav.task-detail{
 }
 
 .grid-container {
-    position: absolute;
-    top: 0;
+
     height: 100%;
     width: 100%;
     display: flex;
