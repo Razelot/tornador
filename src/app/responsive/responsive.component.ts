@@ -4,6 +4,10 @@ import { MatSidenav, MatSidenavContainer, MatDrawer } from '@angular/material';
 import { Router } from '@angular/router';
 import { TaskComponent } from '../task/task.component';
 
+import { Location } from '@angular/common';
+
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-responsive',
   templateUrl: './responsive.component.html',
@@ -13,34 +17,33 @@ export class ResponsiveComponent implements OnInit {
 
   @ViewChild('drawerNav') private drawerNav$: MatSidenav;
   @ViewChild('taskNav') private taskNav$: MatSidenav;
-  @ViewChild('task') private task$: TaskComponent;
-  
-  constructor(private navService: NavigationService, private router: Router) { 
+  @ViewChild('task') private taskComponent$: TaskComponent;
 
-    // navService.changeEmitted$.subscribe(
-    //   text => {
-    //     if (text == 'openDrawer') {
-    //       this.drawerNav$.open();
-    //     } else if (text == 'closeDrawer') {
-    //       this.drawerNav$.close();
-    //     }
-    //   });
+  constructor(private ar: ActivatedRoute, public navService: NavigationService, private router: Router, private location: Location) {
 
-    this.navService.changeEmitted$.subscribe(event =>{
+    this.navService.setTitle("All Tasks");
 
-      if((<string[]>event)[0] == 'task-card'){
+    this.navService.changeEmitted$.subscribe(event => {
 
-        let taskId = (<string[]>event)[1];
+      if ((<string[]>event)[0] == 'task-card') {
+
+        let taskID = (<string[]>event)[1];
+        this.location.replaceState("/tasks/" + taskID);
 
         this.taskNav$.open();
-        this.task$.setTaskById(taskId);
+        this.taskComponent$.setTaskById(taskID);
       }
     });
-  
+
   }
 
-
   ngOnInit() {
+
+    if (this.ar.snapshot.params.taskID) {
+      let taskID = this.ar.snapshot.params.taskID;
+      this.taskNav$.open();
+      this.taskComponent$.setTaskById(taskID);
+    }
 
     //STUPID CODE DOESN'T WORK, WE'RE SWITCHING 'OVER'.
 
@@ -62,53 +65,43 @@ export class ResponsiveComponent implements OnInit {
 
   }
 
-  onHamburgerClick(){
+  onHamburgerClick() {
     console.log('hamburgerClick');
   }
 
-  onSaveButtonClick(taskId: string){
+  onSaveButtonClick(taskID: string) {
     console.log('saveButtonClick');
   }
 
-  deleteTask(){
+  deleteTask() {
     console.log('deleteTask');
   }
 
-
-  onBackdropClick(){
-    this.hideTaskDetail();
-    this.hideBackdrop();
+  onBackdropClick() {
+    this.navService.setTitle("All Tasks");
+    this.location.replaceState("/tasks");
+    // this.hideTaskDetail();
+    // this.hideBackdrop();
   }
 
-  onHideButtonClick(){
+  onHideButtonClick() {
     this.taskNav$.close();
   }
 
-  hideBackdrop(){
+  hideBackdrop() {
     document.getElementById("backdrop").style.display = "none";
   }
 
-  showBackdrop(){
+  showBackdrop() {
     document.getElementById("backdrop").style.display = "block";
   }
 
-  hideTaskDetail(){
+  hideTaskDetail() {
     document.getElementById("task-detail").style.display = "none";
   }
 
-  showTaskDetail(){
+  showTaskDetail() {
     document.getElementById("task-detail").style.display = "block";
-  }
-
-
-
-
-  openDrawer() {
-    this.drawerNav$.open();
-  }
-
-  closeDrawer() {
-    this.drawerNav$.close();
   }
 
 }

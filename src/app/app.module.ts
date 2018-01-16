@@ -74,11 +74,21 @@ export const firebaseConfig = {
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'tasks', pathMatch: 'full' },
-  {
+
+    {
     path: 'tasks',
-    component: ResponsiveComponent,
-    canActivate: [AuthGuard]
-  },
+    canActivateChild: [AuthGuard],
+    children: [
+      { path: '', component: ResponsiveComponent },
+      { path: ':taskID', component: ResponsiveComponent },
+      { path: ':taskID/:tab', component: ResponsiveComponent },
+      { path: ':taskID/:tab/:imgNum', component: ResponsiveComponent },
+      { path: '?new', component: NewTaskComponent },
+      { path: '?filter', component: FilterDialogComponent },
+      { path: ':taskID/:tab?img', component: ImageDialogComponent },
+      { path: ':taskID/:tab?upload', component: UploadDialogComponent },
+
+
   // {
   //   path: 'tasks',
   //   canActivateChild: [AuthGuard],

@@ -10,9 +10,7 @@
         </span>
 
         <span style="flex: 1; color:white; overflow-x: auto;">
-          <!-- {{ getToolbarTitle() }} -->
-
-          I AM THE BONE OF MY SWORD
+          {{ navService.getTitle() }}
         </span>
 
 
@@ -88,9 +86,9 @@
         <app-side-menu></app-side-menu>
       </mat-sidenav>
 
-      <mat-sidenav-container style="height: 100%;">
+      <mat-sidenav-container style="height: 100%;" (backdropClick)="onBackdropClick()">
 
-        <mat-sidenav #taskNav id="task-detail" mode="over" position="end" >
+        <mat-sidenav #taskNav id="task-detail" mode="over" position="end">
           <div style="height: 100%; max-height: 100%; min-height: 100%;">
             <app-task #task></app-task>
           </div>

@@ -31,38 +31,31 @@ export class TaskComponent implements OnInit {
 
   prevListStatus$: string;
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private ns: NavigationService, private router: Router,
+  constructor(private ar: ActivatedRoute, private ds: DataService, private navService: NavigationService, private router: Router,
     public snackBar: MatSnackBar, private location: Location) { }
 
   ngOnInit() {
-
-    let self = this;
-
-    this.taskID$ = this.ar.snapshot.params.taskID;
-
-    if (this.taskID$ != null) {
-      this.task$ = this.ds.getTask(this.taskID$).take(1)
-        .do(task => {
-          self.prevListStatus$ = task.status;
-          self.task$Object = task;
-        });
-    }
-
-    if (this.ar.snapshot.params.tab) {
-      this.activeTab$ = this.getTabID(
-        this.ns.camelize(this.ar.snapshot.params.tab));
+    if (this.ar.snapshot.params.taskID != null) {
+      this.setTaskById(this.ar.snapshot.params.taskID);
     }
   }
 
-  setTaskById(taskId: string) {
-
-    let self = this;
-    this.taskID$ = taskId;
+  setTaskById(taskID: string) {
+    this.taskID$ = taskID;
 
     this.task$ = this.ds.getTask(this.taskID$).take(1)
       .do(task => {
-        self.task$Object = task;
+        this.navService.setTitle(task.title);
+        this.prevListStatus$ = task.status;
+        this.task$Object = task;
       });
+
+    if (this.ar.snapshot.params.tab) {
+      this.activeTab$ = this.getTabID(
+        this.navService.camelize(this.ar.snapshot.params.tab)); 
+    } else {
+      this.activeTab$ = 0;
+    }
   }
 
   getAttachmentsLength(): string {
