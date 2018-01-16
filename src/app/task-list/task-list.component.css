@@ -2,28 +2,32 @@
     float: right;
 }
 
-button.mat-fab-new-task{
-    background-color: #363636 !important; 
+button.mat-fab-new-task {
+    background-color: #363636 !important;
     margin-right: 20px;
-    margin-top: -80px; 
+    margin-top: -80px;
     float: right;
     z-index: 9;
 }
 
-button#filter.filter-button :active{
+button#filter.filter-button :active {
     background-color: #36363636;
     color: white;
 }
 
-.filter-dialog{
+.filter-dialog {
     width: 100%;
     max-width: 100px;
     position: fixed !important;
     top: 56px;
 }
 
-.transparent-backdrop{
+.transparent-backdrop {
     opacity: 0;
+}
+
+.task-column {
+    padding: 0;
 }
 
 /* mat-dialog-container.mat-dialog-container{
@@ -31,11 +35,10 @@ button#filter.filter-button :active{
     background-color: white;
 } */
 
-
-@media (max-width: 600px){
+@media (max-width: 600px) {
     div.mobile-view {
         display: block;
-        flex: 1; 
+        flex: 1;
         height: 100%;
     }
     div.desktop-view {
@@ -63,17 +66,23 @@ div.flex-container {
     scroll-behavior: smooth;
 }
 
-div.flex-container > div {
+div.flex-container>div.task-column {
     min-width: 360px;
     max-width: 360px;
     flex: 1 0 0;
-    padding: 10px;
+    padding: 0;
     height: inherit;
     display: flex;
     flex-direction: column;
 }
 
-div.card-container{
+.status-label {
+    padding: 5px;
+    height: 38px;
+    border-bottom: 1px solid #363636AA;
+}
+
+div.card-container {
     flex: 1 0 0;
     overflow-y: auto;
     overflow-x: hidden;

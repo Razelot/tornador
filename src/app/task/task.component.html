@@ -39,8 +39,9 @@
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE871;</i>
         </ng-template>
-        <div *ngIf="activeTab$ === 0" style="padding: 24px; display: flex; flex-direction: column;" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)">
-          <app-task-overview [task$]="task" style="flex: 1; height: 100%;" ></app-task-overview>
+        <div *ngIf="activeTab$ === 0" style="padding: 24px; display: flex; flex-direction: column;" (swipeleft)="onSwipe($event.type)"
+          (swiperight)="onSwipe($event.type)">
+          <app-task-overview [task$]="task" style="flex: 1; height: 100%;"></app-task-overview>
         </div>
       </mat-tab>
       <mat-tab>
@@ -58,7 +59,7 @@
           <span>{{ getAttachmentsLength() }}</span>
         </ng-template>
         <div *ngIf="activeTab$ === 2" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)" style="display: flex; flex-direction: column;">
-          <app-task-attachment [task$]="task" [taskID$]="taskID$" style="flex: 1; height: 100%;" ></app-task-attachment>
+          <app-task-attachment [task$]="task" [taskID$]="taskID$" style="flex: 1; height: 100%;"></app-task-attachment>
         </div>
       </mat-tab>
       <mat-tab>

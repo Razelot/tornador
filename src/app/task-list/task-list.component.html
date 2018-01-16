@@ -76,46 +76,67 @@
 
   <div class="desktop-view">
     <div class="flex-container">
-      <div>
-        <div>
-          NOT STARTED
+      <div class="task-column">
+        <div class="status-label">
+
+          <span>
+            <i class="material-icons">&#xE835;</i>
+            NOT STARTED
+          </span>
+
         </div>
+
+
         <div class="card-container">
           <div *ngFor="let task of taskList$_status_0 | async">
             <app-task-card [task$]="task"></app-task-card>
           </div>
         </div>
       </div>
-      <div>
+      <div class="task-column">
+        <div class="status-label">
 
-        <div>
-          IN PROGRESS
+          <span>
+            <i class="material-icons">&#xE871;</i>
+            IN PROGRESS
+          </span>
+
         </div>
         <div class="card-container">
-            <div *ngFor="let task of taskList$_status_1 | async">
-              <app-task-card [task$]="task"></app-task-card>
-            </div>
+          <div *ngFor="let task of taskList$_status_1 | async">
+            <app-task-card [task$]="task"></app-task-card>
           </div>
+        </div>
       </div>
-      <div>
-        <div>
-          COMPLETED
+      <div class="task-column">
+        <div class="status-label">
+
+          <span>
+            <i class="material-icons">&#xE834;</i>
+            COMPLETED
+          </span>
+
         </div>
         <div class="card-container">
-            <div *ngFor="let task of taskList$_status_2 | async">
-              <app-task-card [task$]="task"></app-task-card>
-            </div>
+          <div *ngFor="let task of taskList$_status_2 | async">
+            <app-task-card [task$]="task"></app-task-card>
           </div>
+        </div>
       </div>
-      <div>
-        <div>
-          PENDING
+      <div class="task-column">
+        <div class="status-label">
+
+          <span>
+            <i class="material-icons">&#xE034;</i>
+            PENDING
+          </span>
+
         </div>
         <div class="card-container">
-            <div *ngFor="let task of taskList$_status_3 | async">
-              <app-task-card [task$]="task"></app-task-card>
-            </div>
+          <div *ngFor="let task of taskList$_status_3 | async">
+            <app-task-card [task$]="task"></app-task-card>
           </div>
+        </div>
       </div>
     </div>
   </div>

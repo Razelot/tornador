@@ -75,7 +75,7 @@ export const firebaseConfig = {
 const appRoutes: Routes = [
   { path: '', redirectTo: 'tasks', pathMatch: 'full' },
 
-    {
+  {
     path: 'tasks',
     canActivateChild: [AuthGuard],
     children: [
@@ -87,7 +87,8 @@ const appRoutes: Routes = [
       { path: '?filter', component: FilterDialogComponent },
       { path: ':taskID/:tab?img', component: ImageDialogComponent },
       { path: ':taskID/:tab?upload', component: UploadDialogComponent },
-
+    ]
+  },
 
   // {
   //   path: 'tasks',
