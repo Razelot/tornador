@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
             .map(authState => !!authState)
             .do(authenticated => {
                 if (!authenticated) {
-                    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+                    this.router.navigate(['/login'], { queryParams: { redirect: state.url }});
                 }
             });
     }
@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate {
             .map(authState => !!authState)
             .do(authenticated => {
                 if (!authenticated) {
-                    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+                    this.router.navigate(['/login'], { queryParams: { redirect: state.url }});
                 }
             });
     }

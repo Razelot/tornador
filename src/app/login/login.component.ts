@@ -40,13 +40,13 @@ export class LoginComponent implements OnInit {
 
         this.ds.loadUserData(user);
 
-        if (this.ar.snapshot.queryParams.returnUrl) {
-          var returnUrl = decodeURIComponent(this.ar.snapshot.queryParams.returnUrl).split('?')[0];
+        if (this.ar.snapshot.queryParams.redirect) {
+          var redirect = decodeURIComponent(this.ar.snapshot.queryParams.redirect).split('?')[0];
 
-          var queryParamsString = decodeURIComponent(this.ar.snapshot.queryParams.returnUrl).split('?')[1];
+          var queryParamsString = decodeURIComponent(this.ar.snapshot.queryParams.redirect).split('?')[1];
           var queryParamsObject = queryParamsString ? this.ns.toQueryParamsObject(queryParamsString) : {};
 
-          this.router.navigate([returnUrl], {queryParams: queryParamsObject});
+          this.router.navigate([redirect], {queryParams: queryParamsObject});
 
         } else {
           this.router.navigate(['/']);

@@ -30,15 +30,19 @@ export class AppComponent {
 
   // title = 'TORNADOR';
 
+
+  // @ViewChild('drawer') drawer$: MatDrawer;
+
+
   constructor(private ds: DataService, private ns: NavigationService, private r: Router, public snackBar: MatSnackBar, public authService: AuthService) {
-    ns.changeEmitted$.subscribe(
-      text => {
-        if (text == 'openDrawer') {
-          this.openDrawer();
-        } else if (text == 'closeDrawer') {
-          this.closeDrawer();
-        }
-      });
+    // ns.changeEmitted$.subscribe(
+    //   text => {
+    //     if (text == 'openDrawer') {
+    //       this.openDrawer();
+    //     } else if (text == 'closeDrawer') {
+    //       this.closeDrawer();
+    //     }
+    //   });
   }
 
   ngOnInit() {
@@ -60,13 +64,12 @@ export class AppComponent {
     this.ns.getTitle();
   }
 
-  @ViewChild('drawer') drawer$: MatDrawer;
-  openDrawer() {
-    this.drawer$.open();
-  }
+  // openDrawer() {
+  //   this.drawer$.open();
+  // }
 
-  closeDrawer() {
-    this.drawer$.close();
-  }
+  // closeDrawer() {
+  //   this.drawer$.close();
+  // }
 
 }

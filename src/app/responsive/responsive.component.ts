@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationService } from '../navigation.service';
-import { MatSidenav, MatSidenavContainer } from '@angular/material';
+import { MatSidenav, MatSidenavContainer, MatDrawer } from '@angular/material';
 import { Router } from '@angular/router';
 import { TaskComponent } from '../task/task.component';
 
@@ -11,18 +11,28 @@ import { TaskComponent } from '../task/task.component';
 })
 export class ResponsiveComponent implements OnInit {
 
-  @ViewChild('sidenav') private sidenav$: MatSidenav;
+  @ViewChild('drawerNav') private drawerNav$: MatSidenav;
+  @ViewChild('taskNav') private taskNav$: MatSidenav;
   @ViewChild('task') private task$: TaskComponent;
   
-  constructor(private navigationService: NavigationService, private router: Router) { 
+  constructor(private navService: NavigationService, private router: Router) { 
 
-    this.navigationService.changeEmitted$.subscribe(event =>{
+    // navService.changeEmitted$.subscribe(
+    //   text => {
+    //     if (text == 'openDrawer') {
+    //       this.drawerNav$.open();
+    //     } else if (text == 'closeDrawer') {
+    //       this.drawerNav$.close();
+    //     }
+    //   });
+
+    this.navService.changeEmitted$.subscribe(event =>{
 
       if((<string[]>event)[0] == 'task-card'){
 
         let taskId = (<string[]>event)[1];
 
-        this.sidenav$.open();
+        this.taskNav$.open();
         this.task$.setTaskById(taskId);
       }
     });
@@ -35,18 +45,18 @@ export class ResponsiveComponent implements OnInit {
     //STUPID CODE DOESN'T WORK, WE'RE SWITCHING 'OVER'.
 
     // if(window.innerWidth >= 900){
-    //   this.sidenav$.mode = 'side';
+    //   this.taskNav$.mode = 'side';
     // } else{
-    //   this.sidenav$.mode = 'over';
+    //   this.taskNav$.mode = 'over';
     // }
 
     // window.addEventListener('resize', () => {
     //   if(window.innerWidth > 420 && window.innerWidth < 900){
-    //       this.sidenav$.mode = 'over';
+    //       this.taskNav$.mode = 'over';
     //   } 
     //   else if(window.innerWidth >= 900)
     //   {
-    //       this.sidenav$.mode = 'side';
+    //       this.taskNav$.mode = 'side';
     //   }
     // });
 
@@ -71,7 +81,7 @@ export class ResponsiveComponent implements OnInit {
   }
 
   onHideButtonClick(){
-    this.sidenav$.close();
+    this.taskNav$.close();
   }
 
   hideBackdrop(){
@@ -88,6 +98,17 @@ export class ResponsiveComponent implements OnInit {
 
   showTaskDetail(){
     document.getElementById("task-detail").style.display = "block";
+  }
+
+
+
+
+  openDrawer() {
+    this.drawerNav$.open();
+  }
+
+  closeDrawer() {
+    this.drawerNav$.close();
   }
 
 }

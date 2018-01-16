@@ -57,7 +57,7 @@ import { FilterDialogComponent } from './task-list/filter-dialog/filter-dialog.c
 import { FilterService } from './task-list/filter-dialog/filter.service';
 import { TaskChatComponent } from './task/task-chat/task-chat.component';
 import { TaskChatCardComponent } from './task/task-chat/task-chat-card/task-chat-card.component';
-import { TaskAttachmentComponent} from './task/task-attachment/task-attachment.component';
+import { TaskAttachmentComponent } from './task/task-attachment/task-attachment.component';
 import { StorageService } from './storage.service';
 import { ImageDialogComponent } from './task/task-attachment/image-dialog/image-dialog.component';
 import { LoginComponent } from './login/login.component';
@@ -76,19 +76,24 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'tasks', pathMatch: 'full' },
   {
     path: 'tasks',
-    canActivateChild: [AuthGuard],
-    children: [
-      { path: '', component: ResponsiveComponent },
-      { path: ':taskID', component: TaskComponent, canActivate: [AuthGuard] },
-      { path: ':taskID/:tab', component: TaskComponent },
-      { path: ':taskID/:tab/:imgNum', component: TaskComponent },
-      { path: '?new', component: NewTaskComponent },
-      { path: '?filter', component: FilterDialogComponent },
-      { path: ':taskID/:tab?img', component: ImageDialogComponent },
-      { path: ':taskID/:tab?upload', component: UploadDialogComponent },
-
-    ]
+    component: ResponsiveComponent,
+    canActivate: [AuthGuard]
   },
+  // {
+  //   path: 'tasks',
+  //   canActivateChild: [AuthGuard],
+  //   children: [
+  //     { path: '', component: ResponsiveComponent },
+  //     { path: ':taskID', component: TaskComponent, canActivate: [AuthGuard] },
+  //     { path: ':taskID/:tab', component: TaskComponent },
+  //     { path: ':taskID/:tab/:imgNum', component: TaskComponent },
+  //     { path: '?new', component: NewTaskComponent },
+  //     { path: '?filter', component: FilterDialogComponent },
+  //     { path: ':taskID/:tab?img', component: ImageDialogComponent },
+  //     { path: ':taskID/:tab?upload', component: UploadDialogComponent },
+
+  //   ]
+  // },
   { path: 'responsive', component: ResponsiveComponent },
   { path: 'login', component: LoginComponent },
 ];
@@ -139,6 +144,6 @@ const appRoutes: Routes = [
       useClass: MyHammerConfig
     }
   ],
-  bootstrap: [AppComponent, SideMenuComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
