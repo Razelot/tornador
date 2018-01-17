@@ -45,16 +45,19 @@ export class TaskComponent implements OnInit {
 
     this.task$ = this.ds.getTask(this.taskID$).take(1)
       .do(task => {
+        this.navService.setTaskID(this.taskID$);
         this.navService.setTitle(task.title);
+        this.navService.setTask(task);
+
         this.prevListStatus$ = task.status;
         this.task$Object = task;
       });
 
+    this.activeTab$ = 0;
+
     if (this.ar.snapshot.params.tab) {
       this.activeTab$ = this.getTabID(
-        this.navService.camelize(this.ar.snapshot.params.tab)); 
-    } else {
-      this.activeTab$ = 0;
+        this.navService.camelize(this.ar.snapshot.params.tab));
     }
   }
 

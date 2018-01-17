@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { Task } from './model/task';
 
 
 @Injectable()
@@ -17,22 +18,28 @@ export class NavigationService {
   }
 
 
-  taskID: String;
+  taskID$: String;
+  task$: Task;
 
-  task$: Observable<{}>;
+  editTask$: boolean = false;
 
-  foo: Observable<{}>;
-
-
-  title: String;
+  title$: String;
   constructor() { }
 
   setTitle(title: String) {
-    this.title = title;
+    this.title$ = title;
+  }
+
+  setTask(task: Task){
+    this.task$ = task;
+  }
+
+  setTaskID(taskID: string) {
+    this.taskID$ = taskID;
   }
 
   getTitle() {
-    return this.title;
+    return this.title$;
   }
 
   camelize(str) {
@@ -44,6 +51,16 @@ export class NavigationService {
 
   toQueryParamsObject(str) {
     return JSON.parse('{"' + str.replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+  }
+
+  clearTask(){
+    this.taskID$ = undefined;
+    this.task$ = undefined;
+    this.editTask$ = false;
+  }
+
+  setEditTask(bool: boolean){
+    this.editTask$ = bool;
   }
 
 }

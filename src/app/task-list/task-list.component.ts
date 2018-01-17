@@ -14,7 +14,7 @@ import { FormControl } from '@angular/forms';
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 import { DataService } from '../data.service';
 import { NavigationService } from '../navigation.service';
-import { FilterService } from './filter-dialog/filter.service';
+import { FilterService } from '../filter.service';
 import { AuthService } from '../auth.service';
 
 
@@ -31,7 +31,7 @@ export class TaskListComponent implements OnInit {
   toppings = new FormControl();
   toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
-  constructor(private ar: ActivatedRoute, public ds: DataService, private authService: AuthService, private ns: NavigationService, private router: Router,
+  constructor(private ar: ActivatedRoute, public ds: DataService, private authService: AuthService, private navService: NavigationService, private router: Router,
     public dialog: MatDialog, public fs: FilterService) {
 
     var self = this;
@@ -69,8 +69,10 @@ export class TaskListComponent implements OnInit {
 
     if (this.ar.snapshot.queryParams.status) {
       this.activeTab$ = this.getTabID(
-        this.ns.camelize(this.ar.snapshot.queryParams.status));
+        this.navService.camelize(this.ar.snapshot.queryParams.status));
     }
+
+    this.navService.clearTask();
 
   }
 
@@ -183,7 +185,7 @@ export class TaskListComponent implements OnInit {
   }
 
   onHamburgerClick() {
-    this.ns.emitChange('openDrawer');
+    this.navService.emitChange('openDrawer');
   }
 
   getTabID(tab: string) {

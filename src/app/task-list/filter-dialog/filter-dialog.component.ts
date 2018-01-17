@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from '../../data.service';
-import { FilterService } from './filter.service';
+import { FilterService } from '../../filter.service';
 
 @Component({
   selector: 'app-filter-dialog',

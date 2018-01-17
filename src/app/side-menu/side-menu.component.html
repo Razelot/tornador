@@ -2,7 +2,7 @@
   <div *ngIf="(authService.user | async) as user" style="background-color: #363636; padding: 20px;">
 
     <div>
-      <button mat-fab [matMenuTriggerFor]="menu" style="margin: 10px 0px;">
+      <!-- <button mat-fab [matMenuTriggerFor]="menu" style="margin: 10px 0px;">
         <i class="material-icons">face</i>
       </button>
       <mat-menu #menu="matMenu" yPosition="below" xPosition="after">
@@ -10,7 +10,10 @@
           <i class="material-icons">settings_power</i>
           <span>Sign out</span>
         </button>
-      </mat-menu>
+      </mat-menu> -->
+
+      <i class="material-icons">face</i>
+
 
 
 
@@ -42,7 +45,14 @@
   </div>
 
   <div style="flex: 1; position: relative;">
-    <button mat-menu-item class="drawer-button">
+
+      <button mat-menu-item class="drawer-button" style="position: absolute; bottom: 0px;">
+        <i class="material-icons">settings_power</i>
+        <span>Sign out</span>
+      </button>
+
+
+    <!-- <button mat-menu-item class="drawer-button">
       <i class="material-icons">check_box</i>
       <span style="margin: 0px 0px 0px 10px;">Task</span>
     </button>
@@ -53,10 +63,10 @@
     <button mat-menu-item class="drawer-button">
       <i class="material-icons">archive</i>
       <span>Archive</span>
-    </button>
+    </button> -->
 
 
-    <div style="position: absolute; bottom: 0px;">
+    <!-- <div style="position: absolute; bottom: 0px;">
       <button mat-menu-item class="drawer-button">
         <i class="material-icons">settings</i>
         <span>Settings</span>
@@ -65,7 +75,7 @@
         <i class="material-icons">help</i>
         <span>Help & feedback</span>
       </button>
-    </div>
+    </div> -->
 
   </div>
 
