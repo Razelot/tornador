@@ -9,9 +9,9 @@ import { Task } from '../model/task';
 import { MatSnackBar } from '@angular/material';
 
 import { DataService } from '../data.service';
-import { NavigationService } from '../navigation.service';
 
 import { Location } from '@angular/common';
+import { NavigationService } from '../navigation.service';
 
 
 @Component({
@@ -31,7 +31,7 @@ export class TaskComponent implements OnInit {
 
   prevListStatus$: string;
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private navService: NavigationService, private router: Router,
+  constructor(private navService: NavigationService, private ar: ActivatedRoute, private ds: DataService, private router: Router,
     public snackBar: MatSnackBar, private location: Location) { }
 
   ngOnInit() {
@@ -81,16 +81,20 @@ export class TaskComponent implements OnInit {
     return r;
   }
 
-  onSwipe(action: String) {
+  onSwipe(event) {
+    console.log(event)
+
+    // console.log("SWIPE")
+
     // next
-    if (action === this.SWIPE_ACTION.RIGHT) {
+    if (event.type === this.SWIPE_ACTION.RIGHT) {
       if (this.activeTab$ > 0) {
         this.activeTab$ = this.activeTab$ - 1;
       }
     }
 
     // previous
-    if (action === this.SWIPE_ACTION.LEFT) {
+    if (event.type === this.SWIPE_ACTION.LEFT) {
       if (this.activeTab$ < 4) {
         this.activeTab$ = this.activeTab$ + 1;
       }

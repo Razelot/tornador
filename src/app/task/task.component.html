@@ -1,46 +1,16 @@
 <div *ngIf="task$ | async as task" style=" display: flex; flex-direction:column; height: 100%; max-height: 100%;">
 
-  <div style="display: block; width: 100%; flex: 0 1 auto; background-color: #363636;">
-    <!-- <mat-toolbar style="background-color: transparent; color: white;">
-      <mat-toolbar-row>
-
-        <button mat-icon-button class="button-navigation" style="float: left; margin: 0px 5px;" (click)="onBackButtonClick()">
-          <i class="material-icons">arrow_back</i>
-        </button>
-
-        <span style="flex: 1; overflow-x: auto; ">
-          <span *ngIf="activeTab$ > 0" >{{ task.title }}</span>
-        </span>
-        
-        <span style="margin: 0px 5px;">
-          <button mat-icon-button [matMenuTriggerFor]="menu" class="button-navigation" style="float: right;">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu" yPosition="below">
-            <button mat-menu-item (click)="deleteTask()">
-              <i class="material-icons">&#xE872;</i>
-              <span>Delete</span>
-            </button>
-          </mat-menu>
-
-          <button *ngIf="activeTab$ == 0" mat-icon-button class="button-navigation" style="float: right;" (click)="onSaveButtonClick(task)">
-            <i class="material-icons">save</i>
-          </button>
-
-        </span>
-      </mat-toolbar-row>
-    </mat-toolbar> -->
-  </div>
-
   <div style="flex: 1 1 auto; display: flex; flex-direction: column;">
 
     <mat-tab-group id="task" [(selectedIndex)]="activeTab$" (selectedTabChange)="selectedTabChange()">
+    <!-- <mat-tab-group id="task" (selectedTabChange)="selectedTab=$event.index"  (swipeleft)="onSwipe($event)" (swiperight)="onSwipe($event)"> -->
+
       <mat-tab>
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE871;</i>
         </ng-template>
-        <div *ngIf="activeTab$ === 0" style="padding: 24px; display: flex; flex-direction: column;" (swipeleft)="onSwipe($event.type)"
-          (swiperight)="onSwipe($event.type)">
+        <div *ngIf="activeTab$ === 0" style="padding: 24px; display: flex; flex-direction: column;" (swipeleft)="onSwipe($event)"
+          (swiperight)="onSwipe($event)">
           <app-task-overview [task$]="task" style="flex: 1; height: 100%;"></app-task-overview>
         </div>
       </mat-tab>
@@ -49,7 +19,7 @@
           <i class="material-icons">&#xE0B7;</i>
           <span style="margin-left: 4px;">{{ getCommentsLength() }}</span>
         </ng-template>
-        <div *ngIf="activeTab$ === 1" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)" style="display: flex; flex-direction: column;">
+        <div *ngIf="activeTab$ === 1" (swipeleft)="onSwipe($event)" (swiperight)="onSwipe($event)" style="display: flex; flex-direction: column;">
           <app-task-chat [taskID$]="taskID$" style="flex: 1; height: 100%;"></app-task-chat>
         </div>
       </mat-tab>
@@ -58,7 +28,7 @@
           <i class="material-icons">&#xE226;</i>
           <span>{{ getAttachmentsLength() }}</span>
         </ng-template>
-        <div *ngIf="activeTab$ === 2" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)" style="display: flex; flex-direction: column;">
+        <div *ngIf="activeTab$ === 2" (swipeleft)="onSwipe($event)" (swiperight)="onSwipe($event)" style="display: flex; flex-direction: column;">
           <app-task-attachment [task$]="task" [taskID$]="taskID$" style="flex: 1; height: 100%;"></app-task-attachment>
         </div>
       </mat-tab>
@@ -66,7 +36,7 @@
         <ng-template mat-tab-label>
           <i class="material-icons">&#xE8B3;</i>
         </ng-template>
-        <div *ngIf="activeTab$ === 3" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)" style="display: flex; flex-direction: column;">
+        <div *ngIf="activeTab$ === 3" (swipeleft)="onSwipe($event)" (swiperight)="onSwipe($event)" style="display: flex; flex-direction: column;">
           History
         </div>
       </mat-tab>

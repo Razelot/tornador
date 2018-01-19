@@ -82,22 +82,23 @@ export class ResponsiveComponent implements OnInit {
   onSaveButtonClick() {
     this.ds.updateTask(this.navService.taskID$, this.navService.task$);
 
+    this.navService.setTitle(this.navService.task$.title);
+
     this.snackBar.open("Task Saved!", "Dismiss", {
       duration: 3000,
     });
   }
 
   deleteTask() {
-    console.log('deleteTask');
+    this.ds.deleteTask(this.navService.taskID$);
+    this.hideTask();
   }
 
-  onBackdropClick() {
+  hideTask() {
     this.navService.setTitle("All Tasks");
     this.location.replaceState("/tasks");
     this.navService.clearTask();
-
-    // this.hideTaskDetail();
-    // this.hideBackdrop();
+    this.taskNav$.close();
   }
 
   onHideButtonClick() {

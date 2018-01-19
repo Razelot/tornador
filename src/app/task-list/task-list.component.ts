@@ -13,9 +13,9 @@ import { TaskCardComponent } from './task-card/task-card.component';
 import { FormControl } from '@angular/forms';
 import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 import { DataService } from '../data.service';
-import { NavigationService } from '../navigation.service';
 import { FilterService } from '../filter.service';
 import { AuthService } from '../auth.service';
+import { NavigationService } from '../navigation.service';
 
 
 @Component({
@@ -31,7 +31,7 @@ export class TaskListComponent implements OnInit {
   toppings = new FormControl();
   toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
-  constructor(private ar: ActivatedRoute, public ds: DataService, private authService: AuthService, private navService: NavigationService, private router: Router,
+  constructor(private navService: NavigationService, private ar: ActivatedRoute, public ds: DataService, private authService: AuthService, private router: Router,
     public dialog: MatDialog, public fs: FilterService) {
 
     var self = this;

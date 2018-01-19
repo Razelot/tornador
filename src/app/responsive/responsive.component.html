@@ -4,9 +4,18 @@
       <mat-toolbar-row style="padding: 0px; display: flex; flex-direction: row;">
 
         <span style="margin: 0px 5px;">
-          <button mat-icon-button style="color: white;" (click)="drawerNav.toggle()">
+          <button id="desktop-menu" mat-icon-button style="color: white;" (click)="drawerNav.toggle()">
             <i class="material-icons">menu</i>
           </button>
+          <div id="mobile-menu">
+            <button *ngIf="!navService.taskID$" mat-icon-button style="color: white;" (click)="drawerNav.toggle()">
+              <i class="material-icons">menu</i>
+            </button>
+            <button *ngIf="navService.taskID$" mat-icon-button style="color: white;" (click)="hideTask()">
+              <i class="material-icons">arrow_back</i>
+            </button>
+          </div>
+
         </span>
 
         <span style="flex: 1; color:white; overflow-x: auto;">
@@ -49,15 +58,14 @@
   <div class="grid-container">
 
 
-    <div class="hint-width"> Window too small, please enlarge width dumbass </div>
+    <!-- <div class="hint-width"> Window too small, please enlarge width dumbass </div> -->
 
     <mat-sidenav-container style="width: 100%;">
-      <mat-sidenav #drawerNav id="side-menu" opened="false"
-        mode="over" position="start">
+      <mat-sidenav #drawerNav id="side-menu" opened="false" mode="over" position="start">
         <app-side-menu></app-side-menu>
       </mat-sidenav>
 
-      <mat-sidenav-container style="height: 100%;" (backdropClick)="onBackdropClick()">
+      <mat-sidenav-container style="height: 100%;" (backdropClick)="hideTask()">
 
         <mat-sidenav #taskNav id="task-detail" mode="over" position="end">
           <div style="height: 100%; max-height: 100%; min-height: 100%;">
