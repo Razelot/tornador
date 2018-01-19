@@ -15,65 +15,35 @@
 
 
         <div style="float: right; display: flex; flex-direction: row;">
-          <button mat-icon-button class="button-navigation" (click)="onSaveButtonClick(task)">
+          <button *ngIf="navService.editTask$" mat-icon-button class="button-navigation" (click)="onSaveButtonClick()">
             <i class="material-icons">save</i>
           </button>
 
-
-          <button mat-icon-button class="button-navigation" (click)="onHideButtonClick()">
+          <!-- <button mat-icon-button class="button-navigation" (click)="onHideButtonClick()">
             <i class="material-icons">arrow_forward</i>
+          </button> -->
+
+          <button *ngIf="!navService.taskID$" mat-icon-button class="button-navigation" (click)="openFilterDialog()" [style.background-color]="fs.isFilterActive$ ? '#FFFFFF' : 'transparent'"
+            [style.color]="fs.isFilterActive$ ? '#363636' : '#FFFFFF'">
+            <i class="material-icons">filter_list</i>
           </button>
 
-
-          <span style="margin: 0px 5px;">
-            <button mat-icon-button [matMenuTriggerFor]="menu" class="button-navigation">
-              <mat-icon>more_vert</mat-icon>
+          <button *ngIf="navService.taskID$" mat-icon-button [matMenuTriggerFor]="menu" class="button-navigation">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" yPosition="below">
+            <button mat-menu-item (click)="deleteTask()">
+              <i class="material-icons">&#xE872;</i>
+              <span>Delete</span>
             </button>
-            <mat-menu #menu="matMenu" yPosition="below">
-              <button mat-menu-item (click)="deleteTask()">
-                <i class="material-icons">&#xE872;</i>
-                <span>Delete</span>
-              </button>
-            </mat-menu>
-          </span>
+          </mat-menu>
+
         </div>
 
-        <!-- <span style="margin: 0px 5px;">
-                    <button mat-icon-button [matMenuTriggerFor]="menu" style="float: right;">
-                        <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #menu="matMenu" yPosition="below">
-                        <button mat-menu-item>
-                            <i class="material-icons">&#xE871;</i>
-                            <span>Inside Menu</span>
-                        </button>
-                    </mat-menu>
-
-                    <button mat-icon-button style="float: right;" (click)="openFilterDialog()" [style.background-color]="fs.isFilterActive$ ? '#FFFFFF' : 'transparent'"
-                        [style.color]="fs.isFilterActive$ ? '#363636' : '#FFFFFF'">
-                        <i class="material-icons">filter_list</i>
-                    </button>
-                </span> -->
       </mat-toolbar-row>
     </mat-toolbar>
 
   </div>
-
-  <!-- <div class="grid-container">
-  <div class="hint-width"> Window too small, please enlarge width dumbass </div>
-  <div class="task-list">
-    
-  </div>
-  <div id="backdrop" class="backdrop" (click)="onBackdropClick()">
-     
-  </div>
-  <div id="task-detail" class="task-detail">TASKDETAIL</div>
-</div> -->
-
-  <!-- <mat-drawer #drawer mode="over">
-  <app-side-menu></app-side-menu>
-</mat-drawer> -->
-
 
 
   <div class="grid-container">
@@ -82,7 +52,8 @@
     <div class="hint-width"> Window too small, please enlarge width dumbass </div>
 
     <mat-sidenav-container style="width: 100%;">
-      <mat-sidenav #drawerNav id="side-menu" opened="true" mode="side" position="start">
+      <mat-sidenav #drawerNav id="side-menu" opened="false"
+        mode="over" position="start">
         <app-side-menu></app-side-menu>
       </mat-sidenav>
 

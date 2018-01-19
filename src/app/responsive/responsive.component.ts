@@ -1,12 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FilterService } from '../filter.service';
+import { DataService } from '../data.service';
+
 import { NavigationService } from '../navigation.service';
-import { MatSidenav, MatSidenavContainer, MatDrawer } from '@angular/material';
+import { MatSidenav, MatSidenavContainer, MatDrawer, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { TaskComponent } from '../task/task.component';
+import { FilterDialogComponent } from '../task-list/filter-dialog/filter-dialog.component';
+
 
 import { Location } from '@angular/common';
 
 import { ActivatedRoute } from '@angular/router';
+
+import { MatSnackBar } from '@angular/material';
+
 
 @Component({
   selector: 'app-responsive',
@@ -19,7 +27,9 @@ export class ResponsiveComponent implements OnInit {
   @ViewChild('taskNav') private taskNav$: MatSidenav;
   @ViewChild('task') private taskComponent$: TaskComponent;
 
-  constructor(private ar: ActivatedRoute, public navService: NavigationService, private router: Router, private location: Location) {
+  constructor(private ar: ActivatedRoute, public navService: NavigationService, private ds: DataService,
+    private router: Router, private location: Location, public fs: FilterService,
+    private snackBar: MatSnackBar, private dialog: MatDialog) {
 
     this.navService.setTitle("All Tasks");
 
@@ -69,8 +79,12 @@ export class ResponsiveComponent implements OnInit {
     console.log('hamburgerClick');
   }
 
-  onSaveButtonClick(taskID: string) {
-    console.log('saveButtonClick');
+  onSaveButtonClick() {
+    this.ds.updateTask(this.navService.taskID$, this.navService.task$);
+
+    this.snackBar.open("Task Saved!", "Dismiss", {
+      duration: 3000,
+    });
   }
 
   deleteTask() {
@@ -80,6 +94,8 @@ export class ResponsiveComponent implements OnInit {
   onBackdropClick() {
     this.navService.setTitle("All Tasks");
     this.location.replaceState("/tasks");
+    this.navService.clearTask();
+
     // this.hideTaskDetail();
     // this.hideBackdrop();
   }
@@ -104,4 +120,24 @@ export class ResponsiveComponent implements OnInit {
     document.getElementById("task-detail").style.display = "block";
   }
 
+  openFilterDialog(): void {
+    let dialogRef = this.dialog.open(FilterDialogComponent, {
+      maxWidth: '100%',
+      panelClass: 'filter-dialog', backdropClass: 'transparent-backdrop',
+    });
+
+    // dialogRef.componentInstance.isFilterActive$ = this.isFilterActive$;
+    //dialogRef.componentInstance.size = "Large";
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (this.fs.isFilterActive$) {
+        if (this.fs.isAllFilterPropertyNull()) {
+          this.fs.isFilterActive$ = false;
+        }
+      } else { // if isFilterActive$ == false
+        this.fs.setAllFilterPropertyNull();
+      }
+
+    });
+  }
 }

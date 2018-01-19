@@ -54,7 +54,7 @@ import { NewTaskComponent } from './new-task/new-task.component';
 import { TaskOverviewComponent } from './task/task-overview/task-overview.component';
 import { TaskCardComponent } from './task-list/task-card/task-card.component';
 import { FilterDialogComponent } from './task-list/filter-dialog/filter-dialog.component';
-import { FilterService } from './task-list/filter-dialog/filter.service';
+import { FilterService } from './filter.service';
 import { TaskChatComponent } from './task/task-chat/task-chat.component';
 import { TaskChatCardComponent } from './task/task-chat/task-chat-card/task-chat-card.component';
 import { TaskAttachmentComponent } from './task/task-attachment/task-attachment.component';

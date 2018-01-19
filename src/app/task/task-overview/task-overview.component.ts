@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../data.service';
 import { FormControl, Validators, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Task } from '../../model/task';
+import { NavigationService } from '../../navigation.service';
 
 @Component({
   selector: 'app-task-overview',
@@ -10,7 +12,7 @@ import { FormControl, Validators, FormGroup, FormBuilder, ReactiveFormsModule } 
 })
 export class TaskOverviewComponent implements OnInit {
 
-  @Input() task$;
+  @Input() task$: Task;
   @Input() isAddNewTask$: boolean = false;
 
   businessOptions$;
@@ -21,7 +23,7 @@ export class TaskOverviewComponent implements OnInit {
 
   formGroup$: FormGroup;
 
-  constructor(private ar: ActivatedRoute, private ds: DataService, private router: Router, formBuilder: FormBuilder) {
+  constructor(private ar: ActivatedRoute, private ds: DataService, private navService: NavigationService, private router: Router, formBuilder: FormBuilder) {
     this.formGroup$ = formBuilder.group({
       floatLabel: 'never',
       business_unit: new FormControl('', [Validators.required]),
@@ -82,8 +84,17 @@ export class TaskOverviewComponent implements OnInit {
     }
 
   }
+  
   onCancelClick() {
     this.onCancelClickEvent.emit();
+  }
+
+  editTask(){
+    
+  }
+
+  uneditTask(){
+
   }
 
 }
