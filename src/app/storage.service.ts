@@ -19,7 +19,7 @@ export class StorageService {
 
 
 
-  uploadImageFile(taskID: String, task: Task, file: File) {
+  uploadImageFile(taskID: String, task: Task, file: File): Promise<any> {
 
     let self = this;
 
@@ -36,7 +36,7 @@ export class StorageService {
 
     var fileRef = firebase.storage().ref(taskID + '/' + now + "-" + file.name);
 
-    fileRef.put(file).then(function (snapshot) {
+    return fileRef.put(file).then(function (snapshot) {
 
       self.ds.getDatabase().list('tasks/' + taskID + '/attachment_URL').push(snapshot.downloadURL);
 

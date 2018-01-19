@@ -87,51 +87,42 @@ export class TaskAttachmentComponent implements OnInit {
 
     let dialogRef: MatDialogRef<UploadDialogComponent>;
 
-    var promise = new Promise(function (resolve, reject) {
-
-      //open dialog
-       dialogRef = self.dialog.open(UploadDialogComponent, {
-        disableClose: true,
-        maxHeight: '100%',
-        data: {
-
-        }
-      });
-
-      return; 
-
-    });
-
-    promise.then(function(result){
-
-      console.log('then start');
-
-      let success = true;
-
-      for (let i = 0; i < imageArray.length; i++) {
-
-        let image = event.target.files[i];
-
-        let uploadSubscription = self.ng2ImgMax.resizeImage(image, 1200, 1200).subscribe(
-          result => {
-            self.storage.uploadImageFile(self.taskID$, self.task$, result);
-            uploadSubscription.unsubscribe();
-          },
-          error => {
-            console.log('😢 Oh no!', error);
-            success = false;
-          }
-        );
+    dialogRef = self.dialog.open(UploadDialogComponent, {
+      disableClose: true,
+      maxHeight: '100%',
+      data: 
+      { 
+        'taskId': self.taskID$,
+        'task': self.task$,
+        'imageArray' : imageArray
       }
-
-      console.log('mark as complete');
-
-      dialogRef.componentInstance.markAsComplete();
-
-      console.log('completed');
-
-
     });
+
+    // var promise = new Promise(function (resolve, reject) {
+
+    //   //open dialog
+       
+
+    //   return; 
+
+    // });
+
+    // promise.then(function(result){
+
+    //   console.log('then start');
+
+    //   let success = true;
+
+    //   
+
+    //   console.log('mark as complete');
+
+    //   dialogRef.componentInstance.markAsComplete();
+
+    //   console.log('completed');
+
+
+    // });
 
   }
 }
