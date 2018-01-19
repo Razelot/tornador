@@ -30,13 +30,20 @@ export class TaskAttachmentComponent implements OnInit {
 
   imgNum$: number;
 
+  selectedUrl$;
+  urlArray$ = [];
+  urlIndex$ = 0;
+
+  resizeOptions$: ResizeOptions = {
+    resizeMaxHeight: 1200,
+    resizeMaxWidth: 1200,
+  };
 
   ngOnInit() {
 
     this.imgNum$ = this.ar.snapshot.params.imgNum;
 
     if (this.imgNum$ == undefined) { return; }
-
 
     var imgURL = this.getDownloadURL()[this.imgNum$ - 1];
 
@@ -48,7 +55,7 @@ export class TaskAttachmentComponent implements OnInit {
 
   getDownloadURL(): String[] {
 
-    if (this.task$.attachment_URL == null) {
+    if (this.task$ != null && this.task$.attachment_URL == null) {
       return [];
     }
 
@@ -57,28 +64,7 @@ export class TaskAttachmentComponent implements OnInit {
     return r;
   }
 
-  onImgClick(imgURL: string, imgNum: number) {
-
-    setTimeout(() => {
-      let dialogRef = this.dialog.open(ImageDialogComponent, {
-        maxHeight: '100%',
-        panelClass: 'image-dialog-panel',
-        backdropClass: 'image-dialog-backdrop',
-        data: {
-          img_selected: imgURL, img_array: this.getDownloadURL(),
-          taskID: this.taskID$
-        }
-      });
-      this.location.replaceState("/tasks/" + this.taskID$ + "/attachments/" + imgNum);
-
-    }, 1);
-  }
-
-  resizeOptions$: ResizeOptions = {
-    resizeMaxHeight: 1200,
-    resizeMaxWidth: 1200,
-  };
-
+  
   onInputFileChange(event) {
 
     let imageArray = event.target.files;
@@ -89,7 +75,7 @@ export class TaskAttachmentComponent implements OnInit {
 
     dialogRef = self.dialog.open(UploadDialogComponent, {
       disableClose: true,
-      maxHeight: '100%',
+      maxHeight: '100%', 
       data: 
       { 
         'taskId': self.taskID$,
@@ -97,32 +83,49 @@ export class TaskAttachmentComponent implements OnInit {
         'imageArray' : imageArray
       }
     });
-
-    // var promise = new Promise(function (resolve, reject) {
-
-    //   //open dialog
-       
-
-    //   return; 
-
-    // });
-
-    // promise.then(function(result){
-
-    //   console.log('then start');
-
-    //   let success = true;
-
-    //   
-
-    //   console.log('mark as complete');
-
-    //   dialogRef.componentInstance.markAsComplete();
-
-    //   console.log('completed');
-
-
-    // });
-
   }
+
+  onImgClick(imgURL: string, imgNum: number) {
+
+    // this.location.replaceState("/tasks/" + this.taskID$ + "/attachments/" + imgNum);
+
+    // var modal = document.getElementById('imageViewer');
+    // modal.style.display = "block";
+    // this.selectedUrl$ = imgURL;
+
+     setTimeout(() => {
+       let dialogRef = this.dialog.open(ImageDialogComponent, {
+         maxHeight: '100%', maxWidth: '100%',
+         panelClass: 'image-dialog-panel',
+         backdropClass: 'image-dialog-backdrop',
+         data: {
+           img_selected: imgURL, img_array: this.getDownloadURL(),
+           taskID: this.taskID$
+         }
+       });
+
+     }, 1);
+  }
+
+
+  // SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
+  // onSwipe(action: String) {
+
+  //   // next
+  //   if (action === this.SWIPE_ACTION.RIGHT) {
+  //     this.selectedurlIndex$ = (this.urlIndex$ - 1 + this.urlArray$.length) % this.urlArray$.length;
+  //     this.url$ = this.urlArray$[this.urlIndex$];
+  //   }
+
+  //   // previous
+  //   if (action === this.SWIPE_ACTION.LEFT) {
+  //     this.urlIndex$ = (this.urlIndex$ + 1) % this.urlArray$.length;
+  //     this.url$ = this.urlArray$[this.urlIndex$];
+  //   }
+
+  //   var imgNum = this.urlIndex$ + 1;
+
+  //   this.location.replaceState("/tasks/" + this.taskID$ + "/attachments/" + imgNum);
+
+  // }
 }

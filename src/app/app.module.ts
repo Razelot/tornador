@@ -42,6 +42,7 @@ import { DataService } from './data.service';
 import { NavigationService } from './navigation.service';
 import { AuthGuard } from './auth.guard';
 
+import { PinchZoomDirective } from '../../node_modules/ngx-pinch-zoom/components';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -63,6 +64,7 @@ import { ImageDialogComponent } from './task/task-attachment/image-dialog/image-
 import { LoginComponent } from './login/login.component';
 import { ResponsiveComponent } from './responsive/responsive.component';
 import { UploadDialogComponent } from './task/task-attachment/upload-dialog/upload-dialog.component';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyBnUbpMJpFC7wL2_PibQ3Kfx1jtRmge_AY",
   authDomain: "tornador-bcc1d.firebaseapp.com",
@@ -127,6 +129,7 @@ const appRoutes: Routes = [
     LoginComponent,
     ResponsiveComponent,
     UploadDialogComponent,
+    PinchZoomDirective,
   ],
   imports: [
     BrowserModule,
@@ -144,7 +147,8 @@ const appRoutes: Routes = [
     MatSidenavModule, MatGridListModule, MatProgressSpinnerModule,
 
     FormsModule, ReactiveFormsModule,
-    Ng2ImgMaxModule,
+    Ng2ImgMaxModule, 
+
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 
   ],

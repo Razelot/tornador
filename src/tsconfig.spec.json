@@ -15,6 +15,7 @@
   ],
   "include": [
     "**/*.spec.ts",
+    "../node_modules/ngx-pinch-zoom/lib/pinch-zoom.directive.ts",
     "**/*.d.ts"
   ]
 }

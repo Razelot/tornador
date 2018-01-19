@@ -20,7 +20,8 @@ export class ImageDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ImageDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private location: Location
+    @Inject(MAT_DIALOG_DATA) public data: any, 
+    private location: Location
   ) {
     this.url$ = data.img_selected;
     this.urlArray$ = data.img_array;
