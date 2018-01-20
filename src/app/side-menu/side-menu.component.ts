@@ -35,7 +35,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   logout() {
-    // this.ns.emitChange('closeDrawer');
+    //this.ns.emitChange('closeDrawer');
     this.authService.logout().then(value => {
       this.router.navigate(['/login']);
     });

@@ -1,5 +1,8 @@
-<div (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)" 
+<div id="swipeContainer" (swipeleft)="onSwipe($event.type)" (swiperight)="onSwipe($event.type)" 
       style="height:100%; width: 100%; overflow: hidden; position: relative;" pinch-zoom>
+      <div style="height: 100%; width: 100%; position: absolute;" (click)="onNoClick()">
+          <span style="color: transparent;">.</span>
+        </div>
     <img [src]="url$" style="max-width: 80%; max-height: 80%; position: absolute; top: 0; right: 0; bottom: 0; left: 0; margin: auto;" >
   </div>
   
@@ -8,9 +11,8 @@
       <button mat-button class="navigation-button" (click)="onSwipe('swiperight')" tabindex="-1">
         <i class="material-icons">keyboard_arrow_left</i>
       </button>
-      <span class="index-span" (click)="onNoClick()">
+      <span class="index-span">
         {{ urlIndex$ + 1}}/{{ urlArray$.length}}
-  
       </span>
       <button mat-button class="navigation-button" (click)="onSwipe('swipeleft')" tabindex="-1">
         <i class="material-icons">keyboard_arrow_right</i>

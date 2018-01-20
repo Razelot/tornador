@@ -20,7 +20,7 @@ export class ImageDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ImageDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, 
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private location: Location
   ) {
     this.url$ = data.img_selected;
@@ -46,21 +46,26 @@ export class ImageDialogComponent implements OnInit {
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
   onSwipe(action: String) {
 
-    // next
-    if (action === this.SWIPE_ACTION.RIGHT) {
-      this.urlIndex$ = (this.urlIndex$ - 1 + this.urlArray$.length) % this.urlArray$.length;
-      this.url$ = this.urlArray$[this.urlIndex$];
+    var swipeContainer = document.getElementById('swipeContainer');
+
+    if (swipeContainer.style.transform.toString() == 'matrix(1, 0, 0, 1, 0, 0)' || swipeContainer.style.transform == '') {
+
+      // next
+      if (action === this.SWIPE_ACTION.RIGHT) {
+        this.urlIndex$ = (this.urlIndex$ - 1 + this.urlArray$.length) % this.urlArray$.length;
+        this.url$ = this.urlArray$[this.urlIndex$];
+      }
+
+      // previous
+      if (action === this.SWIPE_ACTION.LEFT) {
+        this.urlIndex$ = (this.urlIndex$ + 1) % this.urlArray$.length;
+        this.url$ = this.urlArray$[this.urlIndex$];
+      }
+
+      var imgNum = this.urlIndex$ + 1;
+
+      this.location.replaceState("/tasks/" + this.taskID$ + "/attachments/" + imgNum);
     }
-
-    // previous
-    if (action === this.SWIPE_ACTION.LEFT) {
-      this.urlIndex$ = (this.urlIndex$ + 1) % this.urlArray$.length;
-      this.url$ = this.urlArray$[this.urlIndex$];
-    }
-
-    var imgNum = this.urlIndex$ + 1;
-
-    this.location.replaceState("/tasks/" + this.taskID$ + "/attachments/" + imgNum);
 
   }
 
